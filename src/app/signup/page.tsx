@@ -5,6 +5,7 @@ import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { signup } from "./actions";
 import { useActionState } from "react";
+import { redirect } from "next/navigation";
 
 interface SignUpForm extends FieldValues, FormData {
     name: string,
@@ -73,9 +74,9 @@ export default function SignUp() {
                 <Button type="submit"
                 // disabled={errors.email != null || errors.password != null || errors.name != null }
                 >Log In</Button>
-                <Button type="button" onClick={e => {
-                    e.preventDefault();
-                }} variant="secondary">I Don&apos;t Have An Account</Button>
+                <Button type="button" onClick={() => {
+                    redirect("/login");
+                }} variant="secondary">I Have An Account</Button>
             </form>
             <div className="flex-1 bg-green-100 rounded-[40px]">
 

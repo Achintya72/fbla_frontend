@@ -61,7 +61,7 @@ export default function Login() {
                 <Button type="submit"
                 // disabled={errors.email != null || errors.password != null || errors.name != null }
                 >Log In</Button>
-                <Button type="button" onClick={e => {
+                <Button type="button" onClick={() => {
                     redirect("/signup");
                 }} variant="secondary">I Don&apos;t Have An Account</Button>
             </form>
