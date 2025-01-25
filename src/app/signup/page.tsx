@@ -73,7 +73,7 @@ export default function SignUp() {
                 />
                 <Button type="submit"
                 // disabled={errors.email != null || errors.password != null || errors.name != null }
-                >Log In</Button>
+                >Sign Up</Button>
                 <Button type="button" onClick={() => {
                     redirect("/login");
                 }} variant="secondary">I Have An Account</Button>
