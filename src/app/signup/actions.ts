@@ -3,15 +3,16 @@
 import { createSession, deleteSession } from "../lib/session";
 import { redirect } from "next/navigation";
 
-export async function login(prevState: any, formData: FormData) {
+export async function signup(prevState: any, formData: FormData) {
+	const name = formData.get("name")?.valueOf();
 	const username = formData.get("email")?.valueOf();
 	const password = formData.get("password")?.valueOf();
 
 	try {
-		const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sign_in`, {
+		const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sign_up`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ username: username, password: password }),
+			body: JSON.stringify({ name: name, credentials: { username: username, password: password } }),
 		});
 
 		// const token = await response.json();
