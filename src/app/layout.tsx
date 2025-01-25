@@ -6,7 +6,7 @@ import Navbar from "@/components/navbar";
 const inter = Inter({ 
   variable: "--font-inter",
   subsets: ['latin'],
-  weight: ['200', '700']
+  weight: ['200',"400", '700']
 })
 
 export default function RootLayout({

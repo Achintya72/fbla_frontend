@@ -32,9 +32,13 @@ export default {
         },
         red: {
           100: "#FFE0E0",
+          400: "#F62A2A",
           700: "#7F4D4D"
         }
       },
+      fontFamily: {
+        "font-inter": "var(--font-inter)"
+      }
     },
   },
   plugins: [],
