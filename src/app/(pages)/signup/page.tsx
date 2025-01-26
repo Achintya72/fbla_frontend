@@ -3,8 +3,6 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
-import { signup } from "./actions";
-import { useActionState } from "react";
 import { redirect } from "next/navigation";
 import { useCreateUser, useLoginContext } from "@/services/login";
 import Error from "@/components/Error";

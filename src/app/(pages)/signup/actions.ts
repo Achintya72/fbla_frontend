@@ -3,7 +3,7 @@
 import { deleteSession } from "@/utils/session";
 import { redirect } from "next/navigation";
 
-export async function signup(prevState: any, formData: FormData) {
+export async function signup(prevState: FormData, formData: FormData) {
 	const name = formData.get("name")?.valueOf();
 	const username = formData.get("email")?.valueOf();
 	const password = formData.get("password")?.valueOf();

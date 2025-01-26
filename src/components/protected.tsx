@@ -4,7 +4,7 @@ import { Role } from "@/models/login";
 import { useLoginContext } from "@/services/login";
 import { User } from "firebase/auth";
 import { redirect } from "next/navigation";
-import { useLayoutEffect } from "react";
+import { ComponentType, useLayoutEffect } from "react";
 
 interface ProtectionOptions {
     auth: boolean;
@@ -20,18 +20,16 @@ const verifyAuth = (authUser: User | null, role: Role, options: ProtectionOption
     return null;
 }
 
-export default function withProtection(Component: any, options: ProtectionOptions) {
-    return function WithProtection(props: any) {
+export default function withProtection<P extends object>(Component: ComponentType<P>, options: ProtectionOptions) {
+    return function WithProtection(props: P) {
         const { authUser, role } = useLoginContext();
         
-
-
         useLayoutEffect(() => {
             const action = verifyAuth(authUser, role, options);
             if(action != null) {
                 return action;
             }
-        }, [verifyAuth, options, authUser, role]);
+        }, [authUser, role]);
 
         if(verifyAuth(authUser, role, options) != null) {
             return null;
