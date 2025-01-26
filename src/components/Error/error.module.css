@@ -1,0 +1,16 @@
+.show {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    animation: slideIn 300ms ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -100px;
+    }
+    to {
+        bottom: 50px;
+    }
+}
