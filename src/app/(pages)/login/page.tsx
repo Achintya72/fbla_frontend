@@ -4,9 +4,8 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { useLoginContext, useLoginUser } from "@/services/login";
+import { useLoginUser } from "@/services/login";
 import Error from "@/components/Error";
-import Loader from "@/components/Loader";
 
 interface LoginForm extends FieldValues, FormData {
     email: string,
@@ -18,11 +17,8 @@ export default function Login() {
         mode: "all",
         reValidateMode: "onChange"
     });
-    const context = useLoginContext();
-    const { authUser } = useLoginContext();
     const [error, resetError, loading, loginUser] = useLoginUser();
 
-    console.log(context);
 
     const onSubmit = async (data: LoginForm) => {
         await loginUser(data.email, data.password);

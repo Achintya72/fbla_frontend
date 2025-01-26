@@ -10,7 +10,7 @@ const LoginContext = createContext<LoginContextData>({
     populated: false,
     role: "student",
     name: "",
-    populateUser: (user: User) => { }
+    populateUser: () => { }
 });
 
 function LoginContextProvider({ children }: PropsWithChildren) {

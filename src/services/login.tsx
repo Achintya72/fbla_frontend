@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import LoginContext from "@/repositories/loginContext";
 import { LoginContextData } from "@/models/login";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";

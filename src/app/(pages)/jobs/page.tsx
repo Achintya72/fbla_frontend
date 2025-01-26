@@ -1,7 +1,6 @@
 
 "use client";
 
-import withProtection from "@/components/protected";
 import classes from "@/utils/classes";
 import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
 import JobsSearch from "./JobsSearch";

@@ -19,7 +19,7 @@ export default function Error({ error, resetError }: ErrorProps) {
             }, 5000);
 
         }
-    }, [error]);
+    }, [error, resetError]);
 
     return (
         <>
