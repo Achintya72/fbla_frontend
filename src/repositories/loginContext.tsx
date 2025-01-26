@@ -9,7 +9,8 @@ const LoginContext = createContext<LoginContextData>({
     authUser: null,
     populated: false,
     role: "student",
-    name: ""
+    name: "",
+    populateUser: (user: User) => { }
 });
 
 function LoginContextProvider({ children }: PropsWithChildren) {
@@ -18,15 +19,26 @@ function LoginContextProvider({ children }: PropsWithChildren) {
     const [role, changeRole] = useState<Role>("student");
     const [name, changeName] = useState<string>("");
 
+    /**
+     * Updates role and username based on the user's display name
+     * @param user - user to populate the context with
+     */
+    const populateUser = (user: User) => {
+        const userName = user.displayName;
+        const [r, name] = userName?.split("_") || ["student", ""] as [Role, string];
+        changeRole(r as Role);
+        changeName(name);
+    }
+
     useEffect(() => {
         return onAuthStateChanged(auth, (user) => {
             changeAuthUser(user);
             changePopulated(true);
             if (user) {
-                const userName = user.displayName;
-                const [r, name] = userName?.split("_") || ["student", ""] as [Role, string];
-                changeRole(r as Role);
-                changeName(name);
+                populateUser(user);
+            } else {
+                changeRole("student");
+                changeName("");
             }
         });
     }, [])
@@ -34,6 +46,7 @@ function LoginContextProvider({ children }: PropsWithChildren) {
     const values: LoginContextData = {
         authUser,
         populated,
+        populateUser,
         role,
         name
     }
