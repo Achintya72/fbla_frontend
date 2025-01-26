@@ -3,6 +3,7 @@ import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
 import JobsSearch from "./JobsSearch";
 import Tag from "./SelectionTag";
 import JobCards from "./JobCards";
+import Filters from "./Filters";
 
 export default function Jobs() {
 
@@ -27,8 +28,9 @@ export default function Jobs() {
                 {["All", "UI/UX Design", "Architecture", "Engineering", "Graphic Design", "Product Management", "Data Science", "Marketing", "Finance", "Human Resources"].map((tag, index) => <Tag key={index} tag={tag} />)}
             </div>
 
-            <div className="flex flex-row gap-[10px] mt-[16px] overflow-x-auto">
+            <div className="flex flex-row gap-[16px] mt-[16px]">
                 {/* Filters */}
+                <Filters />
                 {/* JobCards */}
                 <JobCards />
             </div>
