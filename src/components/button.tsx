@@ -1,4 +1,4 @@
-import classes from "@/app/utils/classes";
+import classes from "@/utils/classes";
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

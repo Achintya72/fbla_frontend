@@ -1,4 +1,4 @@
-import classes from "@/app/utils/classes";
+import classes from "@/utils/classes";
 import { InputHTMLAttributes } from "react";
 import { FieldError, FieldValues, Path, RegisterOptions, UseFormRegister } from "react-hook-form";
 

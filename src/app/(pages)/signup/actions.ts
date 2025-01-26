@@ -1,6 +1,6 @@
 "use server";
 
-import { createSession, deleteSession } from "../lib/session";
+import { deleteSession } from "@/utils/session";
 import { redirect } from "next/navigation";
 
 export async function signup(prevState: any, formData: FormData) {

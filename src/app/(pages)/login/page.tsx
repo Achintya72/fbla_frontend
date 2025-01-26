@@ -3,9 +3,8 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
-import { login } from "./actions";
-import { useActionState } from "react";
 import { redirect } from "next/navigation";
+import { useLoginContext, useLoginUser } from "@/services/login";
 
 interface LoginForm extends FieldValues, FormData {
     name: string,
@@ -14,16 +13,25 @@ interface LoginForm extends FieldValues, FormData {
 }
 
 export default function Login() {
-    const [, loginAction] = useActionState(login, undefined);
-    const { register, formState: { errors }, } = useForm<LoginForm>({
+    const { register, handleSubmit, formState: { errors }, } = useForm<LoginForm>({
         mode: "all",
         reValidateMode: "onChange"
     });
+    const { authUser } = useLoginContext();
+    const [] = useLoginUser();
+
+    console.log(authUser);
+
+    const onSubmit = (data: LoginForm) => {
+
+
+    }
+
     return (
         <main className="px-[60px] flex gap-[40px]" style={{
             height: "calc(100vh - 200px)"
         }}>
-            <form action={loginAction} className="flex flex-col justify-center flex-1 gap-[20px]">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center flex-1 gap-[20px]">
                 <h2>Login</h2>
                 <Input<LoginForm>
                     register={register}

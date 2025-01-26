@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 export default function Home() {
-  console.log(process.env.NEXT_PUBLIC_API_URL);
   return (
     <main className="px-[20px]">
       <div className="relative *:object-cover w-full rounded-[40px] overflow-hidden" style={{
