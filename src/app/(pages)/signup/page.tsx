@@ -6,6 +6,8 @@ import { FieldValues, useForm } from "react-hook-form";
 import { signup } from "./actions";
 import { useActionState } from "react";
 import { redirect } from "next/navigation";
+import { useCreateUser, useLoginContext } from "@/services/login";
+import Error from "@/components/Error";
 
 interface SignUpForm extends FieldValues, FormData {
     name: string,
@@ -15,18 +17,25 @@ interface SignUpForm extends FieldValues, FormData {
 }
 
 export default function SignUp() {
-    const [, signupAction] = useActionState(signup, undefined);
-    const { register, formState: { errors }, watch } = useForm<SignUpForm>({
+    const { register, handleSubmit, formState: { errors } } = useForm<SignUpForm>({
         mode: "all",
         reValidateMode: "onChange"
     });
+    const [error, changeError, loading, createUser] = useCreateUser();
+    const context = useLoginContext();
+
+    console.log(context);
+
+    const onSubmit = async (data: SignUpForm) => {
+        await createUser(data.name, data.email, data.password);
+    }
 
 
     return (
         <main className="px-[60px] flex flex-row-reverse gap-[40px]" style={{
             height: "calc(100vh - 200px)"
         }}>
-            <form action={signupAction} className="flex flex-col justify-center flex-1 gap-[20px]">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center flex-1 gap-[20px]">
                 <h2>Sign Up</h2>
                 <Input<SignUpForm>
                     register={register}
@@ -67,11 +76,13 @@ export default function SignUp() {
                     name="confirmPassword"
                     options={{
                         required: "Field is required",
-                        validate: (value) => value != watch('password') ? "Passwords do not match" : true
+                        validate: (val: string, formValues) => {
+                            if (val !== formValues.password) return "Passwords must match"
+                        }
                     }}
                     type="password"
                 />
-                <Button type="submit"
+                <Button type="submit" loading={loading}
                 // disabled={errors.email != null || errors.password != null || errors.name != null }
                 >Sign Up</Button>
                 <Button type="button" onClick={() => {
@@ -81,6 +92,7 @@ export default function SignUp() {
             <div className="flex-1 bg-green-100 rounded-[40px]">
 
             </div>
+            <Error error={error} resetError={changeError} />
         </main>
     )
 }

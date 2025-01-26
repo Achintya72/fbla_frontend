@@ -5,9 +5,10 @@ import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
 import { useLoginContext, useLoginUser } from "@/services/login";
+import Error from "@/components/Error";
+import Loader from "@/components/Loader";
 
 interface LoginForm extends FieldValues, FormData {
-    name: string,
     email: string,
     password: string
 }
@@ -17,15 +18,16 @@ export default function Login() {
         mode: "all",
         reValidateMode: "onChange"
     });
+    const context = useLoginContext();
     const { authUser } = useLoginContext();
-    const [] = useLoginUser();
+    const [error, resetError, loading, loginUser] = useLoginUser();
 
-    console.log(authUser);
+    console.log(context);
 
-    const onSubmit = (data: LoginForm) => {
-
-
+    const onSubmit = async (data: LoginForm) => {
+        await loginUser(data.email, data.password);
     }
+
 
     return (
         <main className="px-[60px] flex gap-[40px]" style={{
@@ -33,16 +35,6 @@ export default function Login() {
         }}>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center flex-1 gap-[20px]">
                 <h2>Login</h2>
-                <Input<LoginForm>
-                    register={register}
-                    error={errors.name}
-                    label="name"
-                    name="name"
-                    options={{
-                        required: "Required Field"
-                    }}
-
-                />
                 <Input<LoginForm>
                     register={register}
                     error={errors.email}
@@ -67,8 +59,8 @@ export default function Login() {
 
                 />
                 <Button type="submit"
-                // disabled={errors.email != null || errors.password != null || errors.name != null }
-                >Log In</Button>
+                disabled={errors.email != null || errors.password != null }
+                loading={loading}>Log In</Button>
                 <Button type="button" onClick={() => {
                     redirect("/signup");
                 }} variant="secondary">I Don&apos;t Have An Account</Button>
@@ -76,6 +68,7 @@ export default function Login() {
             <div className="flex-1 bg-green-100 rounded-[40px]">
 
             </div>
+            <Error error={error} resetError={resetError} />
         </main>
     )
 }
