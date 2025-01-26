@@ -1,0 +1,26 @@
+.loader {
+    background-color: theme('colors.gray.500');
+    animation: load 1s infinite;
+}
+
+.first {
+    animation-delay: 100ms;
+}
+
+.second {
+    animation-delay: 200ms;
+}
+
+.third {
+    animation-delay: 300ms;
+}
+@keyframes load {
+    50% {
+        transform: translateY(-5px);
+        background-color: white;
+    }
+
+    100% {
+        transform: none;
+    }
+}
