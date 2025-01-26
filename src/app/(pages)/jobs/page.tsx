@@ -1,7 +1,11 @@
+
+"use client";
+
+import withProtection from "@/components/protected";
 import classes from "@/utils/classes";
 import { MagnifyingGlass } from "@/utils/icons";
 
-export default function Jobs() {
+function Jobs() {
     return (
         <div className="px-[60px]">
             <div
@@ -23,3 +27,5 @@ export default function Jobs() {
         </div>
     )
 }
+
+export default withProtection(Jobs, { auth: true });
