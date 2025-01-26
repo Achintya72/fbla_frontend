@@ -1,9 +1,14 @@
 import classes from "@/utils/classes";
 import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
+import JobsSearch from "./JobsSearch";
+import Tag from "./SelectionTag";
+import JobCards from "./JobCards";
 
 export default function Jobs() {
+
     return (
         <div className="px-[60px]">
+            {/* Search Bar */}
             <div
                 className={
                     classes(
@@ -14,11 +19,18 @@ export default function Jobs() {
                 <div className="pl-[16px] self-center justify-self-center">
                     <MagnifyingGlass size={20} />
                 </div>
-                <input
-                    placeholder="Search"
-                    id="SearchBar"
-                    className="flex-grow p-[16px] rounded-tr-[8px] rounded-br-[8px] focus:outline-none"
-                />
+                <JobsSearch />
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-row gap-[10px] mt-[16px] overflow-x-auto">
+                {["All", "UI/UX Design", "Architecture", "Engineering", "Graphic Design", "Product Management", "Data Science", "Marketing", "Finance", "Human Resources"].map((tag, index) => <Tag key={index} tag={tag} />)}
+            </div>
+
+            <div className="flex flex-row gap-[10px] mt-[16px] overflow-x-auto">
+                {/* Filters */}
+                {/* JobCards */}
+                <JobCards />
             </div>
         </div>
     )
