@@ -1,5 +1,5 @@
 import classes from "@/utils/classes";
-import { MagnifyingGlass } from "@/utils/icons";
+import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
 
 export default function Jobs() {
     return (
