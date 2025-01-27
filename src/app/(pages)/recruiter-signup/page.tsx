@@ -6,6 +6,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
 import { useCreateRecruiter, useLoginContext } from "@/services/login";
 import Error from "@/components/Error";
+import { useEffect } from "react";
 
 interface SignUpForm extends FieldValues, FormData {
     name: string,
@@ -22,15 +23,15 @@ export default function SignUp() {
     const [error, changeError, loading, createRecruiter] = useCreateRecruiter();
     const context = useLoginContext();
 
-    console.log(context);
-
     const onSubmit = async (data: SignUpForm) => {
         await createRecruiter(data.name, data.email, data.password);
-        if (error === "") {
-            redirect("/dashboard");
-        }
     }
 
+    useEffect(() => {
+        if (context.authUser) {
+            redirect("/dashboard");
+        }
+    }, [context.authUser])
 
     return (
         <main className="px-[60px] flex flex-row-reverse gap-[40px]" style={{

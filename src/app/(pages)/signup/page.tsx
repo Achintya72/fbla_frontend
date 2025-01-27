@@ -6,6 +6,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
 import { useCreateUser, useLoginContext } from "@/services/login";
 import Error from "@/components/Error";
+import { useEffect } from "react";
 
 interface SignUpForm extends FieldValues, FormData {
     name: string,
@@ -26,10 +27,13 @@ export default function SignUp() {
 
     const onSubmit = async (data: SignUpForm) => {
         await createUser(data.name, data.email, data.password);
-        if (error === "") {
+    }
+
+    useEffect(() => {
+        if (context.authUser) {
             redirect("/dashboard");
         }
-    }
+    }, [context.authUser])
 
 
     return (

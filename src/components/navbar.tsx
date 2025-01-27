@@ -18,7 +18,7 @@ export default function Navbar() {
                 <div className="absolute left-[50%] translate-x-[-50%] flex items-center gap-[32px]">
                     <Button variant="text"><Link href="/jobs">Jobs</Link></Button>
                     {authUser &&
-                        <Button variant="text"><Link href="/about">Dashboard</Link></Button>
+                        <Button variant="text"><Link href="/dashboard">Dashboard</Link></Button>
                     }
                     <Button variant="text"><Link href="/about">About</Link></Button>
                 </div>
