@@ -28,7 +28,8 @@ export default function Posting() {
         return (
             <div className="px-[60px] flex flex-row gap-[24px]">
                 <div className="flex flex-col gap-[16px] flex-[2]">
-                    <img className="w-full aspect-[8/1] rounded-[8px] object-cover" src={job.coverImage} />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img className="w-full aspect-[8/1] rounded-[8px] object-cover" alt={"Cover Image "} src={job.coverImage} />
                     <div className="flex flex-row justify-between">
                         <h1 className="text-[40px] font-inter tracking-normal">{job.title}</h1>
                         <div className="flex flex-row gap-[10px]">
