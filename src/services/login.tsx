@@ -35,6 +35,7 @@ export const useLoginUser: () => [string, () => void, boolean, (email: string, p
      * @return void
      */
     const loginUser = async (email: string, password: string) => {
+        resetError();
         try {
             changeLoading(true);
             await delay(1000);
@@ -63,7 +64,7 @@ export const useLoginUser: () => [string, () => void, boolean, (email: string, p
  * Custom hook to create user
  * @returns [error, resetError, loading, createUser]
  */
-export const useCreateUser: () => [string, () => void, boolean, (name: string, email: string, password: string) => void] =  () => {
+export const useCreateUser: () => [string, () => void, boolean, (name: string, email: string, password: string) => void] = () => {
     const [error, changeError] = useState<string>("");
     const [loading, changeLoading] = useState<boolean>(false);
     const { populateUser } = useLoginContext();
@@ -77,9 +78,10 @@ export const useCreateUser: () => [string, () => void, boolean, (name: string, e
             changeLoading(true);
             await delay(1000);
             await createUserWithEmailAndPassword(auth, email, password);
-            if(auth.currentUser) {
+            if (auth.currentUser) {
                 await updateProfile(auth.currentUser, { displayName: `student_${name}` });
                 populateUser(auth.currentUser);
+                changeError("");
             }
         } catch (error) {
             if (error instanceof FirebaseError) {
@@ -101,6 +103,48 @@ export const useCreateUser: () => [string, () => void, boolean, (name: string, e
 }
 
 /**
+ * Custom hook to create user
+ * @returns [error, resetError, loading, createUser]
+ */
+export const useCreateRecruiter: () => [string, () => void, boolean, (name: string, email: string, password: string) => void] = () => {
+    const [error, changeError] = useState<string>("");
+    const [loading, changeLoading] = useState<boolean>(false);
+    const { populateUser } = useLoginContext();
+
+    const resetError = () => {
+        changeError("");
+    }
+
+    const createRecruiter = async (name: string, email: string, password: string) => {
+        try {
+            changeLoading(true);
+            await delay(1000);
+            await createUserWithEmailAndPassword(auth, email, password);
+            if (auth.currentUser) {
+                await updateProfile(auth.currentUser, { displayName: `recruiter_${name}` });
+                populateUser(auth.currentUser);
+                changeError("");
+            }
+        } catch (error) {
+            if (error instanceof FirebaseError) {
+                switch (error.message) {
+                    case "Firebase: Error (auth/email-already-in-use).":
+                        changeError("Account already exists");
+                        break
+                    default:
+                        changeError(error.message);
+                }
+            } else {
+                changeError("Something weird happened. Please try again later");
+            }
+        } finally {
+            changeLoading(false);
+        }
+    }
+    return [error, resetError, loading, createRecruiter];
+}
+
+/**
  * Custom hook to logout user
  * @returns [loading, error, resetError, logoutUser]
  * loading: boolean
@@ -115,14 +159,14 @@ export const useLogout: () => [boolean, string, () => void, () => void] = () => 
     const resetError = () => {
         changeError("");
     }
-    
+
     const logoutUser = async () => {
         try {
             changeLoading(true);
             await delay(1000);
             await signOut(auth);
         } catch (error) {
-            if(error instanceof FirebaseError) {
+            if (error instanceof FirebaseError) {
                 changeError(error.message);
             } else {
                 changeError("Something weird happened. Please try again later");

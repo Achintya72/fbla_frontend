@@ -22,6 +22,9 @@ export default function Login() {
 
     const onSubmit = async (data: LoginForm) => {
         await loginUser(data.email, data.password);
+        if (error === "") {
+            redirect("/dashboard");
+        }
     }
 
 
@@ -55,8 +58,8 @@ export default function Login() {
 
                 />
                 <Button type="submit"
-                disabled={errors.email != null || errors.password != null }
-                loading={loading}>Log In</Button>
+                    disabled={errors.email != null || errors.password != null}
+                    loading={loading}>Log In</Button>
                 <Button type="button" onClick={() => {
                     redirect("/signup");
                 }} variant="secondary">I Don&apos;t Have An Account</Button>

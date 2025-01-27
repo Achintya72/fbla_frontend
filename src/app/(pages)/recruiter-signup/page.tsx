@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { useCreateUser, useLoginContext } from "@/services/login";
+import { useCreateRecruiter, useLoginContext } from "@/services/login";
 import Error from "@/components/Error";
 
 interface SignUpForm extends FieldValues, FormData {
@@ -19,13 +19,13 @@ export default function SignUp() {
         mode: "all",
         reValidateMode: "onChange"
     });
-    const [error, changeError, loading, createUser] = useCreateUser();
+    const [error, changeError, loading, createRecruiter] = useCreateRecruiter();
     const context = useLoginContext();
 
     console.log(context);
 
     const onSubmit = async (data: SignUpForm) => {
-        await createUser(data.name, data.email, data.password);
+        await createRecruiter(data.name, data.email, data.password);
         if (error === "") {
             redirect("/dashboard");
         }
@@ -37,7 +37,7 @@ export default function SignUp() {
             height: "calc(100vh - 200px)"
         }}>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center flex-1 gap-[20px]">
-                <h2>Sign Up</h2>
+                <h2>Recruiter Sign Up</h2>
                 <Input<SignUpForm>
                     register={register}
                     error={errors.name}
@@ -55,7 +55,9 @@ export default function SignUp() {
                     name="email"
                     options={{
                         required: "Required Field",
-                        pattern: { value: /^\d{7}@lwsd\.org$/, message: "School emails only" }
+                        pattern: {
+                            value: /^\S+@\S+\.\S+$/, message: "School emails only"
+                        }
                     }}
 
                 />
@@ -90,8 +92,8 @@ export default function SignUp() {
                     redirect("/login");
                 }} variant="secondary">I Have An Account</Button>
                 <Button type="button" onClick={() => {
-                    redirect("/recruiter-signup");
-                }} variant="secondary">I&apos;m A Recruiter</Button>
+                    redirect("/signup");
+                }} variant="secondary">I&apos;m Not A Recruiter</Button>
             </form>
             <div className="flex-1 bg-green-100 rounded-[40px]">
 
