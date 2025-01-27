@@ -29,9 +29,9 @@ export default function SignUp() {
 
     useEffect(() => {
         if (context.authUser) {
-            redirect("/dashboard");
+            redirect(`/dashboard/${context.role}`);
         }
-    }, [context.authUser])
+    }, [context.authUser, context.role])
 
     return (
         <main className="px-[60px] flex flex-row-reverse gap-[40px]" style={{

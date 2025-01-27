@@ -12,10 +12,10 @@ interface ProtectionOptions {
 }
 
 const verifyAuth = (authUser: User | null, role: Role, options: ProtectionOptions) => {
-    if(options.auth && !authUser) {
+    if (options.auth && !authUser) {
         return redirect("/login");
-    } else if(options.role && !options.role.includes(role)) {
-        return authUser ? redirect("/dashboard") : redirect("/login");
+    } else if (options.role && !options.role.includes(role)) {
+        return authUser ? redirect(`/dashboard/${options.role}`) : redirect("/login");
     }
     return null;
 }
@@ -23,15 +23,15 @@ const verifyAuth = (authUser: User | null, role: Role, options: ProtectionOption
 export default function withProtection<P extends object>(Component: ComponentType<P>, options: ProtectionOptions) {
     return function WithProtection(props: P) {
         const { authUser, role } = useLoginContext();
-        
+
         useLayoutEffect(() => {
             const action = verifyAuth(authUser, role, options);
-            if(action != null) {
+            if (action != null) {
                 return action;
             }
         }, [authUser, role]);
 
-        if(verifyAuth(authUser, role, options) != null) {
+        if (verifyAuth(authUser, role, options) != null) {
             return null;
         }
 

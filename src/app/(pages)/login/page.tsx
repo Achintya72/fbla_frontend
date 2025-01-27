@@ -27,9 +27,9 @@ export default function Login() {
 
     useEffect(() => {
         if (context.authUser) {
-            redirect("/dashboard");
+            redirect(`/dashboard/${context.role}`);
         }
-    }, [context.authUser])
+    }, [context.authUser, context.role])
 
 
     return (
