@@ -27,6 +27,7 @@ interface Job {
     closeDate: Date;
     applications: Application[];
     responsibilities: string[];
+    coverImage: string;
 }
 
 interface JobContextData {

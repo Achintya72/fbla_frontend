@@ -44,7 +44,8 @@ function JobsContextProvider({ children }: PropsWithChildren) {
                 tags: ["Engineering"],
                 closeDate: new Date(2025, 1, 1),
                 applications: Array.from({ length: 12 }, (_, i) => ({ id: (i + 1).toString() })),
-                responsibilities: ["Develop software solutions", "Work with the team to deliver projects", "Learn and grow"]
+                responsibilities: ["Develop software solutions", "Work with the team to deliver projects", "Learn and grow"],
+                coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
             },
             {
                 id: "2",
@@ -60,7 +61,8 @@ function JobsContextProvider({ children }: PropsWithChildren) {
                 tags: ["Data", "Engineering"],
                 closeDate: new Date(2025, 2, 1),
                 applications: Array.from({ length: 8 }, (_, i) => ({ id: (i + 1).toString() })),
-                responsibilities: ["Analyze data", "Create reports", "Collaborate with the team"]
+                responsibilities: ["Analyze data", "Create reports", "Collaborate with the team"],
+                coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
             },
             {
                 id: "3",
@@ -76,7 +78,8 @@ function JobsContextProvider({ children }: PropsWithChildren) {
                 tags: ["Product Management"],
                 closeDate: new Date(2025, 3, 1),
                 applications: Array.from({ length: 10 }, (_, i) => ({ id: (i + 1).toString() })),
-                responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"]
+                responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
+                coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
             },
             {
                 id: "4",
@@ -92,7 +95,8 @@ function JobsContextProvider({ children }: PropsWithChildren) {
                 tags: ["Marketing"],
                 closeDate: new Date(2025, 4, 1),
                 applications: Array.from({ length: 15 }, (_, i) => ({ id: (i + 1).toString() })),
-                responsibilities: ["Assist in marketing campaigns", "Develop marketing strategies", "Collaborate with the team"]
+                responsibilities: ["Assist in marketing campaigns", "Develop marketing strategies", "Collaborate with the team"],
+                coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
             },
             {
                 id: "5",
@@ -108,7 +112,8 @@ function JobsContextProvider({ children }: PropsWithChildren) {
                 tags: ["Design"],
                 closeDate: new Date(2025, 5, 1),
                 applications: Array.from({ length: 20 }, (_, i) => ({ id: (i + 1).toString() })),
-                responsibilities: ["Design user experiences", "Conduct user research", "Collaborate with the design team"]
+                responsibilities: ["Design user experiences", "Conduct user research", "Collaborate with the design team"],
+                coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
             }
         ];
         setJobs(mockJobs);
