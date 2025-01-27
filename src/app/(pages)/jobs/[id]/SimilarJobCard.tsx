@@ -1,16 +1,11 @@
-"use client";
-
-import Button from "@/components/button";
-import { Job } from "@/models/jobs"
-import JobsContext from "@/repositories/jobsContext";
-import { BookmarkSimple } from "@phosphor-icons/react";
+import { Job } from "@/models/jobs";
+import { BookmarkSimple } from "@phosphor-icons/react/dist/ssr";
 import { redirect } from "next/navigation";
-import { useContext } from "react";
 
-function JobCard({ job }: { job: Job }) {
+export default function SimilarJobCard({ job }: { job: Job }) {
     return (
-        <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px]">
-            <div className="flex flex-row justify-between">
+        <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[350px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
+            <div className="flex flex-row justify-between gap-[8px]">
                 <div className="flex flex-row gap-[5px]">
                     <div className="bg-white-200 rounded-full h-[51px] w-[51px] flex items-center justify-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -36,35 +31,9 @@ function JobCard({ job }: { job: Job }) {
                     {job.commitment.charAt(0).toUpperCase() + job.commitment.slice(1)}
                 </div>
             </div>
-            <div>
-                {job.description}
-            </div>
             <div className="text-white-700 text-[14px]">
                 {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })} • {job.applications.length} Applicant{job.applications.length > 1 ? "s" : ""}
             </div>
-            <div className="flex flex-row justify-between">
-                <div className="font-semibold">
-                    ${job.salary.toLocaleString()}
-                    <span className="text-white-700">/mo</span>
-                </div>
-                <div className="flex flex-row gap-[10px]">
-                    <Button size="small" variant="secondary" onClick={() => redirect(`/jobs/${job.id}`)}>View</Button>
-                    <Button size="small">Apply</Button>
-                </div>
-            </div>
-        </div >
-    );
-}
-
-export default function JobCards() {
-    const { jobs, populated, searchText, selectedTag, compensationRange, locations, commitments } = useContext(JobsContext);
-
-    const filteredJobs = jobs.filter(job => job.title.includes(searchText) && (job.tags.includes(selectedTag) || selectedTag == "All") && job.salary >= compensationRange[0] && job.salary <= compensationRange[1] && (locations.length == 0 || locations.includes(job.location)) && (commitments.length == 0 || commitments.includes(job.commitment)));
-
-    return (
-        <div className="grid grid-cols-3 gap-[16px] flex-1">
-            {!populated && <div>Loading...</div>}
-            {populated && (filteredJobs.length > 0 ? filteredJobs.map((job, index) => <JobCard key={index} job={job} />) : <div>No jobs found</div>)}
         </div>
     )
 }
