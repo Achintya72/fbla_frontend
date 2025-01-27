@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import { Job } from "@/models/jobs"
 import JobsContext from "@/repositories/jobsContext";
 import { BookmarkSimple } from "@phosphor-icons/react";
+import { redirect } from "next/navigation";
 import { useContext } from "react";
 
 function JobCard({ job }: { job: Job }) {
@@ -47,7 +48,7 @@ function JobCard({ job }: { job: Job }) {
                     <span className="text-white-700">/mo</span>
                 </div>
                 <div className="flex flex-row gap-[10px]">
-                    <Button size="small" variant="secondary">View</Button>
+                    <Button size="small" variant="secondary" onClick={() => redirect(`/jobs/${job.id}`)}>View</Button>
                     <Button size="small">Apply</Button>
                 </div>
             </div>
