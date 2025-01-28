@@ -94,3 +94,19 @@ label {
 .circle-cutout-2 {
 	mask: radial-gradient(circle at 0% 0%, transparent 40px, black 41px);
 }
+
+.status {
+	@apply p-[6px] rounded-[5px] flex-grow-0 max-h-fit;
+}
+
+.accepted {
+	@apply bg-green-100 text-green-700;
+}
+
+.pending {
+	@apply bg-yellow-100 text-yellow-700;
+}
+
+.rejected {
+	@apply bg-red-100 text-red-700;
+}
