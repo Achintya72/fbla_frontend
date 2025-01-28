@@ -2,10 +2,10 @@
 
 import Button from '@/components/button';
 import JobsContext from '@/repositories/jobsContext';
-import { BookmarkSimple } from '@phosphor-icons/react';
 import { useParams, redirect } from 'next/navigation';
 import React, { useContext } from 'react';
-import SimilarJobCard from './SimilarJobCard';
+import CondensedJobCard from '../../../../components/CondensedJobCard';
+import Bookmark from '@/components/bookmark';
 
 export default function Posting() {
     const { jobs, populated } = useContext(JobsContext);
@@ -33,9 +33,7 @@ export default function Posting() {
                     <div className="flex flex-row justify-between">
                         <h1 className="text-[40px] font-inter tracking-normal">{job.title}</h1>
                         <div className="flex flex-row gap-[10px]">
-                            <div className="bg-white-400 rounded-[8px] p-[12px]">
-                                <BookmarkSimple size={24} />
-                            </div>
+                            <Bookmark job={job} className="bg-white-400 rounded-[8px] p-[12px]" />
                             <Button>Apply (Closes {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })})</Button>
                         </div>
                     </div>
@@ -82,7 +80,7 @@ export default function Posting() {
                 <div>
                     <h5 className="text-white-800">Similar Jobs</h5>
                     <div className="flex flex-col gap-[16px] mt-[8px] flex-1">
-                        {similarJobs.length > 0 ? similarJobs.map((job, index) => <SimilarJobCard key={index} job={job} />) : <div>No similar jobs found</div>}
+                        {similarJobs.length > 0 ? similarJobs.map((job, index) => <CondensedJobCard key={index} job={job} />) : <div>No similar jobs found</div>}
                     </div>
                 </div>
             </div>

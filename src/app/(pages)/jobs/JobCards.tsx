@@ -1,9 +1,9 @@
 "use client";
 
+import Bookmark from "@/components/bookmark";
 import Button from "@/components/button";
 import { Job } from "@/models/jobs"
 import JobsContext from "@/repositories/jobsContext";
-import { BookmarkSimple } from "@phosphor-icons/react";
 import { redirect } from "next/navigation";
 import { useContext } from "react";
 
@@ -21,9 +21,7 @@ function JobCard({ job }: { job: Job }) {
                         <div className="text-white-700 text-[14px]">{job.company.name}</div>
                     </div>
                 </div>
-                <div className="self-center justify-self-center  text-white-700">
-                    <BookmarkSimple size={24} />
-                </div>
+                <Bookmark job={job} className="self-center justify-self-center  text-white-700" />
             </div>
             <div className="flex flex-row font-bold text-[14px] gap-[10px]">
                 <div className="p-[6px] bg-blue-100 text-blue-400 rounded-[5px]">

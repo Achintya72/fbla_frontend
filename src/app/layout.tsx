@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import { LoginContextProvider } from "@/repositories/loginContext";
 import { JobsContextProvider } from "@/repositories/jobsContext";
+import UserDataContextProvider from "@/repositories/userDataContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,8 +26,10 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased max-w-[1440px] mx-auto`}>
         <LoginContextProvider>
           <JobsContextProvider>
-            <Navbar />
-            {children}
+            <UserDataContextProvider>
+              <Navbar />
+              {children}
+            </UserDataContextProvider>
           </JobsContextProvider>
         </LoginContextProvider>
       </body>
