@@ -45,4 +45,4 @@ interface JobContextData {
     setCommitments: (commitments: Commitment[]) => void;
 }
 
-export type { Job, JobContextData, JobLevel, Location, Commitment };
+export type { Job, JobContextData, Company, JobLevel, Location, Commitment };

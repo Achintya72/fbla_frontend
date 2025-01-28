@@ -1,3 +1,4 @@
+
 type JobStatus = "bookmarked" | "pending" | "accepted" | "rejected" | "in-progress"
 
 interface JobReference {
@@ -6,11 +7,19 @@ interface JobReference {
     nextSteps?: { step: string, completed: boolean }[],
 }
 
-interface UserData {
+// interface UserData {
+//     profile: Profile,
+//     setJobReferences: (jobReferences: JobReference[]) => void,
+//     addJobReference: (jobReference: JobReference) => void,
+//     removeJobReference: (id: string) => void,
+// }
+
+interface Profile {
+    id: string,
+    name: string,
+    email: string
     jobReferences: JobReference[],
-    setJobReferences: (jobReferences: JobReference[]) => void,
-    addJobReference: (jobReference: JobReference) => void,
-    removeJobReference: (id: string) => void,
 }
 
-export type { UserData, JobReference, JobStatus }
+
+export type { Profile, JobReference, JobStatus }
