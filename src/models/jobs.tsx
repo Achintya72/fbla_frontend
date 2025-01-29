@@ -27,11 +27,13 @@ interface Job {
     closeDate: Date;
     applications: Application[];
     responsibilities: string[];
+    skills: string[];
     coverImage: string;
 }
 
 interface JobContextData {
     jobs: Job[];
+    setJobs: (jobs: Job[]) => void;
     populated: boolean;
     searchText: string;
     setSearchText: (text: string) => void;

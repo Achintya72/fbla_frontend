@@ -38,7 +38,7 @@ export default function Posting() {
                             <Link href={`/jobs/${job.id}/apply`}>
                                 <Button>Apply (Closes {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })})</Button>
                             </Link>
-                            
+
                         </div>
                     </div>
                     <div className="flex flex-row justify-between">
@@ -79,6 +79,10 @@ export default function Posting() {
                     <div>
                         <div className="font-bold">Responsibilities</div>
                         <ul className="text-white-700">{job.responsibilities.map((value, index) => <li key={index}>• {value}</li>)}</ul>
+                    </div>
+                    <div>
+                        <div className="font-bold">Skills</div>
+                        <ul className="text-white-700">{job.skills.map((value, index) => <li key={index}>• {value}</li>)}</ul>
                     </div>
                 </div>
                 <div>
