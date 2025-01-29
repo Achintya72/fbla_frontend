@@ -7,13 +7,6 @@ interface JobReference {
     nextSteps?: { step: string, completed: boolean }[],
 }
 
-// interface UserData {
-//     profile: Profile,
-//     setJobReferences: (jobReferences: JobReference[]) => void,
-//     addJobReference: (jobReference: JobReference) => void,
-//     removeJobReference: (id: string) => void,
-// }
-
 interface Profile {
     id: string,
     name: string,

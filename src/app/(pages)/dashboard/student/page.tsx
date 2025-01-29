@@ -11,9 +11,10 @@ import { useContext } from "react";
 
 function Dashboard() {
     const { name, role } = useLoginContext();
-    const { jobReferences } = useUserDataContext();
+    const { studentData } = useUserDataContext();
     const { jobs } = useContext(JobsContext);
 
+    const jobReferences = studentData?.jobReferences || [];
     const inProgress = jobReferences.filter((value) => value.status == "in-progress");
     const completed = jobReferences.filter((value) => ["accepted", "rejected", "pending"].includes(value.status));
     const bookmarked = jobReferences.filter((value) => value.status == "bookmarked");
@@ -59,7 +60,7 @@ function Dashboard() {
                     <h4 className="mb-[8px]">Bookmarks</h4>
                     {bookmarked.length > 0 && bookmarked.map((value, index) => {
                         const job = jobs.find((job) => job.id === value.id);
-                        return job ? <CondensedJobCard key={index} job={job} showApply /> : null;
+                        return job ? <CondensedJobCard key={index} job={job} showButtons /> : null;
                     })}
                     {bookmarked.length == 0 && <div className="text-white-700">No bookmarks. <Link className="underline" href="/jobs">Add some?</Link></div>}
                 </div>

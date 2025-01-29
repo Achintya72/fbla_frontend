@@ -77,6 +77,14 @@ p {
 	line-height: normal;
 }
 
+small {
+	font-family: var(--font-inter);
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
 label {
 	font-family: var(--font-inter);
 	font-size: 14px;

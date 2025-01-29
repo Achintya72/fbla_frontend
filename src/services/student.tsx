@@ -1,12 +1,26 @@
 "use client";
 
-const useFetchStudentData = async (setter: Dispatch<SetStateAction<StudentData>>) => {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+import { StudentData } from "@/models/student";
+import { student } from "@/repositories/mockData";
+import delay from "@/utils/delay";
+import { FirebaseError } from "firebase/app";
+import { Dispatch, SetStateAction } from "react";
 
+export const fetchStudentData: () => Promise<StudentData | undefined> = async (
+    setError?: Dispatch<SetStateAction<string>>, 
+    setLoading?: Dispatch<SetStateAction<boolean>>,
+) => {
     try {
-        setLoading(true);
+        setLoading?.(true);
         await delay(1000);
-        setter()
+        return student;    
+    } catch(e) {
+        if(e instanceof FirebaseError) {
+            setError?.(e.message);
+        }
+        setError?.("An unknown error occurred.");
+        return undefined;
+    } finally {
+        setLoading?.(false);
     }
-}
+};

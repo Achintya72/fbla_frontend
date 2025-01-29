@@ -1,11 +1,13 @@
 "use client";
 
 import { Job } from "@/models/jobs";
-import { useUserDataContext } from "@/repositories/userDataContext";
+import { useAddJobReference, useGetJobReferences, useRemoveJobReference } from "@/services/profile";
 import { BookmarkSimple } from "@phosphor-icons/react";
 
 export default function Bookmark({ job, className }: { job: Job, className: string }) {
-    const { jobReferences, addJobReference, removeJobReference } = useUserDataContext();
+    const jobReferences = useGetJobReferences()();
+    const removeJobReference = useRemoveJobReference();
+    const addJobReference = useAddJobReference();
 
     const ref = jobReferences.find(jobReference => jobReference.id === job.id);
     const added = ref != undefined;

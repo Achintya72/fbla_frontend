@@ -45,7 +45,7 @@ export default function Login() {
                     name="email"
                     options={{
                         required: "Required Field",
-                        pattern: { value: /^\d{7}@lwsd\.org$/, message: "School emails only" }
+                        pattern: { value: /^\d{@lwsd\.org$/, message: "Emails only" }
                     }}
 
                 />

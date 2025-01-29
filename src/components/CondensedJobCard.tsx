@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Bookmark from "./bookmark";
 import Button from "./button";
 
-export default function CondensedJobCard({ job, showApply = false, status = null, nextSteps = [] }: { job: Job, showApply?: boolean, status?: string | null, nextSteps?: string[] }) {
+export default function CondensedJobCard({ job, showButtons = false, status = null, nextSteps = [], buttons = [{text: "Apply", href: `/${job.id}/apply`}] }: { job: Job, showButtons?: boolean, status?: string | null, nextSteps?: string[], buttons?: {text: string, href: string}[] }) {
     return (
         <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[350px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
             <div className="flex flex-row justify-between gap-[8px]">
@@ -34,7 +34,10 @@ export default function CondensedJobCard({ job, showApply = false, status = null
             <div className="text-white-700 text-[14px]">
                 {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })} • {job.applications.length} Applicant{job.applications.length > 1 ? "s" : ""}
             </div>
-            {showApply && <Button size="small">Apply</Button>}
+            {showButtons && buttons.map((value, index) => <Button size="small" key={index} onClick={(event) => {
+                event.stopPropagation();
+                redirect(value.href);
+            }}>{value.text}</Button>)}
         </div>
     )
 }

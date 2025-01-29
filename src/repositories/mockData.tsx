@@ -1,5 +1,7 @@
 import { StudentData } from "@/models/student";
 import { JobReference } from "@/models/userData";
+import { RecruiterData } from "@/models/recruiter";
+import { CounselorData } from "@/models/counselor";
 
 export const jobReferences: JobReference[] = [
     {
@@ -29,6 +31,15 @@ export const jobReferences: JobReference[] = [
             { step: "Offer", completed: true },
         ],
     },
+    {
+        id: "4",
+        status: "pending",
+        nextSteps: [
+            { step: "Apply", completed: true },
+            { step: "Interview", completed: true },
+            { step: "Offer", completed: true },
+        ],
+    },
 ];
 
 export const student: StudentData = {
@@ -36,7 +47,17 @@ export const student: StudentData = {
     name: "John Doe",
     email: "1055712@lwsd.org",
     counselor: "2",
-    coverLetters: [],
+    coverLetters: [
+        {
+            name: "Data Analyst",
+            url: "https://www.google.com",
+        },
+        {
+            name: "UI Designer",
+            url: "https://www.google.com",
+        }
+    ],
+    resume: "https://www.facebook.com",
     jobReferences: jobReferences,
     page: {
         bio: "I am a student at Eastlake High School and I am interested in computer science.",
@@ -50,3 +71,26 @@ export const student: StudentData = {
     lessons: [],
     verified: false,
 };
+
+export const recruiter: RecruiterData = {
+    id: "2",
+    name: "Jeff Bezos",
+    email: "jeffbezos@amazon.com",
+    company: {
+        name: "Amazon",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+        tags: ["e-commerce", "cloud computing", "artificial intelligence"],
+    },
+    jobReferences: jobReferences,
+    verified: true
+}
+
+export const counselor: CounselorData = {
+    id: "3",
+    name: "Jane Smith",
+    email: "mtouran@lwsd.org",
+    students: ["1"],
+    endorsementRequests: ["1"],
+    jobReferences: jobReferences,
+    pendingRecruiters: ["2"],
+}

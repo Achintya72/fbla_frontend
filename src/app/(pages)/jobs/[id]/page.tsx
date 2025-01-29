@@ -6,6 +6,7 @@ import { useParams, redirect } from 'next/navigation';
 import React, { useContext } from 'react';
 import CondensedJobCard from '../../../../components/CondensedJobCard';
 import Bookmark from '@/components/bookmark';
+import Link from 'next/link';
 
 export default function Posting() {
     const { jobs, populated } = useContext(JobsContext);
@@ -34,7 +35,10 @@ export default function Posting() {
                         <h1 className="text-[40px] font-inter tracking-normal">{job.title}</h1>
                         <div className="flex flex-row gap-[10px]">
                             <Bookmark job={job} className="bg-white-400 rounded-[8px] p-[12px]" />
-                            <Button>Apply (Closes {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })})</Button>
+                            <Link href={`/jobs/${job.id}/apply`}>
+                                <Button>Apply (Closes {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })})</Button>
+                            </Link>
+                            
                         </div>
                     </div>
                     <div className="flex flex-row justify-between">
