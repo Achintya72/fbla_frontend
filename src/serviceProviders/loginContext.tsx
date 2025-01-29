@@ -2,8 +2,9 @@
 
 import { onAuthStateChanged, User } from "firebase/auth";
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import { auth } from "./firebase";
-import { LoginContextData, Role } from "@/models/login";
+import { auth } from "../repositories/firebase";
+import { LoginContextData, Role, UserJWT } from "@/models/login";
+import { jwtDecode } from "jwt-decode";
 
 const LoginContext = createContext<LoginContextData>({
     authUser: null,
@@ -14,7 +15,7 @@ const LoginContext = createContext<LoginContextData>({
 });
 
 function LoginContextProvider({ children }: PropsWithChildren) {
-    const [authUser, changeAuthUser] = useState<User | null>(null);
+    const [authUser, changeAuthUser] = useState<boolean>(false);
     const [populated, changePopulated] = useState<boolean>(false);
     const [role, changeRole] = useState<Role>("student");
     const [name, changeName] = useState<string>("");
@@ -23,24 +24,26 @@ function LoginContextProvider({ children }: PropsWithChildren) {
      * Updates role and username based on the user's display name
      * @param user - user to populate the context with
      */
-    const populateUser = (user: User) => {
-        const userName = user.displayName;
-        const [r, name] = userName?.split("_") || ["student", ""] as [Role, string];
-        changeRole(r as Role);
-        changeName(name);
+    const populateUser = (token: string) => {
+        const decoded: UserJWT = jwtDecode(token);
+        changeAuthUser(true);
+        changeRole(decoded.account_type);
+        changeName(decoded.dis ?? "");
     }
 
     useEffect(() => {
-        return onAuthStateChanged(auth, (user) => {
-            changeAuthUser(user);
-            changePopulated(true);
-            if (user) {
-                populateUser(user);
-            } else {
-                changeRole("student");
-                changeName("");
-            }
-        });
+        // return onAuthStateChanged(auth, (user) => {
+        //     changeAuthUser(user);
+        //     changePopulated(true);
+        //     if (user) {
+        //         populateUser(user);
+        //     } else {
+        //         changeRole("student");
+        //         changeName("");
+        //     }
+        // });
+
+
     }, [])
 
     const values: LoginContextData = {

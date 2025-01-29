@@ -3,7 +3,7 @@ import { Profile } from "./userData";
 
 interface RecruiterData extends Profile {
     company: Company;
-    verified: boolean;
+    verified: boolean | null;
 }
 
 export type { RecruiterData };

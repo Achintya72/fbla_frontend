@@ -1,7 +1,7 @@
 "use client";
 
 import { JobReference } from "@/models/userData";
-import { useUserDataContext } from "@/repositories/userDataContext"
+import { useUserDataContext } from "@/serviceProviders/userDataContext"
 
 
 export const useGetJobReferences = () => {

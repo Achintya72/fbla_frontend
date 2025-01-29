@@ -1,7 +1,7 @@
 "use client";
 
 import Button from '@/components/button';
-import JobsContext from '@/repositories/jobsContext';
+import JobsContext from '@/serviceProviders/jobsContext';
 import { useParams, redirect } from 'next/navigation';
 import React, { useContext } from 'react';
 import CondensedJobCard from '../../../../components/CondensedJobCard';

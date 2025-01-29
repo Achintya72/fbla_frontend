@@ -1,6 +1,6 @@
 "use client";
 
-import JobsContext from "@/repositories/jobsContext";
+import JobsContext from "@/serviceProviders/jobsContext";
 import { Sliders } from "@phosphor-icons/react";
 import { useContext, ChangeEvent } from "react";
 import { Location, Commitment } from "@/models/jobs";

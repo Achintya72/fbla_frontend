@@ -1,4 +1,5 @@
 import { User } from "firebase/auth";
+import { JwtPayload } from "jwt-decode";
 
 type Role = "counselor" | "recruiter" | "student";
 
@@ -10,4 +11,9 @@ interface LoginContextData {
     populateUser: (user: User) => void
 }
 
-export type { LoginContextData, Role };
+interface UserJWT extends JwtPayload {
+    account_type: Role,
+    dis: string | null,
+}
+
+export type { LoginContextData, Role, UserJWT };

@@ -9,7 +9,7 @@ import { fetchStudentData } from "@/services/student";
 import { fetchCounselorData } from "@/services/counselor";
 import { fetchRecruiterData } from "@/services/recruiter";
 import Loader from "@/components/Loader";
-import { student } from "./mockData";
+import { student } from "../repositories/mockData";
 import { JobReference, Profile } from "@/models/userData";
 
 interface UserData {

@@ -92,5 +92,5 @@ export const counselor: CounselorData = {
     students: ["1"],
     endorsementRequests: ["1"],
     jobReferences: jobReferences,
-    pendingRecruiters: ["2"],
+    applicationReviews: []
 }

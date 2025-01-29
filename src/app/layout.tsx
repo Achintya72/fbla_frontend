@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import { LoginContextProvider } from "@/repositories/loginContext";
-import { JobsContextProvider } from "@/repositories/jobsContext";
-import UserDataContextProvider from "@/repositories/userDataContext";
+import { LoginContextProvider } from "@/serviceProviders/loginContext";
+import { JobsContextProvider } from "@/serviceProviders/jobsContext";
+import UserDataContextProvider from "@/serviceProviders/userDataContext";
 
 const inter = Inter({
   variable: "--font-inter",

@@ -1,6 +1,6 @@
 "use client";
 
-import JobsContext from "@/repositories/jobsContext";
+import JobsContext from "@/serviceProviders/jobsContext";
 import { useContext } from "react";
 
 export default function JobsSearch() {

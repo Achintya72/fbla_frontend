@@ -3,11 +3,11 @@
 import Button from "@/components/button";
 import CondensedJobCard from "@/components/CondensedJobCard";
 import withProtection from "@/components/protected"
-import { useUserDataContext } from "@/repositories/userDataContext";
+import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import { useLoginContext } from "@/services/login";
 import Link from "next/link";
 import { useContext } from "react";
-import JobsContext from "@/repositories/jobsContext";
+import JobsContext from "@/serviceProviders/jobsContext";
 
 function Dashboard() {
     const { recruiterData } = useUserDataContext();

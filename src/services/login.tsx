@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useState } from "react";
-import LoginContext from "@/repositories/loginContext";
+import LoginContext from "@/serviceProviders/loginContext";
 import { LoginContextData } from "@/models/login";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { auth } from "@/repositories/firebase";

@@ -3,7 +3,7 @@
 import Bookmark from "@/components/bookmark";
 import Button from "@/components/button";
 import { Job } from "@/models/jobs"
-import JobsContext from "@/repositories/jobsContext";
+import JobsContext from "@/serviceProviders/jobsContext";
 import { redirect } from "next/navigation";
 import { useContext } from "react";
 

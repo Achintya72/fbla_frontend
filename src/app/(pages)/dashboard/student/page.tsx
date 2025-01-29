@@ -3,8 +3,8 @@
 import Button from "@/components/button";
 import CondensedJobCard from "@/components/CondensedJobCard";
 import withProtection from "@/components/protected"
-import JobsContext from "@/repositories/jobsContext";
-import { useUserDataContext } from "@/repositories/userDataContext";
+import JobsContext from "@/serviceProviders/jobsContext";
+import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import { useLoginContext } from "@/services/login";
 import Link from "next/link";
 import { useContext } from "react";

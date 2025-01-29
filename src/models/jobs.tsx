@@ -1,10 +1,9 @@
+import { Application } from "./application";
+import { StudentPage } from "./student";
+
 type JobLevel = "intern" | "entry" | "mid" | "senior";
 type Location = "Hybrid" | "Remote" | "Onsite";
 type Commitment = "Full-time" | "Part-time" | "Up-To-You";
-
-interface Application {
-    id: string;
-}
 
 interface Company {
     name: string;
@@ -24,8 +23,8 @@ interface Job {
     level: JobLevel;
     hours: string;
     tags: string[];
-    closeDate: Date;
-    applications: Application[];
+    closeDate: Date; // ISO
+    applications: string[];
     responsibilities: string[];
     coverImage: string;
 }
