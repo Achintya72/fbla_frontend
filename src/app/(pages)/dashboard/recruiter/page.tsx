@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import CondensedJobCard from "@/components/CondensedJobCard";
 import withProtection from "@/components/protected"
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
-import { useLoginContext } from "@/services/login";
+import { useLoginContext } from "@/services/login.service";
 import Link from "next/link";
 import { useContext } from "react";
 import JobsContext from "@/serviceProviders/jobsContext";

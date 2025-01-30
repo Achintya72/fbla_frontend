@@ -1,7 +1,7 @@
 "use client";
 
 import { CounselorData } from "@/models/counselor";
-import { counselor } from "@/repositories/mockData";
+import { counselor } from "@/utils/mockData";
 import delay from "@/utils/delay";
 import { FirebaseError } from "firebase/app";
 

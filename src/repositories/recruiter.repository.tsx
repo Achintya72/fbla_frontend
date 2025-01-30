@@ -6,7 +6,7 @@ import { Job } from "@/models/jobs";
 import { RecruiterData } from "@/models/recruiter";
 import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
-import { applications } from "./mockDB";
+import { applications } from "../utils/mockDB";
 
 /**
  * @returns RecruiterData or null
@@ -38,7 +38,7 @@ export const createJobPosting: (job: Job) => Promise<Job> = async (job) => {
  * Updates specific job posting
  * @returns Updating Job posting
  */
-export const updateJobPosting: (job: Job) => Promise<Job | null> = async (job) => {
+export const updateJobPosting: (job: Job) => Promise<Job> = async (job) => {
     const { setJobs, jobs } = useMockData();
     await delay(1000);
     const foundIndex = jobs.findIndex(j => j.id === job.id);
@@ -125,7 +125,8 @@ export const changeApplicationStatus: (applicationId: string, status: Progress) 
         setApplications(prev => {
             prev[foundIndex].status = status;
             return [...prev];
-        })
+        });
+        return;
     }
     throw new Error("Application not found");
 }
@@ -143,6 +144,7 @@ export const publishJobResults: (jobId: string) => Promise<void> = async (id) =>
             status: a.recruiterClassification
         }));
         setApplications([...newApplications]);
+        return;
     }
     throw new Error("Job not found");
 }

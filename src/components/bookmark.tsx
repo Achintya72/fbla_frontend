@@ -3,7 +3,7 @@
 import { Job } from "@/models/jobs";
 import { useAddJobReference, useGetJobReferences, useRemoveJobReference } from "@/services/profile";
 import { BookmarkSimple } from "@phosphor-icons/react";
-import { useLoginContext } from "@/services/login";
+import { useLoginContext } from "@/services/login.service";
 
 export default function Bookmark({ job, className }: { job: Job, className: string }) {
     const { role } = useLoginContext();

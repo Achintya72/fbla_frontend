@@ -2,8 +2,6 @@
 import { useContext, useState } from "react";
 import LoginContext from "@/serviceProviders/loginContext";
 import { LoginContextData, Role } from "@/models/login";
-import { FirebaseError } from "firebase/app";
-import delay from "@/utils/delay";
 import { loginUser, createUser, validateJWT } from "@/repositories/login.repository";
 import { deleteUser, retrieveUserFromCache, setUserInCache } from "@/repositories/loginCache.respository";
 
@@ -60,7 +58,7 @@ export const useLoginUser: () => [string, () => void, boolean, (email: string, p
  * Custom hook to create user
  * @returns [error, resetError, loading, createUser]
  */
-export const useCreateUser: () => [string, () => void, boolean, (name: string, email: string, password: string, role: Role) => void] = () => {
+export const useCreateUser: () => [string, () => void, boolean, (email: string, password: string, name: string, role: Role) => void] = () => {
     const [error, changeError] = useState<string>("");
     const [loading, changeLoading] = useState<boolean>(false);
     const { populateUser } = useLoginContext();
@@ -69,7 +67,7 @@ export const useCreateUser: () => [string, () => void, boolean, (name: string, e
         changeError("");
     }
 
-    const signup = async (name: string, email: string, password: string, role: Role) => {
+    const signup = async (email: string, password: string, name: string, role: Role) => {
         resetError();
         try {
             changeLoading(true);
@@ -127,16 +125,20 @@ export const useLogout: () => [boolean, string, () => void, () => void] = () => 
     return [loading, error, resetError, logoutUser];
 }
 
-export const useLoginCacheUser: () => (populateUser: (token: string) => void) => Promise<void> = () => {
+export const useLoginCacheUser = () => {
 
-    const loginUserFromCache: (populateUser: (token: string) => void) => Promise<void> = async (populateUser) => {
+    const loginUserFromCache: (populateUser: (token: string) => void, reset: () => void) => Promise<void> = async (populateUser, reset) => {
         const token = retrieveUserFromCache();
         if (token) {
             const result = await validateJWT(token);
             if (result) {
                 populateUser(token);
+                return;
+            } else {
+                deleteUser();
             }
         }
+        reset();
     }
 
     return loginUserFromCache;

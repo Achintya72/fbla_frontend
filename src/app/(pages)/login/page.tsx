@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { useLoginContext, useLoginUser } from "@/services/login";
+import { useLoginContext, useLoginUser } from "@/services/login.service";
 import Error from "@/components/Error";
 import { useEffect } from "react";
 

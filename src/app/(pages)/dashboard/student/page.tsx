@@ -2,10 +2,11 @@
 
 import Button from "@/components/button";
 import CondensedJobCard from "@/components/CondensedJobCard";
+import Loader from "@/components/Loader";
 import withProtection from "@/components/protected"
 import JobsContext from "@/serviceProviders/jobsContext";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
-import { useLoginContext } from "@/services/login";
+import { useLoginContext } from "@/services/login.service";
 import Link from "next/link";
 import { useContext } from "react";
 
@@ -14,10 +15,15 @@ function Dashboard() {
     const { studentData } = useUserDataContext();
     const { jobs } = useContext(JobsContext);
 
-    const jobReferences = studentData?.jobReferences || [];
-    const inProgress = jobReferences.filter((value) => value.status == "in-progress");
+    if (studentData == undefined) {
+        return <Loader />
+    }
+
+    const jobReferences = studentData.jobReferences || [];
+    const inProgress = jobReferences.filter(ref => ref.status === "in-progress");
     const completed = jobReferences.filter((value) => ["accepted", "rejected", "pending"].includes(value.status));
     const bookmarked = jobReferences.filter((value) => value.status == "bookmarked");
+
 
     return (
         <main className="px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
@@ -53,7 +59,9 @@ function Dashboard() {
                     </div>
                     <div className="flex flex-row gap-[10px]">
                         <Button size={'small'}>Edit Profile</Button>
-
+                        <Link href={`/student/${studentData?.id}`}>
+                            <Button size="small" variant="secondary">Preview</Button>
+                        </Link>
                     </div>
                 </div>
                 <div className="flex flex-col gap-[16px] min-w-[350px]">

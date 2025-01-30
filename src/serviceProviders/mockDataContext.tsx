@@ -6,7 +6,7 @@ import { Job } from "@/models/jobs";
 import { RecruiterData } from "@/models/recruiter";
 import { StudentData } from "@/models/student";
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useState } from "react";
-import { applications as a, counselors as c, jobs as j, recruiters as r, students as s } from "@/repositories/mockDB";
+import { applications as a, counselors as c, jobs as j, recruiters as r, students as s } from "@/utils/mockDB";
 
 interface MockDatabase {
     students: StudentData[],

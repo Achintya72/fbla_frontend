@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Loader from "@/components/Loader";
 import withProtection from "@/components/protected";
 import JobsContext from "@/serviceProviders/jobsContext";
-import { student } from "@/repositories/mockData";
+import { student } from "@/utils/mockData";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import classes from "@/utils/classes";
 import { CaretLeft, Paperclip, Plus, Upload, X } from "@phosphor-icons/react/dist/ssr";

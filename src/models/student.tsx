@@ -15,7 +15,6 @@ type JobStatus = "bookmarked" | "pending" | "accepted" | "rejected" | "in-progre
 interface JobReference {
     id: string,
     status: JobStatus,
-    nextSteps?: { step: string, completed: boolean }[],
 }
 
 interface LessonStatus {
@@ -33,6 +32,7 @@ interface StudentPage {
     projects: Project[];
     employments: Employment[];
     links: Link[];
+    name: string
 }
 
 interface Link {

@@ -1,7 +1,7 @@
 "use client";
 
 import withProtection from "@/components/protected"
-import { useLoginContext } from "@/services/login";
+import { useLoginContext } from "@/services/login.service";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
 

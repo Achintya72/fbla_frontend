@@ -1,7 +1,7 @@
 "use client";
 
 import { RecruiterData } from "@/models/recruiter";
-import { recruiter } from "@/repositories/mockData";
+import { recruiter } from "@/utils/mockData";
 import delay from "@/utils/delay";
 import { FirebaseError } from "firebase/app";
 import { Dispatch, SetStateAction } from "react";

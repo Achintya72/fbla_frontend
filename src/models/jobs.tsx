@@ -29,6 +29,7 @@ interface Job {
     responsibilities: string[];
     coverImage: string;
     published: boolean;
+    skills: string[];
 }
 
 interface JobContextData {

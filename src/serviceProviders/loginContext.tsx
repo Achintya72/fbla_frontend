@@ -1,11 +1,10 @@
 "use client";
 
-import { onAuthStateChanged, User } from "firebase/auth";
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import { auth } from "../repositories/firebase";
 import { LoginContextData, Role, UserJWT } from "@/models/login";
 import { jwtDecode } from "jwt-decode";
-import { useLoginCacheUser } from "@/services/login";
+import { useLoginCacheUser } from "@/services/login.service";
+import Loader from "@/components/Loader";
 
 const LoginContext = createContext<LoginContextData>({
     authUser: false,
@@ -37,7 +36,7 @@ function LoginContextProvider({ children }: PropsWithChildren) {
     }
 
     useEffect(() => {
-        loginUserFromCache(populateUser);
+        loginUserFromCache(populateUser, reset);
     }, [])
 
     /**
@@ -47,6 +46,7 @@ function LoginContextProvider({ children }: PropsWithChildren) {
         changeAuthUser(false);
         changeRole("student");
         changeName("");
+        changePopulated(true);
     }
 
     const values: LoginContextData = {
@@ -56,6 +56,10 @@ function LoginContextProvider({ children }: PropsWithChildren) {
         role,
         name,
         reset,
+    }
+
+    if(!populated) {
+        return <Loader />
     }
 
     return (

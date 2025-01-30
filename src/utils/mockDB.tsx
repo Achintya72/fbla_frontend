@@ -35,9 +35,13 @@ export const students: StudentData[] = [
             }
         ],
         email: "1055712@lwsd.org",
-        jobReferences: [],
+        jobReferences: [
+            { id: "j1", status: "bookmarked" },
+            { id: "j2", status: "in-progress" }
+        ],
         lessons: [],
         page: {
+            name: "Achintya Agrawal",
             bio: "Passionate believer in the limitless power of channelizing the power of AI through careful design",
             employments: [{
                 company: "Codju",
@@ -83,6 +87,7 @@ export const students: StudentData[] = [
         jobReferences: [],
         lessons: [],
         page: {
+            name: "Pranav Kannepalli",
             bio: "Aspiring Mathematician and Machine Learning Engineer",
             employments: [{
                 company: "Stree Shakti Prabhodini",
@@ -153,7 +158,8 @@ export const jobs: Job[] = [
         responsibilities: ["Develop software solutions", "Work with the team to deliver projects", "Learn and grow"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "r1",
-        published: true
+        published: true,
+        skills: []
     },
     {
         id: "j2",
@@ -172,7 +178,8 @@ export const jobs: Job[] = [
         responsibilities: ["Analyze data", "Create reports", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "r1",
-        published: true
+        published: true,
+        skills: []
     },
     {
         id: "j3",
@@ -191,7 +198,8 @@ export const jobs: Job[] = [
         responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "r1",
-        published: true
+        published: true,
+        skills: []
     },
     {
         id: "j4",
@@ -210,7 +218,8 @@ export const jobs: Job[] = [
         responsibilities: ["Assist in marketing campaigns", "Develop marketing strategies", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "r1",
-        published: true
+        published: true,
+        skills: []
     },
     {
         id: "j5",
@@ -229,7 +238,8 @@ export const jobs: Job[] = [
         responsibilities: ["Design user experiences", "Conduct user research", "Collaborate with the design team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "r1",
-        published: true
+        published: true,
+        skills: []
     }
 ];
 

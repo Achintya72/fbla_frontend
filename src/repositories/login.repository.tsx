@@ -32,7 +32,7 @@ export const loginUser: (email: string, password: string) => Promise<string> = a
  * Success: JWT Token
  * Failure: null
  */
-export const createUser: (email: string, password: string, name: string, role: Role) => Promise<string> = async (name, email, password, role) => {
+export const createUser: (email: string, password: string, name: string, role: Role) => Promise<string> = async (email, password, name, role) => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sign_up`, {
             method: "POST",

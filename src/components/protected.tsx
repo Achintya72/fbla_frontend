@@ -1,7 +1,7 @@
 "use client";
 
 import { Role } from "@/models/login";
-import { useLoginContext } from "@/services/login";
+import { useLoginContext } from "@/services/login.service";
 import { User } from "firebase/auth";
 import { redirect } from "next/navigation";
 import { ComponentType, useLayoutEffect } from "react";

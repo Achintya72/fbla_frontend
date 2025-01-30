@@ -8,7 +8,7 @@ import { RecruiterData } from "@/models/recruiter";
 import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
 import { cp } from "fs";
-import { counselor } from "./mockData";
+import { counselor } from "../utils/mockData";
 
 /**
  * Fetch's counselor's data

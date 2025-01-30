@@ -4,12 +4,12 @@ import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext,
 import { StudentData } from "@/models/student";
 import { CounselorData } from "@/models/counselor";
 import { RecruiterData } from "@/models/recruiter";
-import { useLoginContext } from "@/services/login";
-import { fetchStudentData } from "@/services/student";
+import { useLoginContext } from "@/services/login.service";
+import { useFetchStudentData } from "@/services/student";
 import { fetchCounselorData } from "@/services/counselor";
 import { fetchRecruiterData } from "@/services/recruiter";
 import Loader from "@/components/Loader";
-import { student } from "../repositories/mockData";
+import { student } from "../utils/mockData";
 import { Profile } from "@/models/userData";
 
 interface UserData {
@@ -41,11 +41,13 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
     const [counselorData, setCounselorData] = useState<CounselorData | undefined>(undefined);
     const [recruiterData, setRecruiterData] = useState<RecruiterData | undefined>(undefined);
     const [populated, setPopulated] = useState(false);
+    const { fetchStudentData } = useFetchStudentData();
+
 
     useEffect(() => {
 
         const populateStudentData = async () => {
-            let data = await fetchStudentData();
+            let data = await fetchStudentData("s1");
             setStudentData(data);
         }
 
@@ -63,7 +65,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
         setStudentData(undefined);
         setCounselorData(undefined);
         setRecruiterData(undefined);
-        
+
         if (authUser) {
             switch (role) {
                 case "student":
@@ -85,7 +87,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
         switch (role) {
             case "student":
                 setStudentData(prev => {
-                    if(prev != undefined) {
+                    if (prev != undefined) {
                         return {
                             ...prev,
                             ...data as Profile
@@ -95,7 +97,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
                 break;
             case "counselor":
                 setCounselorData(prev => {
-                    if(prev != undefined) {
+                    if (prev != undefined) {
                         return {
                             ...prev,
                             ...data as Profile
@@ -105,7 +107,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
                 break;
             case "recruiter":
                 setRecruiterData(prev => {
-                    if(prev != undefined) {
+                    if (prev != undefined) {
                         return {
                             ...prev,
                             ...data as Profile
@@ -138,7 +140,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
         setRecruiterData,
     }
 
-    if(!populated) { 
+    if (!populated) {
         return <div className="w-full h-screen flex justify-center items-center">
             <Loader />
         </div>
@@ -152,7 +154,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
 }
 
 const useUserDataContext: () => UserData = () => {
-    const context =  useContext(UserDataContext);
+    const context = useContext(UserDataContext);
     return context;
 }
 

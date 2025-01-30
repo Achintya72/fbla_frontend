@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Button from "./button";
-import { useLoginContext, useLogout } from "@/services/login";
+import { useLoginContext, useLogout } from "@/services/login.service";
 import Error from "./Error";
 
 export default function Navbar() {
