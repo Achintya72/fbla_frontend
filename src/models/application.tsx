@@ -1,4 +1,7 @@
 import { CoverLetter, StudentPage } from "./student";
+import { JobStatus } from "./student";
+
+type Progress = "accepted" | "rejected" | "in-progress"
 
 interface Application {
     id: string;
@@ -9,8 +12,9 @@ interface Application {
     resume?: string,
     recruiterComments: Comment[],
     counselorComments: Comment[],
-    recruiterClassification: boolean | null,
+    recruiterClassification: Progress,
     submitted: boolean
+    status: JobStatus,
 }
 
 interface StudentApplication {
@@ -22,7 +26,7 @@ interface StudentApplication {
     resume?: string,
     submitted: boolean,
     counselorComments: Comment[],
-    status: boolean | null
+    status: JobStatus
 }
 
 interface RecruiterApplication {
@@ -32,10 +36,10 @@ interface RecruiterApplication {
     additionalInformation: string,
     coverLetter: CoverLetter,
     resume?: string,
-    page: StudentPage,
     recruiterComments: Comment[],
-    recruiterClassification: boolean | null,
-    submitted: boolean
+    recruiterClassification: Progress,
+    submitted: boolean,
+    status: JobStatus
 }
 
 interface CounselorApplication {
@@ -54,4 +58,4 @@ interface Comment {
     resolved: boolean
 }
 
-export type { Application, StudentApplication, RecruiterApplication, CounselorApplication, Comment };
+export type { Application, Progress, StudentApplication, RecruiterApplication, CounselorApplication, Comment };

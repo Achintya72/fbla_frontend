@@ -7,6 +7,9 @@ import { redirect } from "next/navigation";
 
 function Dashboard() {
     const context = useLoginContext();
+    console.log(context.role);
+    console.log(context.authUser);
+    console.log(context.name);
 
     useEffect(() => {
         if (context.authUser) {

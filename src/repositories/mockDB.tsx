@@ -11,7 +11,6 @@ export const counselors: CounselorData[] = [
         email: "mtouran@lwsd.org",
         students: ["s1"],
         endorsementRequests: ["s1"],
-        jobReferences: [],
         applicationReviews: []
     },
     {
@@ -20,7 +19,6 @@ export const counselors: CounselorData[] = [
         email: "kwescott@lwsd.org",
         students: ["s2"],
         endorsementRequests: ["s2"],
-        jobReferences: [],
         applicationReviews: []
     }
 ]
@@ -132,7 +130,6 @@ export const recruiters: RecruiterData[] = [
         },
         email: "mzuckerberg@meta.com",
         id: "r1",
-        jobReferences: [],
         name: "Mark Zuckerberg",
         verified: false
     }
@@ -155,6 +152,8 @@ export const jobs: Job[] = [
         applications: [],
         responsibilities: ["Develop software solutions", "Work with the team to deliver projects", "Learn and grow"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
+        recruiterId: "r1",
+        published: true
     },
     {
         id: "j2",
@@ -172,6 +171,8 @@ export const jobs: Job[] = [
         applications: [],
         responsibilities: ["Analyze data", "Create reports", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
+        recruiterId: "r1",
+        published: true
     },
     {
         id: "j3",
@@ -189,6 +190,8 @@ export const jobs: Job[] = [
         applications: [],
         responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
+        recruiterId: "r1",
+        published: true
     },
     {
         id: "j4",
@@ -206,6 +209,8 @@ export const jobs: Job[] = [
         applications: [],
         responsibilities: ["Assist in marketing campaigns", "Develop marketing strategies", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
+        recruiterId: "r1",
+        published: true
     },
     {
         id: "j5",
@@ -223,6 +228,8 @@ export const jobs: Job[] = [
         applications: [],
         responsibilities: ["Design user experiences", "Conduct user research", "Collaborate with the design team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
+        recruiterId: "r1",
+        published: true
     }
 ];
 
@@ -234,8 +241,9 @@ export const applications: Application[] = [
         additionalInformation: "Hello, I'm under d wader. Pls help",
         counselorComments: [],
         recruiterComments: [],
-        recruiterClassification: null,
+        recruiterClassification: "in-progress",
         submitted: false,
+        status: "pending"
     },
     {
         id: "a2",
@@ -250,12 +258,13 @@ export const applications: Application[] = [
                 text: "What is this rubbish?"
             }
         ],
-        recruiterClassification: null,
+        recruiterClassification: "in-progress",
         submitted: true,
         coverLetter: {
             name: "Marketing",
             url: "https://www.linkedin.com"
         },
-        resume: "https://www.linkedin.com"
+        resume: "https://www.linkedin.com",
+        status: "pending"
     }
 ];

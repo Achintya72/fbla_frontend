@@ -13,6 +13,7 @@ interface Company {
 
 interface Job {
     id: string;
+    recruiterId: string,
     title: string;
     description: string;
     longDescription: string;
@@ -27,6 +28,7 @@ interface Job {
     applications: string[];
     responsibilities: string[];
     coverImage: string;
+    published: boolean;
 }
 
 interface JobContextData {

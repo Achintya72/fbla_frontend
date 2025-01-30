@@ -1,5 +1,4 @@
-import { StudentData } from "@/models/student";
-import { JobReference } from "@/models/userData";
+import { StudentData, JobReference } from "@/models/student";
 import { RecruiterData } from "@/models/recruiter";
 import { CounselorData } from "@/models/counselor";
 
@@ -81,7 +80,6 @@ export const recruiter: RecruiterData = {
         logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
         tags: ["e-commerce", "cloud computing", "artificial intelligence"],
     },
-    jobReferences: jobReferences,
     verified: true
 }
 
@@ -91,6 +89,5 @@ export const counselor: CounselorData = {
     email: "mtouran@lwsd.org",
     students: ["1"],
     endorsementRequests: ["1"],
-    jobReferences: jobReferences,
     applicationReviews: []
 }

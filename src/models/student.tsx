@@ -7,6 +7,15 @@ interface StudentData extends Profile {
     counselor: string;
     verified: boolean;
     lessons: LessonStatus[];
+    jobReferences: JobReference[],
+}
+
+type JobStatus = "bookmarked" | "pending" | "accepted" | "rejected" | "in-progress"
+
+interface JobReference {
+    id: string,
+    status: JobStatus,
+    nextSteps?: { step: string, completed: boolean }[],
 }
 
 interface LessonStatus {
@@ -58,4 +67,5 @@ export type {
     Project,
     Employment,
     Link,
+    JobReference, JobStatus
 };

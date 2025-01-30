@@ -1,26 +1,24 @@
 "use client";
 
-import { JobReference } from "@/models/userData";
+import { JobReference } from "@/models/student";
 import { useUserDataContext } from "@/serviceProviders/userDataContext"
 
 
 export const useGetJobReferences = () => {
-    const { getUserData } = useUserDataContext();
+    const { studentData } = useUserDataContext();
     const getJobReference = () => {
-        return getUserData()?.jobReferences || [];
+        return studentData?.jobReferences || [];
     }
     return getJobReference;
 }
 
 export const useAddJobReference = () => {
-    const { setUserData, getUserData } = useUserDataContext();
+    const { setStudentData, studentData } = useUserDataContext();
     const addJobReference = (jobReference: JobReference) => {
-    
-        const userData = getUserData();
-        if(userData) {
-            setUserData({
-                ...userData,
-                jobReferences: [...userData.jobReferences, jobReference] 
+        if(studentData) {
+            setStudentData({
+                ...studentData,
+                jobReferences: [...studentData.jobReferences, jobReference] 
             });
         }
     }
@@ -29,13 +27,12 @@ export const useAddJobReference = () => {
 
 
 export const useRemoveJobReference = () => {
-    const { setUserData, getUserData } = useUserDataContext();
+    const { setStudentData, studentData } = useUserDataContext();
     const removeJobReference = (jobId: string) => {     
-        const userData = getUserData();
-        if(userData) {
-            setUserData({
-                ...userData,
-                jobReferences: userData.jobReferences.filter((jobReference) => jobReference.id !== jobId)
+        if(studentData) {
+            setStudentData({
+                ...studentData,
+                jobReferences: studentData.jobReferences.filter((jobReference) => jobReference.id !== jobId)
             });
         }
     }

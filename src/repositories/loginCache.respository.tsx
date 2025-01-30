@@ -12,7 +12,7 @@ export const retrieveUserFromCache: () => string | null = () => {
     if(!token) {
         return null;
     }
-    return token;
+    return JSON.parse(token);
 }
 
 /**

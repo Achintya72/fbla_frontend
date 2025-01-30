@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { useCreateRecruiter, useLoginContext } from "@/services/login";
+import { useCreateUser, useLoginContext } from "@/services/login";
 import Error from "@/components/Error";
 import { useEffect } from "react";
 
@@ -20,11 +20,11 @@ export default function SignUp() {
         mode: "all",
         reValidateMode: "onChange"
     });
-    const [error, changeError, loading, createRecruiter] = useCreateRecruiter();
+    const [error, changeError, loading, createUser] = useCreateUser();
     const context = useLoginContext();
 
     const onSubmit = async (data: SignUpForm) => {
-        await createRecruiter(data.name, data.email, data.password);
+        await createUser(data.name, data.email, data.password, "recruiter");
     }
 
     useEffect(() => {

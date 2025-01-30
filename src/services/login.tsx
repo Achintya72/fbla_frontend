@@ -1,11 +1,11 @@
 "use client";
 import { useContext, useState } from "react";
 import LoginContext from "@/serviceProviders/loginContext";
-import { LoginContextData } from "@/models/login";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { auth } from "@/repositories/firebase";
+import { LoginContextData, Role } from "@/models/login";
 import { FirebaseError } from "firebase/app";
 import delay from "@/utils/delay";
+import { loginUser, createUser, validateJWT } from "@/repositories/login.repository";
+import { deleteUser, retrieveUserFromCache, setUserInCache } from "@/repositories/loginCache.respository";
 
 export const useLoginContext: () => LoginContextData = () => {
     const context = useContext(LoginContext);
@@ -23,6 +23,7 @@ export const useLoginContext: () => LoginContextData = () => {
 export const useLoginUser: () => [string, () => void, boolean, (email: string, password: string) => void] = () => {
     const [error, changeError] = useState<string>("");
     const [loading, changeLoading] = useState<boolean>(false);
+    const { populateUser } = useLoginContext();
 
     const resetError = () => {
         changeError("");
@@ -34,21 +35,16 @@ export const useLoginUser: () => [string, () => void, boolean, (email: string, p
      * @param password
      * @return void
      */
-    const loginUser = async (email: string, password: string) => {
+    const login = async (email: string, password: string) => {
         resetError();
         try {
             changeLoading(true);
-            await delay(1000);
-            await signInWithEmailAndPassword(auth, email, password);
+            const token = await loginUser(email, password);
+            setUserInCache(token);
+            populateUser(token);
         } catch (error) {
-            if (error instanceof FirebaseError) {
-                switch (error.message) {
-                    case "Firebase: Error (auth/invalid-credential).":
-                        changeError("Invalid email or password");
-                        break
-                    default:
-                        changeError(error.message);
-                }
+            if (error instanceof Error) {
+                changeError(error.message);
             } else {
                 changeError("Something weird happened. Please try again later");
             }
@@ -57,14 +53,14 @@ export const useLoginUser: () => [string, () => void, boolean, (email: string, p
         }
     };
 
-    return [error, resetError, loading, loginUser];
+    return [error, resetError, loading, login];
 };
 
 /**
  * Custom hook to create user
  * @returns [error, resetError, loading, createUser]
  */
-export const useCreateUser: () => [string, () => void, boolean, (name: string, email: string, password: string) => void] = () => {
+export const useCreateUser: () => [string, () => void, boolean, (name: string, email: string, password: string, role: Role) => void] = () => {
     const [error, changeError] = useState<string>("");
     const [loading, changeLoading] = useState<boolean>(false);
     const { populateUser } = useLoginContext();
@@ -73,25 +69,16 @@ export const useCreateUser: () => [string, () => void, boolean, (name: string, e
         changeError("");
     }
 
-    const createUser = async (name: string, email: string, password: string) => {
+    const signup = async (name: string, email: string, password: string, role: Role) => {
+        resetError();
         try {
             changeLoading(true);
-            await delay(1000);
-            await createUserWithEmailAndPassword(auth, email, password);
-            if (auth.currentUser) {
-                await updateProfile(auth.currentUser, { displayName: `student_${name}` });
-                populateUser(auth.currentUser);
-                changeError("");
-            }
+            const token = await createUser(email, password, name, role);
+            setUserInCache(token);
+            populateUser(token);
         } catch (error) {
-            if (error instanceof FirebaseError) {
-                switch (error.message) {
-                    case "Firebase: Error (auth/email-already-in-use).":
-                        changeError("Account already exists");
-                        break
-                    default:
-                        changeError(error.message);
-                }
+            if (error instanceof Error) {
+                changeError(error.message);
             } else {
                 changeError("Something weird happened. Please try again later");
             }
@@ -99,50 +86,9 @@ export const useCreateUser: () => [string, () => void, boolean, (name: string, e
             changeLoading(false);
         }
     }
-    return [error, resetError, loading, createUser];
+    return [error, resetError, loading, signup];
 }
 
-/**
- * Custom hook to create user
- * @returns [error, resetError, loading, createUser]
- */
-export const useCreateRecruiter: () => [string, () => void, boolean, (name: string, email: string, password: string) => void] = () => {
-    const [error, changeError] = useState<string>("");
-    const [loading, changeLoading] = useState<boolean>(false);
-    const { populateUser } = useLoginContext();
-
-    const resetError = () => {
-        changeError("");
-    }
-
-    const createRecruiter = async (name: string, email: string, password: string) => {
-        try {
-            changeLoading(true);
-            await delay(1000);
-            await createUserWithEmailAndPassword(auth, email, password);
-            if (auth.currentUser) {
-                await updateProfile(auth.currentUser, { displayName: `recruiter_${name}` });
-                populateUser(auth.currentUser);
-                changeError("");
-            }
-        } catch (error) {
-            if (error instanceof FirebaseError) {
-                switch (error.message) {
-                    case "Firebase: Error (auth/email-already-in-use).":
-                        changeError("Account already exists");
-                        break
-                    default:
-                        changeError(error.message);
-                }
-            } else {
-                changeError("Something weird happened. Please try again later");
-            }
-        } finally {
-            changeLoading(false);
-        }
-    }
-    return [error, resetError, loading, createRecruiter];
-}
 
 /**
  * Custom hook to logout user
@@ -155,18 +101,20 @@ export const useCreateRecruiter: () => [string, () => void, boolean, (name: stri
 export const useLogout: () => [boolean, string, () => void, () => void] = () => {
     const [loading, changeLoading] = useState<boolean>(false);
     const [error, changeError] = useState<string>("");
+    const { reset } = useLoginContext();
 
     const resetError = () => {
         changeError("");
     }
 
     const logoutUser = async () => {
+        resetError();
         try {
             changeLoading(true);
-            await delay(1000);
-            await signOut(auth);
+            deleteUser();
+            reset();
         } catch (error) {
-            if (error instanceof FirebaseError) {
+            if (error instanceof Error) {
                 changeError(error.message);
             } else {
                 changeError("Something weird happened. Please try again later");
@@ -177,4 +125,19 @@ export const useLogout: () => [boolean, string, () => void, () => void] = () => 
     }
 
     return [loading, error, resetError, logoutUser];
+}
+
+export const useLoginCacheUser: () => (populateUser: (token: string) => void) => Promise<void> = () => {
+
+    const loginUserFromCache: (populateUser: (token: string) => void) => Promise<void> = async (populateUser) => {
+        const token = retrieveUserFromCache();
+        if (token) {
+            const result = await validateJWT(token);
+            if (result) {
+                populateUser(token);
+            }
+        }
+    }
+
+    return loginUserFromCache;
 }

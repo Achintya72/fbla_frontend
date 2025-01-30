@@ -61,7 +61,7 @@ export const createUser: (email: string, password: string, name: string, role: R
  */
 export const validateJWT: (token: string) => Promise<boolean> = async (token) => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jwt_check`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jwt_check`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

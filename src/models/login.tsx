@@ -4,15 +4,16 @@ import { JwtPayload } from "jwt-decode";
 type Role = "counselor" | "recruiter" | "student";
 
 interface LoginContextData {
-    authUser: User | null,
+    authUser: boolean,
     populated: boolean
     role: Role,
     name: string,
-    populateUser: (user: User) => void
+    populateUser: (token: string) => void,
+    reset: () => void,
 }
 
 interface UserJWT extends JwtPayload {
-    account_type: Role,
+    rol: Role,
     dis: string | null,
 }
 

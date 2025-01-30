@@ -13,8 +13,11 @@ function Dashboard() {
     const { recruiterData } = useUserDataContext();
     const { name, role } = useLoginContext();
     const { jobs } = useContext(JobsContext);
+    
+    // TODO: remove job references code
 
-    const { company, jobReferences } = recruiterData ?? {company: {name: ""}, jobReferences: []};
+    {/*
+    const { company, jobReferences } = recruiterData ?? {company: {name: ""}\};
 
     const livePostings = jobReferences.filter((value) => value.status == "pending");
     const completed = jobReferences.filter((value) => ["accepted", "rejected"].includes(value.status));
@@ -68,6 +71,13 @@ function Dashboard() {
                 </div>
             </div>
         </main>
+    )
+    */}
+
+    return (
+        <div>
+            jobReferences not replaced yet
+        </div>
     )
 }
 
