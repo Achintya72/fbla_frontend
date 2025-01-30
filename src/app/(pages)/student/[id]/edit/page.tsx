@@ -26,6 +26,9 @@ export default function EditStudent() {
         return <Loader />
     }
 
+    console.log(formData.projects[0].startDate == undefined ? "" : formData.projects[0].startDate.toISOString().split("T")[0])
+
+
     const resetError = () => {
         setError("");
     }
@@ -45,7 +48,8 @@ export default function EditStudent() {
         });
     };
 
-    const handleEmploymentChange = (index: number, field: keyof Employment, value: unknown) => {
+    const handleEmploymentChange = (index: number, field: keyof Employment, value: unknown, reset: boolean = false) => {
+        if ((value == undefined && (field == "startDate" || field == "endDate")) && !reset) return;
         const updatedEmployments = formData.employments.map((employment, i) =>
             i === index ? { ...employment, [field]: value } : employment
         );
@@ -53,8 +57,8 @@ export default function EditStudent() {
     };
 
     const clearDate = (type: "employments" | "projects", index: number, field: "startDate" | "endDate") => {
-        if (type == "employments") handleEmploymentChange(index, field, undefined);
-        else handleProjectChange(index, field, undefined);
+        if (type == "employments") handleEmploymentChange(index, field, undefined, true);
+        else handleProjectChange(index, field, undefined, true);
     };
 
     const addEmployment = () => {
@@ -77,14 +81,15 @@ export default function EditStudent() {
         handleNestedChange("employments", updatedEmployments);
     };
 
-    const handleProjectChange = (index: number, field: keyof Project, value: unknown) => {
+    const handleProjectChange = (index: number, field: keyof Project, value: unknown, reset: boolean = false) => {
+        if ((value == undefined && (field == "startDate" || field == "endDate")) && !reset) return;
         const updatedProjects = formData.projects.map((project, i) =>
             i === index ? { ...project, [field]: value } : project
         );
         handleNestedChange("projects", updatedProjects);
     };
 
-    const handleLinkChange = (linkIndex: number, field: "name" | "link", value: string) => {
+    const handleLinkChange = (linkIndex: number, field: "name" | "url", value: string) => {
         const updatedLinks = formData.links.map((link, i) =>
             i === linkIndex ? { ...link, [field]: value } : link
         );
@@ -202,7 +207,7 @@ export default function EditStudent() {
                             <input
                                 type="text"
                                 value={link.url}
-                                onChange={(e) => handleLinkChange(index, "link", e.target.value)}
+                                onChange={(e) => handleLinkChange(index, "url", e.target.value)}
                                 placeholder="URL"
                                 className="flex-1"
                             />
@@ -293,7 +298,7 @@ export default function EditStudent() {
 
                             <label>Start Date</label>
                             <div className="flex flex-row gap-[10px] w-full mb-2">
-                                <input type="date" value={project.startDate?.toISOString().split("T")[0] ?? ""} onChange={(e) => handleEmploymentChange(index, "startDate", new Date(e.target.value))}
+                                <input type="date" value={project.startDate?.toISOString().split("T")[0] ?? ""} onChange={(e) => handleProjectChange(index, "startDate", new Date(e.target.value))}
                                     className="flex-1" />
                                 <Button type="button" size="small" variant="secondary" onClick={() => clearDate("projects", index, "startDate")}>
                                     Clear
@@ -302,7 +307,7 @@ export default function EditStudent() {
 
                             <label>End Date</label>
                             <div className="flex flex-row gap-[10px] w-full mb-2">
-                                <input type="date" value={project.endDate?.toISOString().split("T")[0] ?? ""} onChange={(e) => handleEmploymentChange(index, "endDate", new Date(e.target.value))}
+                                <input type="date" value={project.endDate?.toISOString().split("T")[0] ?? ""} onChange={(e) => handleProjectChange(index, "endDate", new Date(e.target.value))}
                                     className="flex-1" />
                                 <Button type="button" size="small" variant="secondary" onClick={() => clearDate("projects", index, "endDate")}>
                                     Clear
