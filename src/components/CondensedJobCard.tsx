@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Bookmark from "./bookmark";
 import Button from "./button";
 
-export default function CondensedJobCard({ job, showButtons = false, status = null, nextSteps = [], buttons = [{text: "Apply", href: `/${job.id}/apply`}] }: { job: Job, showButtons?: boolean, status?: string | null, nextSteps?: string[], buttons?: {text: string, href: string}[] }) {
+export default function CondensedJobCard({ job, showButtons = false, status = null, nextSteps = [], buttons = [{ text: "Apply", href: `/jobs/${job.id}/apply` }] }: { job: Job, showButtons?: boolean, status?: string | null, nextSteps?: string[], buttons?: { text: string, href: string }[] }) {
     return (
         <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[350px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
             <div className="flex flex-row justify-between gap-[8px]">

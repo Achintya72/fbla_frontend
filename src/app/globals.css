@@ -118,3 +118,9 @@ label {
 .rejected {
 	@apply bg-red-100 text-red-700;
 }
+
+input,
+textarea {
+	font-family: var(--font-inter);
+	@apply bg-white-100 outline outline-1 outline-white-500 p-[16px] rounded-[8px];
+}

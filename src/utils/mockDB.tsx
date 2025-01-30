@@ -48,8 +48,8 @@ export const students: StudentData[] = [
                 description: "Wrote 10,000+ lines of code designing the MVP version of RankHero: an app created to superpower exam preparation for JEE and NEET",
                 role: "Software Development Intern",
                 skills: ["UI/UX", "Flutter", "Dart"],
-                startDate: new Date(6, 1, 2024),
-                endDate: new Date(8, 31, 2024)
+                startDate: new Date(2024, 6, 1),
+                endDate: new Date(2024, 8, 31)
             }],
             links: [
                 {
@@ -70,8 +70,8 @@ export const students: StudentData[] = [
                     ],
                     links: ["https://github.com/pranavkannepalli/unbound"],
                     skills: ["UI/UX", "MVVM Architecture", "Flutter", "Figma"],
-                    startDate: new Date(3, 1, 2024),
-                    endDate: new Date(8, 1, 2024),
+                    startDate: new Date(2024, 6, 1),
+                    endDate: new Date(2024, 8, 31)
                 }
             ],
         },
@@ -94,8 +94,8 @@ export const students: StudentData[] = [
                 description: "Wrote 10,000+ lines of code designing an e-commerce website for a womens' co-op organization based out of Maharashtra, India",
                 role: "Software Development Intern",
                 skills: ["UI/UX", "NextJS", "Backend"],
-                startDate: new Date(6, 1, 2024),
-                endDate: new Date(8, 31, 2024)
+                startDate: new Date(2024, 6, 1),
+                endDate: new Date(2024, 8, 31)
             }],
             links: [
                 {
@@ -116,8 +116,8 @@ export const students: StudentData[] = [
                     ],
                     links: ["https://github.com/pranavkannepalli/unbound"],
                     skills: ["UI/UX", "MVVM Architecture", "Flutter", "Figma"],
-                    startDate: new Date(3, 1, 2024),
-                    endDate: new Date(8, 1, 2024),
+                    startDate: new Date(2024, 6, 1),
+                    endDate: new Date(2024, 8, 31)
                 }
             ],
         },

@@ -58,7 +58,9 @@ function Dashboard() {
                         </div>
                     </div>
                     <div className="flex flex-row gap-[10px]">
-                        <Button size={'small'}>Edit Profile</Button>
+                        <Link href={`/student/${studentData?.id}/edit`}>
+                            <Button size={'small'}>Edit Profile</Button>
+                        </Link>
                         <Link href={`/student/${studentData?.id}`}>
                             <Button size="small" variant="secondary">Preview</Button>
                         </Link>

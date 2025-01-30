@@ -51,7 +51,6 @@ function Page() {
                                     <ArrowUpRight size={20} />
                                 </Link>
                             </div>)
-
                         }
                     </div>
                 </div>
@@ -67,7 +66,29 @@ function Page() {
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <h6>{project.name}</h6>
-                                    <small>Date</small>
+                                    <small>{project.startDate ? project.startDate.toDateString().slice(4) + " - " + (project.endDate?.toDateString().slice(4) ?? "Today") : ""}</small>
+                                </div>
+                                <p className="mb-[6px]">{project.description}</p>
+                                <div className="flex gap-[10px] flex-wrap">
+                                    {project.skills.map((skill, j) => (
+                                        <p key={j} className="py-[8px] px-[16px] rounded-full bg-white-400 text-white-700 font-bold">
+                                            {skill}
+                                        </p>
+                                    ))}
+
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="w-full">
+                    <h4 className="mb-[12px]">Employments</h4>
+                    <div className="w-full grid grid-cols-2 gap-[10px]">
+                        {(page?.employments ?? []).map((project, i) => (
+                            <div key={i}>
+                                <div className="flex justify-between items-center">
+                                    <h6>{project.role}<span className="font-normal"> - {project.company}</span></h6>
+                                    <small>{project.startDate ? project.startDate.toDateString().slice(4) + " - " + (project.endDate?.toDateString().slice(4) ?? "Today") : ""}</small>
                                 </div>
                                 <p className="mb-[6px]">{project.description}</p>
                                 <div className="flex gap-[10px] flex-wrap">
