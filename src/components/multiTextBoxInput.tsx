@@ -51,7 +51,7 @@ export default function MultiTextBoxInput<T extends FieldValues>({
                 </div>
             ))}
             <button type="button" onClick={() => append("")}>
-                Add Responsibility
+                Add {name.charAt(0).toUpperCase() + name.slice(1)}
             </button>
             {error && <small className="text-red-400">{error.message}</small>}
         </div>

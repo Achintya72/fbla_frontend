@@ -13,7 +13,7 @@ export const useJobQueries = () => {
      */
     const getJobs: () => Promise<Job[]> = async () => {
         await delay(100);
-        return jobs.filter(j => j.published);
+        return jobs;
     }
 
     return { getJobs };

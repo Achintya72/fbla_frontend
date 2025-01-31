@@ -17,7 +17,7 @@ export default function CondensedJobCard({ job, showButtons = false, status = nu
                         <div className="text-white-700 text-[14px]">{job.company.name}</div>
                     </div>
                 </div>
-                {status && <div className={"status " + status}>{status.charAt(0).toUpperCase() + status.slice(1)}</div>}
+                {status && <div className={"status " + status.replace(" ", "")}>{status.charAt(0).toUpperCase() + status.slice(1)}</div>}
                 {!status && <Bookmark job={job} className="justify-self-center  text-white-700" />}
             </div>
             <div className="flex flex-row font-bold text-[14px] gap-[10px]">

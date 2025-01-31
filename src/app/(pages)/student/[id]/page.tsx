@@ -8,7 +8,6 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 function Page() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -56,7 +55,7 @@ function Page() {
                 </div>
                 <div className="w-full">
                     <h4 className="mb-[12px]">Projects</h4>
-                    <div className="w-full grid grid-cols-2 gap-[10px]">
+                    <div className="w-full gap-[10px]">
                         {(page?.projects ?? []).map((project, i) => (
                             <div key={i}>
                                 <div className="flex mb-[6px] gap-[10px] overflow-x-auto">
@@ -66,7 +65,7 @@ function Page() {
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <h6>{project.name}</h6>
-                                    <small>{project.startDate ? project.startDate.toDateString().slice(4) + " - " + (project.endDate?.toDateString().slice(4) ?? "Today") : ""}</small>
+                                    <small>{project.startDate != undefined ? project.startDate.toDateString().slice(4) + " - " + (project.endDate != undefined ? project.endDate.toDateString().slice(4) : "Today") : ""}</small>
                                 </div>
                                 <p className="mb-[6px]">{project.description}</p>
                                 <div className="flex gap-[10px] flex-wrap">
@@ -83,12 +82,12 @@ function Page() {
                 </div>
                 <div className="w-full">
                     <h4 className="mb-[12px]">Employments</h4>
-                    <div className="w-full grid grid-cols-2 gap-[10px]">
+                    <div className="w-full gap-[10px]">
                         {(page?.employments ?? []).map((project, i) => (
                             <div key={i}>
                                 <div className="flex justify-between items-center">
                                     <h6>{project.role}<span className="font-normal"> - {project.company}</span></h6>
-                                    <small>{project.startDate ? project.startDate.toDateString().slice(4) + " - " + (project.endDate?.toDateString().slice(4) ?? "Today") : ""}</small>
+                                    <small>{project.startDate ? project.startDate.toDateString().slice(4) + " - " + (project.endDate != undefined ? project.endDate.toDateString().slice(4) : "Today") : ""}</small>
                                 </div>
                                 <p className="mb-[6px]">{project.description}</p>
                                 <div className="flex gap-[10px] flex-wrap">

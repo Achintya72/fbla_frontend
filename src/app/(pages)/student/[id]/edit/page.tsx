@@ -135,7 +135,10 @@ export default function EditStudent() {
 
     const validateFields = (data: unknown): boolean => {
         if (typeof data === "object" && data !== null) {
-            return Object.values(data).every(value => {
+            return Object.entries(data).every(([key, value]) => {
+                if (key === "startDate" || key === "endDate") {
+                    return true; // Allow startDate and endDate to be undefined
+                }
                 if (Array.isArray(value)) {
                     return value.length > 0 && value.every(validateFields);
                 }
@@ -147,6 +150,7 @@ export default function EditStudent() {
         }
         return true;
     };
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

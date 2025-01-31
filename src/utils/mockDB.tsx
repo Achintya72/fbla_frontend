@@ -137,7 +137,18 @@ export const recruiters: RecruiterData[] = [
         id: "r1",
         name: "Mark Zuckerberg",
         verified: false
-    }
+    },
+    {
+        company: {
+            logo: "https://images.seeklogo.com/logo-png/47/1/meta-logo-png_seeklogo-477180.png?v=1957917042401470928",
+            name: "Meta",
+            tags: ["Social Media", "LLM"]
+        },
+        email: "p@gmail.com",
+        id: "2",
+        name: "PKannepalli",
+        verified: false
+    },
 ]
 
 export const jobs: Job[] = [
@@ -153,13 +164,14 @@ export const jobs: Job[] = [
         level: "intern",
         hours: "20",
         tags: ["Engineering"],
-        closeDate: new Date(2025, 1, 1),
+        closeDate: new Date(2025, 0, 1),
         applications: [],
         responsibilities: ["Develop software solutions", "Work with the team to deliver projects", "Learn and grow"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "r1",
+        recruiterId: "2",
         published: true,
-        skills: []
+        skills: [],
+        studentFound: undefined
     },
     {
         id: "j2",
@@ -173,13 +185,14 @@ export const jobs: Job[] = [
         level: "intern",
         hours: "15",
         tags: ["Data", "Engineering"],
-        closeDate: new Date(2025, 2, 1),
+        closeDate: new Date(2025, 0, 5),
         applications: [],
         responsibilities: ["Analyze data", "Create reports", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "r1",
-        published: true,
-        skills: []
+        recruiterId: "2",
+        published: false,
+        skills: [],
+        studentFound: undefined
     },
     {
         id: "j3",
@@ -197,9 +210,10 @@ export const jobs: Job[] = [
         applications: [],
         responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "r1",
-        published: true,
-        skills: []
+        recruiterId: "2",
+        published: false,
+        skills: [],
+        studentFound: undefined
     },
     {
         id: "j4",
@@ -213,13 +227,14 @@ export const jobs: Job[] = [
         level: "intern",
         hours: "20",
         tags: ["Marketing"],
-        closeDate: new Date(2025, 4, 1),
-        applications: [],
+        closeDate: new Date(2025, 0, 1),
+        applications: ["a2"],
         responsibilities: ["Assist in marketing campaigns", "Develop marketing strategies", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "r1",
+        recruiterId: "2",
         published: true,
-        skills: []
+        skills: [],
+        studentFound: undefined
     },
     {
         id: "j5",
@@ -233,26 +248,38 @@ export const jobs: Job[] = [
         level: "intern",
         hours: "30",
         tags: ["Design"],
-        closeDate: new Date(2025, 5, 1),
-        applications: [],
+        closeDate: new Date(2025, 0, 1),
+        applications: ["a1"],
         responsibilities: ["Design user experiences", "Conduct user research", "Collaborate with the design team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "r1",
+        recruiterId: "2",
         published: true,
-        skills: []
+        skills: [],
+        studentFound: undefined
     }
 ];
 
 export const applications: Application[] = [
     {
         id: "a1",
-        student: "s1",
+        student: "s2",
         job: "j5",
-        additionalInformation: "Hello, I'm under d wader. Pls help",
+        additionalInformation: "Hello I'm under da wader ",
         counselorComments: [],
-        recruiterComments: [],
-        recruiterClassification: "in-progress",
-        submitted: false,
+        recruiterComments: [
+            {
+                resolved: false,
+                section: "additional-info",
+                text: "What is this rubbish?"
+            }
+        ],
+        recruiterClassification: "accepted",
+        submitted: true,
+        coverLetter: {
+            name: "Marketing",
+            url: "https://www.linkedin.com"
+        },
+        resume: "https://www.linkedin.com",
         status: "pending"
     },
     {
@@ -268,7 +295,7 @@ export const applications: Application[] = [
                 text: "What is this rubbish?"
             }
         ],
-        recruiterClassification: "in-progress",
+        recruiterClassification: "accepted",
         submitted: true,
         coverLetter: {
             name: "Marketing",

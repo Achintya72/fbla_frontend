@@ -1,27 +1,58 @@
 "use client";
 
-import Button from "@/components/button";
+// import Button from "@/components/button";
 import CondensedJobCard from "@/components/CondensedJobCard";
 import withProtection from "@/components/protected"
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import { useLoginContext } from "@/services/login.service";
 import Link from "next/link";
-import { useContext } from "react";
-import JobsContext from "@/serviceProviders/jobsContext";
+import { useEffect, useState } from "react";
+import { useRecruiterQueries } from "@/repositories/recruiter.repository";
+import Loader from "@/components/Loader";
+import { Job } from "@/models/jobs";
+import { RecruiterApplication } from "@/models/application";
 
 function Dashboard() {
     const { recruiterData } = useUserDataContext();
     const { name, role } = useLoginContext();
-    const { jobs } = useContext(JobsContext);
-    
-    // TODO: remove job references code
+    const [recruiterJobs, setRecruiterJobs] = useState<Job[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
-    {/*
-    const { company, jobReferences } = recruiterData ?? {company: {name: ""}\};
+    const { getRecruiterJobs, getApplicationsForJob } = useRecruiterQueries();
 
-    const livePostings = jobReferences.filter((value) => value.status == "pending");
-    const completed = jobReferences.filter((value) => ["accepted", "rejected"].includes(value.status));
-    const inProgress = jobReferences.filter((value) => value.status == "in-progress");
+    const { company, id } = recruiterData ?? { company: { name: "" } };
+
+    useEffect(() => {
+        if (id == undefined) return;
+        const fetchData = async () => {
+            try {
+                const temp = await getRecruiterJobs(id);
+                const tempJ = await Promise.all(temp.map(async (value) => {
+                    const applications: RecruiterApplication[] = await getApplicationsForJob(value.id);
+                    return {
+                        ...value, studentFound: applications.some((v) => {
+                            return v.recruiterClassification == "accepted"
+                        })
+                    }
+                }));
+                setRecruiterJobs(tempJ);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchData();
+    }, [id, getRecruiterJobs])
+
+    if (id == undefined || loading) {
+        return <Loader />
+    }
+
+    const livePostings: Job[] = recruiterJobs.filter((value) => value.published && value.closeDate >= new Date());
+    const completed: Job[] = recruiterJobs.filter((value) => value.published && value.closeDate < new Date());
+    const inProgress: Job[] = recruiterJobs.filter((value) => !value.published);
 
     return (
         <main className="px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
@@ -29,18 +60,16 @@ function Dashboard() {
                 <h4 className="mb-[8px]">Live Postings</h4>
                 <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
                     {livePostings.length > 0 && livePostings.map((value, index) => {
-                        const job = jobs.find((job) => job.id === value.id);
-                        return job ? <CondensedJobCard key={index} job={job} status={"pending"} /> : null;
+                        return value ? <CondensedJobCard key={index} job={value} status={"pending"} /> : null;
                     })}
-                    {livePostings.length == 0 && <div className="text-white-700">No applications in progress. <Link className="underline" href="/jobs">Add some?</Link></div>}
+                    {livePostings.length == 0 && <div className="text-white-700">No live postings. <Link className="underline" href="/jobs">Create one?</Link></div>}
                 </div>
                 <h4 className="mb-[8px]">Previous Postings</h4>
                 <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
                     {completed.length > 0 && completed.map((value, index) => {
-                        const job = jobs.find((job) => job.id === value.id);
-                        return job ? <CondensedJobCard key={index} job={job} status={value.status} /> : null;
+                        return value ? <CondensedJobCard key={index} job={value} status={value.studentFound ? "student Found" : "completed"} /> : null;
                     })}
-                    {completed.length == 0 && <div className="text-white-700">No completed applications. <Link className="underline" href="/jobs">Add some?</Link></div>}
+                    {completed.length == 0 && <div className="text-white-700">No completed postings. <Link className="underline" href="/jobs">Create one?</Link></div>}
                 </div>
             </div>
             <div className="flex flex-col gap-[16px] min-w-[350px] grow">
@@ -55,29 +84,21 @@ function Dashboard() {
                             {company.name}
                         </div>
                     </div>
-                    <div className="flex flex-row gap-[10px]">
+                    {/* <div className="flex flex-row gap-[10px]">
                         <Button size={'small'}>Edit Profile</Button>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="flex flex-col gap-[16px] min-w-[350px]">
-                    <h4 className="mb-[8px]">In Progress</h4>
+                    <h4 className="mb-[8px]">Waiting for Approval</h4>
                     {inProgress.length > 0 && inProgress.map((value, index) => {
-                        const job = jobs.find((job) => job.id === value.id);
-                        return job ? <CondensedJobCard key={index} job={job} showButtons buttons={[
-                            {text: "Edit", href: `/jobs/${job.id}/edit`}
+                        return value ? <CondensedJobCard key={index} job={value} showButtons buttons={[
+                            { text: "Edit", href: `/jobs/${value.id}/edit` }
                         ]} /> : null;
                     })}
-                    {inProgress.length == 0 && <div className="text-white-700">No bookmarks. <Link className="underline" href="/jobs">Add some?</Link></div>}
+                    {inProgress.length == 0 && <div className="text-white-700">No postings waiting for approval. <Link className="underline" href="/jobs">Create one?</Link></div>}
                 </div>
             </div>
         </main>
-    )
-    */}
-
-    return (
-        <div>
-            jobReferences not replaced yet
-        </div>
     )
 }
 

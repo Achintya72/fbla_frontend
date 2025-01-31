@@ -30,6 +30,7 @@ interface Job {
     coverImage: string;
     published: boolean;
     skills: string[];
+    studentFound: boolean | undefined;
 }
 
 interface JobContextData {

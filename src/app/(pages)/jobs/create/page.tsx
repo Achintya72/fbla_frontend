@@ -33,55 +33,28 @@ export interface JobForm extends FieldValues, FormData {
 }
 
 function EditJob() {
-    const params = useParams();
-    const { jobs, populated } = useContext(JobsContext);
+    const { populated } = useContext(JobsContext);
     const { recruiterData } = useUserDataContext();
     const [error, setError] = useState<string>("");
-    const [loading, setLoading] = useState(false);
-
-    console.log(jobs);
-    const job = jobs.find((job) => job.id === params.id);
     const { control, register, handleSubmit, reset, formState: { errors }, } = useForm<JobForm>({
         mode: "all",
         reValidateMode: "onChange"
     });
-    const { updateJobPosting } = useRecruiterQueries();
+    const { createJobPosting } = useRecruiterQueries();
 
     const resetError = () => {
         setError("");
     }
 
-    useEffect(() => {
-        if (job != undefined)
-            reset(
-                {
-                    title: job.title,
-                    description: job.description,
-                    longDescription: job.longDescription,
-                    responsibilities: job.responsibilities,
-                    level: job.level,
-                    location: job.location,
-                    commitment: job.commitment,
-                    salary: job.salary,
-                    hours: job.hours,
-                    tags: job.tags,
-                    closeDate: job.closeDate.toISOString().split("T")[0],
-                    coverImage: job.coverImage,
-                    skills: job.skills,
-                }
-            )
-    }, [job, reset])
-
     const onSubmit = async (data: JobForm) => {
-        if (job == undefined) {
-            setError("Something went wrong. Try again later");
-            return;
+        if (recruiterData == undefined) {
+            setError("Something went wrong on our end.");
         }
 
-        setLoading(true);
-
         const edits: Job = {
-            ...job,
+            id: "s5",
+            recruiterId: recruiterData!.id,
+            company: recruiterData!.company,
             title: data.title,
             description: data.description,
             longDescription: data.longDescription,
@@ -95,23 +68,24 @@ function EditJob() {
             closeDate: new Date(data.closeDate),
             coverImage: data.coverImage,
             skills: data.skills,
+            applications: [],
+            published: false,
         }
-        try {
-            await updateJobPosting(edits);
-
-            redirect(`/jobs/${job!.id}`);
-        }
-        finally {
-            setLoading(false);
-        }
+        await createJobPosting(edits);
+        // redirect(`/jobs/${id}`);
+        redirect(`/jobs/s5`);
     }
 
-    if (!populated || recruiterData == undefined || job == undefined || loading) {
+    if (!populated || recruiterData == undefined) {
         return (
             <div className="w-full h-screen flex justify-center items-center">
                 <Loader />
             </div>
         )
+    }
+
+    if (job == undefined) {
+        return redirect("/jobs");
     }
 
     return (
@@ -149,7 +123,6 @@ function EditJob() {
                             error={errors.longDescription}
                             label="Long Description"
                             name="longDescription"
-                            textType="textarea"
                             options={{
                                 required: "Required Field"
                             }}
