@@ -37,7 +37,7 @@ export default function Posting() {
                         <h1 className="text-[40px] font-inter tracking-normal">{job.title}</h1>
                         <div className="flex flex-row gap-[10px]">
                             <Bookmark job={job} className="bg-white-400 rounded-[8px] p-[12px]" />
-                            {role == "student" && <Link href={`/jobs/${job.id}/apply`}>
+                            {role == "student" && new Date() < job.closeDate && <Link href={`/jobs/${job.id}/apply`}>
                                 <Button>Apply (Closes {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })})</Button>
                             </Link>}
 

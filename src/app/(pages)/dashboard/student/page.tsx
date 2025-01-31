@@ -70,7 +70,7 @@ function Dashboard() {
                     <h4 className="mb-[8px]">Bookmarks</h4>
                     {bookmarked.length > 0 && bookmarked.map((value, index) => {
                         const job = jobs.find((job) => job.id === value.id);
-                        return job ? <CondensedJobCard key={index} job={job} showButtons /> : null;
+                        return job ? <CondensedJobCard key={index} job={job} showButtons={new Date() < job.closeDate} /> : null;
                     })}
                     {bookmarked.length == 0 && <div className="text-white-700">No bookmarks. <Link className="underline" href="/jobs">Add some?</Link></div>}
                 </div>
