@@ -17,7 +17,7 @@ export const useStudentQueries = () => {
     */
     const getStudentById: (id: string) => Promise<StudentData> = async (id) => {
         await delay(1000);
-        let found = students.find(s => s.id === id);
+        const found = students.find(s => s.id === id);
         if (found) {
             return found;
         }
@@ -31,7 +31,7 @@ export const useStudentQueries = () => {
      */
     const getStudentPage: (id: string) => Promise<StudentPage> = async (id) => {
         await delay(1000);
-        let found = students.find(s => s.id === id);
+        const found = students.find(s => s.id === id);
         if (found) {
             return found.page;
         }
@@ -58,7 +58,7 @@ export const useStudentQueries = () => {
      */
     const updateStudentData: (data: StudentData) => Promise<StudentData> = async (data) => {
         await delay(1000);
-        let foundIndex = students.findIndex(s => s.id === data.id);
+        const foundIndex = students.findIndex(s => s.id === data.id);
         if (foundIndex >= 0) {
             setStudents(prev => {
                 prev[foundIndex] = { ...data };
@@ -77,7 +77,7 @@ export const useStudentQueries = () => {
     */
     const getStudentApplicationForJob: (stuId: string, jobId: string) => Promise<StudentApplication> = async (stuId, jobId) => {
         await delay(1000);
-        let found = applications.find(a => a.student === stuId && a.job === jobId);
+        const found = applications.find(a => a.student === stuId && a.job === jobId);
         if (found) {
             return found as StudentApplication;
         }
@@ -91,7 +91,7 @@ export const useStudentQueries = () => {
      */
     const updatePage: (stuId: string, page: StudentPage) => Promise<StudentPage> = async (stuId, page) => {
         await delay(1000);
-        let foundIndex = students.findIndex(s => s.id === stuId);
+        const foundIndex = students.findIndex(s => s.id === stuId);
         if (foundIndex >= 0) {
             setStudents(prev => {
                 prev[foundIndex].page = page;
@@ -125,7 +125,7 @@ export const useStudentQueries = () => {
      */
     const updateStudentApplication: (application: StudentApplication) => Promise<StudentApplication> = async (application) => {
         await delay(1000);
-        let foundIndex = applications.findIndex(a => a.id === application.id);
+        const foundIndex = applications.findIndex(a => a.id === application.id);
         if (foundIndex >= 0) {
             setApplications(prev => {
                 prev[foundIndex] = { ...prev[foundIndex], ...application };

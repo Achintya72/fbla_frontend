@@ -6,6 +6,7 @@ import { useJobQueries } from "@/repositories/jobs.repository";
 
 const JobsContext = createContext<JobContextData>({
     jobs: [],
+    setJobs: () => { },
     populated: false,
     searchText: "",
     setSearchText: () => { },
@@ -45,6 +46,7 @@ function JobsContextProvider({ children }: PropsWithChildren) {
 
     const values: JobContextData = {
         jobs,
+        setJobs,
         populated,
         searchText,
         setSearchText,

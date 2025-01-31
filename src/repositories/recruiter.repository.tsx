@@ -4,11 +4,14 @@
 import { Application, Comment, Progress, RecruiterApplication } from "@/models/application";
 import { Job } from "@/models/jobs";
 import { RecruiterData } from "@/models/recruiter";
+import JobsContext from "@/serviceProviders/jobsContext";
 import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
+import { useContext } from "react";
 
 export const useRecruiterQueries = () => {
-    const { recruiters, jobs, setJobs, applications, setApplications } = useMockData();
+    const { recruiters, applications, setApplications } = useMockData();
+    const { jobs, setJobs } = useContext(JobsContext);
 
     /**
      * @returns RecruiterData or null
@@ -30,6 +33,7 @@ export const useRecruiterQueries = () => {
         await delay(1000);
         const newJobs = [...jobs, job];
         setJobs([...newJobs]);
+        console.log(newJobs);
         return job;
 
     }

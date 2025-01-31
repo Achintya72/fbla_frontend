@@ -32,7 +32,7 @@ export interface JobForm extends FieldValues, FormData {
     skills: string[];
 }
 
-function EditJob() {
+function CreateJob() {
     const { populated } = useContext(JobsContext);
     const { recruiterData } = useUserDataContext();
     const [error, setError] = useState<string>("");
@@ -54,7 +54,7 @@ function EditJob() {
 
         setLoading(true);
         const edits: Job = {
-            id: "s5",
+            id: "j7",
             recruiterId: recruiterData!.id,
             company: recruiterData!.company,
             title: data.title,
@@ -76,9 +76,9 @@ function EditJob() {
         }
 
         try {
-            await createJobPosting(edits);
+            const j = await createJobPosting(edits);
             // redirect(`/jobs/${id}`);
-            redirect(`/jobs/s5`);
+            redirect(`/jobs/${j.id}`);
         }
         finally {
             setLoading(false);
@@ -100,6 +100,7 @@ function EditJob() {
                     <CaretLeft size={20} />
                     <h6>Recruiter Dashboard <span className="text-red-500">(You will lose unsaved work)</span></h6>
                 </div>
+                <h4>Create Job</h4>
                 <section className="mt-[20px] p-[16px] bg-white-100 rounded-[8px] border border-white-500">
                     <h5 className="mb-[12px]">Name and Description</h5>
                     <div className="flex flex-col gap-[16px]">
@@ -235,4 +236,4 @@ function EditJob() {
     )
 }
 
-export default withProtection(EditJob, { auth: true, role: ["recruiter"] });
+export default withProtection(CreateJob, { auth: true, role: ["recruiter"] });

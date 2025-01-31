@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 type JobLevel = "intern" | "entry" | "mid" | "senior";
 type Location = "Hybrid" | "Remote" | "Onsite";
 type Commitment = "Full-time" | "Part-time" | "Up-To-You";
@@ -32,6 +34,7 @@ interface Job {
 
 interface JobContextData {
     jobs: Job[];
+    setJobs: Dispatch<SetStateAction<Job[]>>,
     populated: boolean;
     searchText: string;
     setSearchText: (text: string) => void;
