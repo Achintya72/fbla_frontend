@@ -32,7 +32,10 @@ function Dashboard() {
                 <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
                     {inProgress.length > 0 && inProgress.map((value, index) => {
                         const job = jobs.find((job) => job.id === value.id);
-                        return job ? <CondensedJobCard key={index} job={job} /> : null;
+                        return job ? <CondensedJobCard status={value.status} key={index} job={job} showButtons buttons={[{
+                            href: `/jobs/${job.id}/apply`,
+                            text: "Edit"
+                        }]}/> : null;
                     })}
                     {inProgress.length == 0 && <div className="text-white-700">No applications in progress. <Link className="underline" href="/jobs">Add some?</Link></div>}
                 </div>

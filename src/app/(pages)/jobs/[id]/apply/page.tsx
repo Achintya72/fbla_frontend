@@ -8,20 +8,46 @@ import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import classes from "@/utils/classes";
 import { CaretLeft, Paperclip, Plus, Upload, X } from "@phosphor-icons/react/dist/ssr";
 import { redirect, useParams } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import { useFetchStudentData } from "@/services/student";
 
 function Apply() {
     const { jobs, populated } = useContext(JobsContext);
     const { studentData } = useUserDataContext();
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string>("");
     const [coverLetter, setCoverLetter] = useState<number>(-1);
     const [resume, setResume] = useState<string | undefined>(undefined);
-    const [additionalInfo, setAdditionalInfo] = useState<string>("")
-    const params = useParams();
+    const [additionalInfo, setAdditionalInfo] = useState<string>("");
+    const { getApplication } = useFetchStudentData();
+    const { id } = useParams();
 
-    const job = jobs.find((job) => job.id === params.id);
+    const job = jobs.find((job) => job.id === id);
 
-    if (!populated) {
+    useEffect(() => {
+        const fetchApplication = async () => {
+            if(studentData && typeof id === "string") {
+                const application = await getApplication(studentData?.id, id, setError, setLoading);
+                if(application) {
+                    setCoverLetter(studentData.coverLetters.findIndex(c => c.name === application.coverLetter?.name));
+                    setResume(application.resume);
+                    setAdditionalInfo(application.additionalInformation);
+                }
+            }
+        }
+
+        fetchApplication();
+    }, []);
+
+    useEffect(() => {
+        if(error.length > 0) {
+            return redirect("/dashboard/student");
+        }
+    }, [error]);
+
+
+    if (!populated || loading) {
         return (
             <div className="w-full h-screen flex justify-center items-center">
                 <Loader />
