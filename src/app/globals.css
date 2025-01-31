@@ -77,6 +77,14 @@ p {
 	line-height: normal;
 }
 
+small {
+	font-family: var(--font-inter);
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
 label {
 	font-family: var(--font-inter);
 	font-size: 14px;
@@ -93,4 +101,28 @@ label {
 
 .circle-cutout-2 {
 	mask: radial-gradient(circle at 0% 0%, transparent 40px, black 41px);
+}
+
+.status {
+	@apply p-[6px] rounded-[5px] flex-grow-0 max-h-fit;
+}
+
+.accepted,
+.completed,
+.studentFound {
+	@apply bg-green-100 text-green-700;
+}
+
+.pending {
+	@apply bg-yellow-100 text-yellow-700;
+}
+
+.rejected {
+	@apply bg-red-100 text-red-700;
+}
+
+input[type="text"],
+textarea {
+	font-family: var(--font-inter);
+	@apply bg-white-100 outline outline-1 outline-white-500 p-[16px] rounded-[8px];
 }

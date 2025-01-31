@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { useLoginContext, useLoginUser } from "@/services/login";
+import { useLoginContext, useLoginUser } from "@/services/login.service";
 import Error from "@/components/Error";
 import { useEffect } from "react";
 
@@ -27,9 +27,9 @@ export default function Login() {
 
     useEffect(() => {
         if (context.authUser) {
-            redirect("/dashboard");
+            redirect(`/dashboard`);
         }
-    }, [context.authUser])
+    }, [context.authUser, context.role])
 
 
     return (
@@ -45,7 +45,7 @@ export default function Login() {
                     name="email"
                     options={{
                         required: "Required Field",
-                        pattern: { value: /^\d{7}@lwsd\.org$/, message: "School emails only" }
+                        pattern: { value: /^\S+@\S+\.\S+$/, message: "Emails only" }
                     }}
 
                 />

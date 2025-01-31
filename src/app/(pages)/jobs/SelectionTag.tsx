@@ -1,6 +1,6 @@
 "use client";
 
-import JobsContext from "@/repositories/jobsContext";
+import JobsContext from "@/serviceProviders/jobsContext";
 import classes from "@/utils/classes";
 import { useContext } from "react";
 

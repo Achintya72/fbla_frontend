@@ -1,10 +1,8 @@
+import { Dispatch, SetStateAction } from "react";
+
 type JobLevel = "intern" | "entry" | "mid" | "senior";
 type Location = "Hybrid" | "Remote" | "Onsite";
 type Commitment = "Full-time" | "Part-time" | "Up-To-You";
-
-interface Application {
-    id: string;
-}
 
 interface Company {
     name: string;
@@ -14,6 +12,7 @@ interface Company {
 
 interface Job {
     id: string;
+    recruiterId: string,
     title: string;
     description: string;
     longDescription: string;
@@ -24,14 +23,18 @@ interface Job {
     level: JobLevel;
     hours: string;
     tags: string[];
-    closeDate: Date;
-    applications: Application[];
+    closeDate: Date; // ISO
+    applications: string[];
     responsibilities: string[];
     coverImage: string;
+    published: boolean;
+    skills: string[];
+    studentFound: boolean | undefined;
 }
 
 interface JobContextData {
     jobs: Job[];
+    setJobs: Dispatch<SetStateAction<Job[]>>,
     populated: boolean;
     searchText: string;
     setSearchText: (text: string) => void;
@@ -43,6 +46,8 @@ interface JobContextData {
     setLocations: (locations: Location[]) => void;
     commitments: Commitment[];
     setCommitments: (commitments: Commitment[]) => void;
+    levels: JobLevel[];
+    setLevels: (levels: JobLevel[]) => void;
 }
 
-export type { Job, JobContextData, JobLevel, Location, Commitment };
+export type { Job, JobContextData, Company, JobLevel, Location, Commitment };

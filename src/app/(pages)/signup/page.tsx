@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { FieldValues, useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { useCreateUser, useLoginContext } from "@/services/login";
+import { useCreateUser, useLoginContext } from "@/services/login.service";
 import Error from "@/components/Error";
 import { useEffect } from "react";
 
@@ -26,14 +26,14 @@ export default function SignUp() {
     console.log(context);
 
     const onSubmit = async (data: SignUpForm) => {
-        await createUser(data.name, data.email, data.password);
+        await createUser(data.email, data.password, data.name, "student");
     }
 
     useEffect(() => {
         if (context.authUser) {
-            redirect("/dashboard");
+            redirect(`/dashboard/${context.role}`);
         }
-    }, [context.authUser])
+    }, [context.authUser, context.role])
 
 
     return (

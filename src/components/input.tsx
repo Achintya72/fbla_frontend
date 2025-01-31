@@ -7,6 +7,7 @@ interface InputProps<T extends FieldValues> extends InputHTMLAttributes<HTMLInpu
     name: Path<T>,
     register: UseFormRegister<T>,
     error: FieldError | undefined,
+    textType?: "input" | "textarea"
     options?: RegisterOptions<T, Path<T>>,
     grow?: boolean
 }
@@ -18,6 +19,7 @@ export default function Input<T extends FieldValues>({
     register,
     options,
     grow = false,
+    textType = "input",
     className,
     ...props
 }: InputProps<T>) {
@@ -34,7 +36,8 @@ export default function Input<T extends FieldValues>({
                         className ?? "",
                         "font-inter bg-white-100 outline outline-1 outline-white-500",
                         error ? "!outline-red-400" : "focus:outline-blue-400",
-                        "p-[16px] rounded-[8px]"
+                        "p-[16px] rounded-[8px]",
+                        textType == "textarea" ? "whitespace-pre-wrap" : ""
                     )
                 }
             />

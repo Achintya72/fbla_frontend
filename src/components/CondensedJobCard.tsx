@@ -1,8 +1,9 @@
 import { Job } from "@/models/jobs";
-import { BookmarkSimple } from "@phosphor-icons/react/dist/ssr";
 import { redirect } from "next/navigation";
+import Bookmark from "./bookmark";
+import Button from "./button";
 
-export default function SimilarJobCard({ job }: { job: Job }) {
+export default function CondensedJobCard({ job, showButtons = false, status = null, buttons = [{ text: "Apply", href: `/jobs/${job.id}/apply` }] }: { job: Job, showButtons?: boolean, status?: string | null, nextSteps?: string[], buttons?: { text: string, href: string }[] }) {
     return (
         <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[350px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
             <div className="flex flex-row justify-between gap-[8px]">
@@ -16,9 +17,8 @@ export default function SimilarJobCard({ job }: { job: Job }) {
                         <div className="text-white-700 text-[14px]">{job.company.name}</div>
                     </div>
                 </div>
-                <div className="self-center justify-self-center  text-white-700">
-                    <BookmarkSimple size={24} />
-                </div>
+                {status && <div className={"status " + status.replace(" ", "")}>{status.charAt(0).toUpperCase() + status.slice(1)}</div>}
+                {!status && <Bookmark job={job} className="justify-self-center  text-white-700" />}
             </div>
             <div className="flex flex-row font-bold text-[14px] gap-[10px]">
                 <div className="p-[6px] bg-blue-100 text-blue-400 rounded-[5px]">
@@ -34,6 +34,10 @@ export default function SimilarJobCard({ job }: { job: Job }) {
             <div className="text-white-700 text-[14px]">
                 {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })} • {job.applications.length} Applicant{job.applications.length > 1 ? "s" : ""}
             </div>
+            {showButtons && buttons.map((value, index) => <Button size="small" key={index} onClick={(event) => {
+                event.stopPropagation();
+                redirect(value.href);
+            }}>{value.text}</Button>)}
         </div>
     )
 }

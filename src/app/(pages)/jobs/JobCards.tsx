@@ -1,13 +1,16 @@
 "use client";
 
+import Bookmark from "@/components/bookmark";
 import Button from "@/components/button";
 import { Job } from "@/models/jobs"
-import JobsContext from "@/repositories/jobsContext";
-import { BookmarkSimple } from "@phosphor-icons/react";
+import JobsContext from "@/serviceProviders/jobsContext";
+import { useLoginContext } from "@/services/login.service";
 import { redirect } from "next/navigation";
 import { useContext } from "react";
 
 function JobCard({ job }: { job: Job }) {
+    const { role } = useLoginContext();
+
     return (
         <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px]">
             <div className="flex flex-row justify-between">
@@ -21,9 +24,7 @@ function JobCard({ job }: { job: Job }) {
                         <div className="text-white-700 text-[14px]">{job.company.name}</div>
                     </div>
                 </div>
-                <div className="self-center justify-self-center  text-white-700">
-                    <BookmarkSimple size={24} />
-                </div>
+                <Bookmark job={job} className="self-center justify-self-center  text-white-700" />
             </div>
             <div className="flex flex-row font-bold text-[14px] gap-[10px]">
                 <div className="p-[6px] bg-blue-100 text-blue-400 rounded-[5px]">
@@ -49,7 +50,7 @@ function JobCard({ job }: { job: Job }) {
                 </div>
                 <div className="flex flex-row gap-[10px]">
                     <Button size="small" variant="secondary" onClick={() => redirect(`/jobs/${job.id}`)}>View</Button>
-                    <Button size="small">Apply</Button>
+                    {role == "student" && <Button size="small" onClick={() => redirect(`/jobs/${job.id}/apply`)}>Apply</Button>}
                 </div>
             </div>
         </div >
@@ -57,9 +58,10 @@ function JobCard({ job }: { job: Job }) {
 }
 
 export default function JobCards() {
-    const { jobs, populated, searchText, selectedTag, compensationRange, locations, commitments } = useContext(JobsContext);
 
-    const filteredJobs = jobs.filter(job => job.title.includes(searchText) && (job.tags.includes(selectedTag) || selectedTag == "All") && job.salary >= compensationRange[0] && job.salary <= compensationRange[1] && (locations.length == 0 || locations.includes(job.location)) && (commitments.length == 0 || commitments.includes(job.commitment)));
+    const { jobs, populated, searchText, selectedTag, compensationRange, locations, commitments, levels } = useContext(JobsContext);
+
+    const filteredJobs = jobs.filter(job => job.title.includes(searchText) && (job.tags.includes(selectedTag) || selectedTag == "All") && job.salary >= compensationRange[0] && job.salary <= compensationRange[1] && (locations.length == 0 || locations.includes(job.location)) && (commitments.length == 0 || commitments.includes(job.commitment)) && (levels.length == 0 || levels.includes(job.level)) && job.published && new Date() < job.closeDate);
 
     return (
         <div className="grid grid-cols-3 gap-[16px] flex-1">
