@@ -15,6 +15,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import Button from "@/components/button";
 import MultiTextBoxInput from "@/components/multiTextBoxInput";
 import Error from "@/components/Error/index"
+import Link from "next/link";
 
 export interface JobForm extends FieldValues, FormData {
     title: string;
@@ -118,10 +119,10 @@ function EditJob() {
         <main className="w-full px-[60px]">
             <h4>Create Job</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="sticky top-0 w-full py-[10px] flex justify-start items-center gap-[10px]">
+                <Link href='/dashboard/recruiter' className="cursor-pointer sticky top-0 w-full py-[10px] flex justify-start items-center gap-[10px]">
                     <CaretLeft size={20} />
                     <h6>Recruiter Dashboard <span className="text-red-500">(You will lose unsaved work)</span></h6>
-                </div>
+                </Link>
                 <section className="mt-[20px] p-[16px] bg-white-100 rounded-[8px] border border-white-500">
                     <h5 className="mb-[12px]">Name and Description</h5>
                     <div className="flex flex-col gap-[16px]">

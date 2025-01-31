@@ -7,6 +7,7 @@ import { Employment, Link, Project, StudentData, StudentPage } from "@/models/st
 import { useStudentQueries } from "@/repositories/student.respository";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import { CaretLeft } from "@phosphor-icons/react";
+import NextLink from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -170,10 +171,10 @@ export default function EditStudent() {
 
     return (
         <div className="w-full px-[60px]">
-            <div className="sticky top-0 w-full py-[10px] flex justify-start items-center gap-[10px]">
+            <NextLink href='/dashboard/student' className="cursor-pointer sticky top-0 w-full py-[10px] flex justify-start items-center gap-[10px]">
                 <CaretLeft size={20} />
                 <h6>Student Dashboard <span className="text-red-500">(You will lose unsaved work)</span></h6>
-            </div>
+            </NextLink>
             <form onSubmit={handleSubmit}>
                 <div className="mt-[20px] p-[16px] bg-white-100 rounded-[8px] border border-white-500">
                     <h5 className="mb-[16px]">Basic Student Data</h5>
