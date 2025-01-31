@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/components/button";
 import Loader from "@/components/Loader";
 import withProtection from "@/components/protected";
 import JobsContext from "@/serviceProviders/jobsContext";

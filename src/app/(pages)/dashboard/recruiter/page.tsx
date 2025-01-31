@@ -44,7 +44,7 @@ function Dashboard() {
         }
 
         fetchData();
-    }, [id, getRecruiterJobs])
+    }, [id, getRecruiterJobs, getApplicationsForJob])
 
     if (id == undefined || loading) {
         return <Loader />

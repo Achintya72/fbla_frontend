@@ -6,38 +6,38 @@ export const jobReferences: JobReference[] = [
     {
         id: "1",
         status: "bookmarked",
-        nextSteps: [
+        /* nextSteps: [
             { step: "Apply", completed: false },
             { step: "Interview", completed: false },
             { step: "Offer", completed: false },
-        ],
+        ], */
     },
     {
         id: "2",
         status: "in-progress",
-        nextSteps: [
+        /* nextSteps: [
             { step: "Apply", completed: true },
             { step: "Interview", completed: false },
             { step: "Offer", completed: false },
-        ],
+        ], */
     },
     {
         id: "3",
         status: "accepted",
-        nextSteps: [
+        /* nextSteps: [
             { step: "Apply", completed: true },
             { step: "Interview", completed: true },
             { step: "Offer", completed: true },
-        ],
+        ], */
     },
     {
         id: "4",
         status: "pending",
-        nextSteps: [
+        /* nextSteps: [
             { step: "Apply", completed: true },
             { step: "Interview", completed: true },
             { step: "Offer", completed: true },
-        ],
+        ], */
     },
 ];
 
@@ -59,6 +59,7 @@ export const student: StudentData = {
     resume: "https://www.facebook.com",
     jobReferences: jobReferences,
     page: {
+        name: "John Doe",
         bio: "I am a student at Eastlake High School and I am interested in computer science.",
         employments: [],
         projects: [],

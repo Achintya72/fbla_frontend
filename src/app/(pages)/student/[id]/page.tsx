@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 function Page() {
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string>("");
+    const [, setError] = useState<string>("");
     const [page, setPage] = useState<StudentPage | undefined>(undefined);
     const { id } = useParams();
     const { fetchStudentPage } = useFetchStudentData();

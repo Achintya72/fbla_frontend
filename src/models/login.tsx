@@ -1,4 +1,3 @@
-import { User } from "firebase/auth";
 import { JwtPayload } from "jwt-decode";
 
 type Role = "counselor" | "recruiter" | "student";

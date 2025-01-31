@@ -1,4 +1,4 @@
-import { CoverLetter, StudentPage } from "./student";
+import { CoverLetter } from "./student";
 import { JobStatus } from "./student";
 
 type Progress = "accepted" | "rejected" | "in-progress"

@@ -16,11 +16,11 @@ export const loginUser: (email: string, password: string) => Promise<string> = a
             body: JSON.stringify({ username: email, password: password }),
         });
 
-		const token = await response.text();
+        const token = await response.text();
         return token;
 
     } catch (e) {
-        throw(e);
+        throw (e);
     }
 }
 
@@ -36,7 +36,7 @@ export const createUser: (email: string, password: string, name: string, role: R
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sign_up`, {
             method: "POST",
-            headers: { "Content-Type": "application/json",},
+            headers: { "Content-Type": "application/json", },
             body: JSON.stringify({
                 name,
                 account_type: role,
@@ -49,8 +49,8 @@ export const createUser: (email: string, password: string, name: string, role: R
 
         const token = await response.text();
         return token;
-    } catch(e) {
-        throw(e);
+    } catch (e) {
+        throw (e);
     }
 }
 
@@ -65,11 +65,12 @@ export const validateJWT: (token: string) => Promise<boolean> = async (token) =>
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}` 
+                "Authorization": `Bearer ${token}`
             }
         });
         return true;
-    } catch(e) {
+    } catch (e) {
+        console.error(e);
         return false;
     }
 }

@@ -9,7 +9,6 @@ import { useFetchStudentData } from "@/services/student";
 import { fetchCounselorData } from "@/services/counselor";
 import { fetchRecruiterData } from "@/services/recruiter";
 import Loader from "@/components/Loader";
-import { student } from "../utils/mockData";
 import { Profile } from "@/models/userData";
 
 interface UserData {
@@ -47,17 +46,17 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
     useEffect(() => {
 
         const populateStudentData = async () => {
-            let data = await fetchStudentData("s1");
+            const data = await fetchStudentData("s1");
             setStudentData(data);
         }
 
         const populateCounselorData = async () => {
-            let data = await fetchCounselorData();
+            const data = await fetchCounselorData();
             setCounselorData(data);
         }
 
         const populateRecruiterData = async () => {
-            let data = await fetchRecruiterData();
+            const data = await fetchRecruiterData();
             setRecruiterData(data);
         }
 

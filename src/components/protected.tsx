@@ -2,7 +2,6 @@
 
 import { Role } from "@/models/login";
 import { useLoginContext } from "@/services/login.service";
-import { User } from "firebase/auth";
 import { redirect } from "next/navigation";
 import { ComponentType, useLayoutEffect } from "react";
 
@@ -11,7 +10,7 @@ interface ProtectionOptions {
     role?: Role[]
 }
 
-const verifyAuth = (authUser: User | null, role: Role, options: ProtectionOptions) => {
+const verifyAuth = (authUser: boolean, role: Role, options: ProtectionOptions) => {
     if (options.auth && !authUser) {
         return redirect("/login");
     } else if (options.role && !options.role.includes(role)) {
