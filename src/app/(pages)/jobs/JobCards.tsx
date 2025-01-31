@@ -57,7 +57,7 @@ function JobCard({ job }: { job: Job }) {
 export default function JobCards() {
     const { jobs, populated, searchText, selectedTag, compensationRange, locations, commitments } = useContext(JobsContext);
 
-    const filteredJobs = jobs.filter(job => job.title.includes(searchText) && (job.tags.includes(selectedTag) || selectedTag == "All") && job.salary >= compensationRange[0] && job.salary <= compensationRange[1] && (locations.length == 0 || locations.includes(job.location)) && (commitments.length == 0 || commitments.includes(job.commitment)));
+    const filteredJobs = jobs.filter(job => job.title.includes(searchText) && (job.tags.includes(selectedTag) || selectedTag == "All") && job.salary >= compensationRange[0] && job.salary <= compensationRange[1] && (locations.length == 0 || locations.includes(job.location)) && (commitments.length == 0 || commitments.includes(job.commitment)) && job.published && new Date() < job.closeDate);
 
     return (
         <div className="grid grid-cols-3 gap-[16px] flex-1">

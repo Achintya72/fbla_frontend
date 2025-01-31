@@ -9,8 +9,8 @@ import JobsContext from "@/serviceProviders/jobsContext";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import { useRecruiterQueries } from "@/repositories/recruiter.repository";
 import { CaretLeft } from "@phosphor-icons/react";
-import { redirect, useParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { redirect } from "next/navigation";
+import { useContext, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import Button from "@/components/button";
 import MultiTextBoxInput from "@/components/multiTextBoxInput";
@@ -36,7 +36,8 @@ function EditJob() {
     const { populated } = useContext(JobsContext);
     const { recruiterData } = useUserDataContext();
     const [error, setError] = useState<string>("");
-    const { control, register, handleSubmit, reset, formState: { errors }, } = useForm<JobForm>({
+    const [loading, setLoading] = useState<boolean>(false);
+    const { control, register, handleSubmit, formState: { errors }, } = useForm<JobForm>({
         mode: "all",
         reValidateMode: "onChange"
     });
@@ -51,6 +52,7 @@ function EditJob() {
             setError("Something went wrong on our end.");
         }
 
+        setLoading(true);
         const edits: Job = {
             id: "s5",
             recruiterId: recruiterData!.id,
@@ -70,22 +72,25 @@ function EditJob() {
             skills: data.skills,
             applications: [],
             published: false,
+            studentFound: false,
         }
-        await createJobPosting(edits);
-        // redirect(`/jobs/${id}`);
-        redirect(`/jobs/s5`);
+
+        try {
+            await createJobPosting(edits);
+            // redirect(`/jobs/${id}`);
+            redirect(`/jobs/s5`);
+        }
+        finally {
+            setLoading(false);
+        }
     }
 
-    if (!populated || recruiterData == undefined) {
+    if (!populated || recruiterData == undefined || loading) {
         return (
             <div className="w-full h-screen flex justify-center items-center">
                 <Loader />
             </div>
         )
-    }
-
-    if (job == undefined) {
-        return redirect("/jobs");
     }
 
     return (

@@ -27,10 +27,10 @@ export default function MultiTextBoxInput<T extends FieldValues>({
     const { fields, append, remove } = useFieldArray({ control, name: name as ArrayPath<JobForm> });
 
     return (
-        <div className={classes(grow ? "flex-1" : "", "flex flex-col gap-[6px] items-stretch justify-start")}>
+        <div className={classes(grow ? "flex-1" : "", "flex flex-col gap-[6px] justify-start items-start")}>
             <label>{label}</label>
             {fields.map((item, index) => (
-                <div key={item.id} className="flex flex-row gap-[5px]">
+                <div key={item.id} className="flex flex-row gap-[5px] w-full">
                     <input
                         {...register(`${name}[${index}]` as Path<T>, options)}
                         id={label + "-" + item.id}  // Use item.id for a unique ID
@@ -38,7 +38,7 @@ export default function MultiTextBoxInput<T extends FieldValues>({
                         type="text"  // Changed to text for a multi-input field
                         className={classes(
                             className ?? "",
-                            "font-inter bg-white-100",
+                            "flex-1 font-inter bg-white-100",
                             error ? "!outline-red-400" : "focus:outline-blue-400",
                             "p-[16px] rounded-[8px]"
                         )}

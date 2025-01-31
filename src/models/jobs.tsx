@@ -1,6 +1,3 @@
-import { Application } from "./application";
-import { StudentPage } from "./student";
-
 type JobLevel = "intern" | "entry" | "mid" | "senior";
 type Location = "Hybrid" | "Remote" | "Onsite";
 type Commitment = "Full-time" | "Part-time" | "Up-To-You";
@@ -46,6 +43,8 @@ interface JobContextData {
     setLocations: (locations: Location[]) => void;
     commitments: Commitment[];
     setCommitments: (commitments: Commitment[]) => void;
+    levels: JobLevel[];
+    setLevels: (levels: JobLevel[]) => void;
 }
 
 export type { Job, JobContextData, Company, JobLevel, Location, Commitment };

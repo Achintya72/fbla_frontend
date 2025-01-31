@@ -1,6 +1,6 @@
 "use client";
 
-// import Button from "@/components/button";
+import Button from "@/components/button";
 import CondensedJobCard from "@/components/CondensedJobCard";
 import withProtection from "@/components/protected"
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
@@ -84,9 +84,9 @@ function Dashboard() {
                             {company.name}
                         </div>
                     </div>
-                    {/* <div className="flex flex-row gap-[10px]">
-                        <Button size={'small'}>Edit Profile</Button>
-                    </div> */}
+                    <div className="flex flex-row gap-[10px]">
+                        <Link href='/jobs/create'><Button size={'small'}>Create Job</Button></Link>
+                    </div>
                 </div>
                 <div className="flex flex-col gap-[16px] min-w-[350px]">
                     <h4 className="mb-[8px]">Waiting for Approval</h4>

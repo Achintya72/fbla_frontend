@@ -3,7 +3,7 @@
 import JobsContext from "@/serviceProviders/jobsContext";
 import { Sliders } from "@phosphor-icons/react";
 import { useContext, ChangeEvent } from "react";
-import { Location, Commitment } from "@/models/jobs";
+import { Location, Commitment, JobLevel } from "@/models/jobs";
 
 export default function Filters() {
     const {
@@ -13,6 +13,8 @@ export default function Filters() {
         setLocations,
         commitments,
         setCommitments,
+        levels,
+        setLevels
     } = useContext(JobsContext);
 
     // Handle changes to the compensation range inputs
@@ -40,6 +42,16 @@ export default function Filters() {
             setCommitments([...commitments, value]);
         } else {
             setCommitments(commitments.filter((com) => com !== value));
+        }
+    };
+
+    // Handle changes to level filters
+    const handleLevelChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value as JobLevel;
+        if (e.target.checked) {
+            setLevels([...levels, value]);
+        } else {
+            setLevels(levels.filter((com) => com !== value));
         }
     };
 
@@ -97,6 +109,22 @@ export default function Filters() {
                                 onChange={handleCommitmentChange}
                             />
                             {commitment}
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="flex flex-col gap-[5px]">
+                <div className="text-white-700">Level</div>
+                <div className="flex flex-col gap-[5px]">
+                    {(["intern", "entry", "mid", "senior"] as JobLevel[]).map((level) => (
+                        <div className="flex flex-row gap-[5px]" key={level}>
+                            <input
+                                type="checkbox"
+                                value={level}
+                                checked={levels.includes(level)}
+                                onChange={handleLevelChange}
+                            />
+                            {level.charAt(0).toUpperCase() + level.slice(1)}
                         </div>
                     ))}
                 </div>
