@@ -18,7 +18,8 @@ interface MockDatabase {
     jobs: Job[],
     setJobs: Dispatch<SetStateAction<Job[]>>,
     applications: Application[],
-    setApplications: Dispatch<SetStateAction<Application[]>>
+    setApplications: Dispatch<SetStateAction<Application[]>>,
+    createApplicationId: () => string,
 }
 
 const MockDatabaseContext = createContext<MockDatabase>({
@@ -31,7 +32,8 @@ const MockDatabaseContext = createContext<MockDatabase>({
     setCounselors: () => { },
     setJobs: () => { },
     setRecruiters: () => { },
-    setStudents: () => { }
+    setStudents: () => { },
+    createApplicationId: () => ""
 });
 
 const MockDatabaseProvider = ({ children }: PropsWithChildren) => {
@@ -41,9 +43,13 @@ const MockDatabaseProvider = ({ children }: PropsWithChildren) => {
     const [jobs, setJobs] = useState<Job[]>(j);
     const [applications, setApplications] = useState<Application[]>(a);
 
+    const createApplicationId = () => {
+        return `a${applications.length + 1}`;
+    }
 
     const value: MockDatabase = {
         applications,
+        createApplicationId,
         counselors,
         jobs,
         recruiters,

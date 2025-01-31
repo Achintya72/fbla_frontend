@@ -1,13 +1,13 @@
 "use client";
 
 import { Application, StudentApplication } from "@/models/application";
-import { StudentData, StudentPage } from "@/models/student";
+import { JobReference, StudentData, StudentPage } from "@/models/student";
 import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
 
 // Collection of methods responsible for handle API calls related to the student
 export const useStudentQueries = () => {
-    const { applications, setApplications, students, setStudents, counselors, setCounselors } = useMockData();
+    const { applications, setApplications, students, setStudents, counselors, setCounselors, createApplicationId } = useMockData();
 
     /**
      * Responsible for fetching Student from DB
@@ -109,13 +109,23 @@ export const useStudentQueries = () => {
     */
     const createStudentApplication: (application: StudentApplication) => Promise<StudentApplication> = async (application) => {
         await delay(1000);
-        const newApplications = [...applications, {
-            ...application,
-            recruiterComments: [],
-            recruiterClassification: "in-progress",
-        } as Application]
-        setApplications([...newApplications]);
-        return application;
+        const studentIndex = students.findIndex(s => s.id === application.student);
+        if(studentIndex >= 0) {
+            const newApplications = [...applications, {
+                ...application,
+                id: createApplicationId(),
+                recruiterComments: [],
+                recruiterClassification: "in-progress",
+            } as Application]
+            setApplications([...newApplications]);
+            const newJobs: JobReference[] = [...students[studentIndex].jobReferences, { id: application.job, status: application.status }];
+            setStudents(prev => {
+                prev[studentIndex].jobReferences = newJobs;
+                return [...prev];
+            })
+            return application;
+        }
+        throw new Error("Student not found");
     }
 
     /**
