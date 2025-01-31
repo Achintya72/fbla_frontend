@@ -315,7 +315,7 @@ export default function EditStudent() {
                             </div>
 
 
-                            <label>Skills (Comma-seperated)</label>
+                            <label>Skills (Comma-separated)</label>
                             <input
                                 type="text"
                                 value={project.skills.join(", ")}
@@ -324,7 +324,7 @@ export default function EditStudent() {
                                 className="w-full mb-2"
                             />
 
-                            <label>Image Links (Comma-seperated)</label>
+                            <label>Image Links (Comma-separated)</label>
                             <input
                                 type="text"
                                 value={project.images.join(", ")}
