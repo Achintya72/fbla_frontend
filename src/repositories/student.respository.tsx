@@ -1,13 +1,13 @@
 "use client";
 
 import { Application, StudentApplication } from "@/models/application";
-import { StudentData, StudentPage } from "@/models/student";
+import { CoverLetter, JobReference, StudentData, StudentPage } from "@/models/student";
 import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
 
 // Collection of methods responsible for handle API calls related to the student
-export const useStudentQueries = () => {
-    const { applications, setApplications, students, setStudents, counselors, setCounselors } = useMockData();
+export const useStudentRepo = () => {
+    const { applications, setApplications, students, setStudents, counselors, setCounselors, createApplicationId, setJobs, jobs } = useMockData();
 
     /**
      * Responsible for fetching Student from DB
@@ -15,7 +15,7 @@ export const useStudentQueries = () => {
      * @param id 
      * @returns StudentData or null
     */
-    const getStudentById: (id: string) => Promise<StudentData> = async (id) => {
+    const getStudentByIdRepo: (id: string) => Promise<StudentData> = async (id) => {
         await delay(1000);
         const found = students.find(s => s.id === id);
         if (found) {
@@ -29,7 +29,7 @@ export const useStudentQueries = () => {
      * Responsible for fetching Student's Profile from DB
      * @returns StudentPage or null
      */
-    const getStudentPage: (id: string) => Promise<StudentPage> = async (id) => {
+    const getStudentPageRepo: (id: string) => Promise<StudentPage> = async (id) => {
         await delay(1000);
         const found = students.find(s => s.id === id);
         if (found) {
@@ -44,7 +44,7 @@ export const useStudentQueries = () => {
      * on initial login
      * @returns Create StudentData or null
     */
-    const createStudent: (student: StudentData) => Promise<StudentData> = async (student) => {
+    const createStudentRepo: (student: StudentData) => Promise<StudentData> = async (student) => {
         await delay(1000);
         const newStudents = [...students, student];
         setStudents([...newStudents]);
@@ -56,7 +56,7 @@ export const useStudentQueries = () => {
      * Responsible for updating the student's data
      * @returns Updated StudentData or null
      */
-    const updateStudentData: (data: StudentData) => Promise<StudentData> = async (data) => {
+    const updateStudentDataRepo: (data: StudentData) => Promise<StudentData> = async (data) => {
         await delay(1000);
         const foundIndex = students.findIndex(s => s.id === data.id);
         if (foundIndex >= 0) {
@@ -75,7 +75,7 @@ export const useStudentQueries = () => {
      * for a specific job.
      * @returns StudentApplication or null
     */
-    const getStudentApplicationForJob: (stuId: string, jobId: string) => Promise<StudentApplication> = async (stuId, jobId) => {
+    const getStudentApplicationForJobRepo: (stuId: string, jobId: string) => Promise<StudentApplication> = async (stuId, jobId) => {
         await delay(1000);
         const found = applications.find(a => a.student === stuId && a.job === jobId);
         if (found) {
@@ -89,7 +89,7 @@ export const useStudentQueries = () => {
      * profile page
      * @returns updated StudentPage or null
      */
-    const updatePage: (stuId: string, page: StudentPage) => Promise<StudentPage> = async (stuId, page) => {
+    const updatePageRepo: (stuId: string, page: StudentPage) => Promise<StudentPage> = async (stuId, page) => {
         await delay(1000);
         const foundIndex = students.findIndex(s => s.id === stuId);
         if (foundIndex >= 0) {
@@ -107,15 +107,33 @@ export const useStudentQueries = () => {
      * for a specific job
      * @returns Created StudentApplication or null
     */
-    const createStudentApplication: (application: StudentApplication) => Promise<StudentApplication> = async (application) => {
+    const createStudentApplicationRepo: (application: StudentApplication) => Promise<StudentApplication> = async (application) => {
         await delay(1000);
-        const newApplications = [...applications, {
-            ...application,
-            recruiterComments: [],
-            recruiterClassification: "in-progress",
-        } as Application]
-        setApplications([...newApplications]);
-        return application;
+        const studentIndex = students.findIndex(s => s.id === application.student);
+        const jobsIndex = jobs.findIndex(j => j.id === application.job);
+        if(studentIndex >= 0) {
+            const id = createApplicationId();
+            const newApplications = [...applications, {
+                ...application,
+                id,
+                recruiterComments: [],
+                recruiterClassification: "in-progress",
+            } as Application]
+            setApplications([...newApplications]);
+            const newJobApplications = [...jobs[jobsIndex].applications, id];
+            setJobs(prev => {
+                prev[jobsIndex].applications = newJobApplications;
+                return [...prev]
+            });
+            const newJobs: JobReference[] = [...students[studentIndex].jobReferences, { id: application.job, status: application.status }];
+            setStudents(prev => {
+                prev[studentIndex].jobReferences = newJobs;
+                return [...prev];
+            });
+
+            return application;
+        }
+        throw new Error("Student not found");
     }
 
     /**
@@ -123,7 +141,7 @@ export const useStudentQueries = () => {
      * pre-existing application
      * @returns Updated StudentApplication or null
      */
-    const updateStudentApplication: (application: StudentApplication) => Promise<StudentApplication> = async (application) => {
+    const updateStudentApplicationRepo: (application: StudentApplication) => Promise<StudentApplication> = async (application) => {
         await delay(1000);
         const foundIndex = applications.findIndex(a => a.id === application.id);
         if (foundIndex >= 0) {
@@ -139,7 +157,7 @@ export const useStudentQueries = () => {
     /**
      * Adds user's application to counselor's application reviews list
     */
-    const requestApplicationReview: (applicationId: string, counselorId: string) => Promise<void> = async (appId, counselorId) => {
+    const requestApplicationReviewRepo: (applicationId: string, counselorId: string) => Promise<void> = async (appId, counselorId) => {
         await delay(1000);
         const counselorIndex = counselors.findIndex(c => c.id === counselorId);
         const application = applications.find(a => a.id === appId);
@@ -160,7 +178,7 @@ export const useStudentQueries = () => {
     /**
      * Adds student id to counselor's endorsementRequests
     */
-    const requestEndorsement: (studentId: string, counselorId: string) => Promise<void> = async (sId, cId) => {
+    const requestEndorsementRepo: (studentId: string, counselorId: string) => Promise<void> = async (sId, cId) => {
         await delay(1000);
         const counselorIndex = counselors.findIndex(c => c.id === cId);
         const student = students.find(s => s.id === sId);
@@ -178,17 +196,40 @@ export const useStudentQueries = () => {
         throw new Error("Student doesn't exist");
     }
 
+    /**
+     * Adds a cover letter to the student's profile
+     */
+    const addCoverLetterRepo: (studentId: string, coverLetter: CoverLetter) => Promise<boolean> = async (sId, coverLetter) => {
+        await delay(1000);
+        const student = students.find(s => s.id === sId);
+        if(student) {
+            const newCoverLetters = [...student.coverLetters, coverLetter];
+            const newData = {...student, coverLetters: newCoverLetters};
+
+            try {
+                await updateStudentDataRepo(newData);
+            }
+            catch (e) {
+                throw e;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
     return {
-        getStudentById,
-        getStudentPage,
-        createStudent,
-        updateStudentData,
-        updatePage,
-        getStudentApplicationForJob,
-        createStudentApplication,
-        updateStudentApplication,
-        requestApplicationReview,
-        requestEndorsement
+        getStudentByIdRepo,
+        getStudentPageRepo,
+        createStudentRepo,
+        updateStudentDataRepo,
+        updatePageRepo,
+        getStudentApplicationForJobRepo,
+        createStudentApplicationRepo,
+        updateStudentApplicationRepo,
+        requestApplicationReviewRepo,
+        requestEndorsementRepo,
+        addCoverLetterRepo
     }
 
 }

@@ -7,10 +7,10 @@ import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import { useLoginContext } from "@/services/login.service";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRecruiterQueries } from "@/repositories/recruiter.repository";
 import Loader from "@/components/Loader";
 import { Job } from "@/models/jobs";
 import { RecruiterApplication } from "@/models/application";
+import { useRecruiterService } from "@/services/recruiter.service";
 
 function Dashboard() {
     const { recruiterData } = useUserDataContext();
@@ -18,7 +18,7 @@ function Dashboard() {
     const [recruiterJobs, setRecruiterJobs] = useState<Job[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const { getRecruiterJobs, getApplicationsForJob } = useRecruiterQueries();
+    const { getRecruiterJobsService, getApplicationsForJobService } = useRecruiterService();
 
     const { company, id } = recruiterData ?? { company: { name: "" } };
 
@@ -26,9 +26,9 @@ function Dashboard() {
         if (id == undefined) return;
         const fetchData = async () => {
             try {
-                const temp = await getRecruiterJobs(id);
+                const temp = await getRecruiterJobsService(id, {});
                 const tempJ = await Promise.all(temp.map(async (value) => {
-                    const applications: RecruiterApplication[] = await getApplicationsForJob(value.id);
+                    const applications: RecruiterApplication[] = await getApplicationsForJobService(value.id, {});
                     return {
                         ...value, studentFound: applications.some((v) => {
                             return v.recruiterClassification == "accepted"
@@ -44,7 +44,7 @@ function Dashboard() {
         }
 
         fetchData();
-    }, [id, getRecruiterJobs, getApplicationsForJob])
+    }, [id, getRecruiterJobsService, getApplicationsForJobService])
 
     if (id == undefined || loading) {
         return <Loader />

@@ -4,7 +4,7 @@ import Button from "@/components/button";
 import Error from "@/components/Error";
 import Loader from "@/components/Loader";
 import { Employment, Link, Project, StudentData, StudentPage } from "@/models/student";
-import { useStudentQueries } from "@/repositories/student.respository";
+import { useStudentDataService } from "@/services/student.service";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import { CaretLeft } from "@phosphor-icons/react";
 import NextLink from "next/link";
@@ -12,8 +12,8 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function EditStudent() {
-    const { studentData, setUserData } = useUserDataContext();
-    const { updateStudentData } = useStudentQueries();
+    const { studentData } = useUserDataContext();
+    const { setStudentDataService } = useStudentDataService();
     const [error, setError] = useState<string>("");
     const [formData, setFormData] = useState<StudentPage | undefined>(undefined);
 
@@ -163,8 +163,7 @@ export default function EditStudent() {
         const copy: StudentData = { ...studentData };
         copy.page = formData;
 
-        updateStudentData(copy);
-        setUserData(copy);
+        setStudentDataService(copy, {});
 
         redirect('/dashboard/student')
     };

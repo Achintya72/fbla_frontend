@@ -7,7 +7,7 @@
  * Encoded User Auth Token, or nothing in case of no 
  * previous authentication
  */
-export const retrieveUserFromCache: () => string | null = () => {
+export const retrieveUserFromCacheRepo: () => string | null = () => {
     const token = localStorage.getItem("user");
     if(!token) {
         return null;
@@ -20,7 +20,7 @@ export const retrieveUserFromCache: () => string | null = () => {
  * the most updated encoded JWT token for to allow
  * persisting later auth states
  */
-export const setUserInCache: (token: string) => void = (token) => {
+export const setUserInCacheRepo: (token: string) => void = (token) => {
     localStorage.setItem("user", JSON.stringify(token));
 }
 
@@ -29,12 +29,12 @@ export const setUserInCache: (token: string) => void = (token) => {
  * Responsible for deleting user auth token
  * from browser cache, in case user signs out
  */
-export const deleteUser = () => {
+export const deleteUserRepo = () => {
     localStorage.removeItem("user");
 }
 
 export const authFetch = async(url: string, options: RequestInit) => {
-    const token = retrieveUserFromCache();
+    const token = retrieveUserFromCacheRepo();
     if(token) {
         options.headers = {
             ...options.headers,

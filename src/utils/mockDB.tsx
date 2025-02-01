@@ -37,7 +37,8 @@ export const students: StudentData[] = [
         email: "1055712@lwsd.org",
         jobReferences: [
             { id: "j1", status: "bookmarked" },
-            { id: "j2", status: "in-progress" }
+            { id: "j4", status: "in-progress" },
+            { id: "j5", status: "in-progress" },
         ],
         lessons: [],
         page: {
@@ -76,7 +77,7 @@ export const students: StudentData[] = [
             ],
         },
         verified: false,
-        resume: "https://www.google.com"
+        resume: undefined
     },
     {
         id: "s2",
@@ -122,7 +123,7 @@ export const students: StudentData[] = [
             ],
         },
         verified: false,
-        resume: "https://www.google.com"
+        resume: undefined
     }
 ]
 
@@ -367,7 +368,7 @@ export const jobs: Job[] = [
 export const applications: Application[] = [
     {
         id: "a1",
-        student: "s2",
+        student: "s1",
         job: "j5",
         additionalInformation: "Hello I'm under da wader ",
         counselorComments: [],
@@ -379,17 +380,14 @@ export const applications: Application[] = [
             }
         ],
         recruiterClassification: "accepted",
-        submitted: true,
-        coverLetter: {
-            name: "Marketing",
-            url: "https://www.linkedin.com"
-        },
-        resume: "https://www.linkedin.com",
-        status: "pending"
+        submitted: false,
+        coverLetter: undefined,
+        resume: undefined,
+        status: "in-progress"
     },
     {
         id: "a2",
-        student: "s2",
+        student: "s1",
         job: "j4",
         additionalInformation: "Helicopter Helicopter dkdkdkdkdk",
         counselorComments: [],
@@ -401,12 +399,12 @@ export const applications: Application[] = [
             }
         ],
         recruiterClassification: "accepted",
-        submitted: true,
+        submitted: false,
         coverLetter: {
             name: "Marketing",
             url: "https://www.linkedin.com"
         },
-        resume: "https://www.linkedin.com",
-        status: "pending"
+        resume: undefined,
+        status: "in-progress"
     }
 ];

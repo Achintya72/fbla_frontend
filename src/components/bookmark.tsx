@@ -1,7 +1,7 @@
 "use client";
 
 import { Job } from "@/models/jobs";
-import { useAddJobReference, useGetJobReferences, useRemoveJobReference } from "@/services/profile";
+import { useAddJobReference, useGetJobReferences, useRemoveJobReference } from "@/services/profile.service";
 import { BookmarkSimple } from "@phosphor-icons/react";
 import { useLoginContext } from "@/services/login.service";
 

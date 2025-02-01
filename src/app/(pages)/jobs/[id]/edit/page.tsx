@@ -7,7 +7,7 @@ import withProtection from "@/components/protected"
 import { JobLevel, Location, Commitment, Job } from "@/models/jobs";
 import JobsContext from "@/serviceProviders/jobsContext";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
-import { useRecruiterQueries } from "@/repositories/recruiter.repository";
+import { useRecruiterService } from "@/services/recruiter.service";
 import { CaretLeft } from "@phosphor-icons/react";
 import { redirect, useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
@@ -46,7 +46,7 @@ function EditJob() {
         mode: "all",
         reValidateMode: "onChange"
     });
-    const { updateJobPosting } = useRecruiterQueries();
+    const { updateJobService } = useRecruiterService();
 
     const resetError = () => {
         setError("");
@@ -98,7 +98,7 @@ function EditJob() {
             skills: data.skills,
         }
         try {
-            await updateJobPosting(edits);
+            await updateJobService(edits, {});
 
             redirect(`/jobs/${job!.id}`);
         }

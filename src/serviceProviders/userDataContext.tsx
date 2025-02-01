@@ -5,9 +5,9 @@ import { StudentData } from "@/models/student";
 import { CounselorData } from "@/models/counselor";
 import { RecruiterData } from "@/models/recruiter";
 import { useLoginContext } from "@/services/login.service";
-import { useFetchStudentData } from "@/services/student";
-import { fetchCounselorData } from "@/services/counselor";
-import { fetchRecruiterData } from "@/services/recruiter";
+import { useStudentDataService } from "@/services/student.service";
+import useCounselorServices from "@/services/counselor.service";
+import {useRecruiterService} from "@/services/recruiter.service";
 import Loader from "@/components/Loader";
 import { Profile } from "@/models/userData";
 
@@ -40,23 +40,25 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
     const [counselorData, setCounselorData] = useState<CounselorData | undefined>(undefined);
     const [recruiterData, setRecruiterData] = useState<RecruiterData | undefined>(undefined);
     const [populated, setPopulated] = useState(false);
-    const { fetchStudentData } = useFetchStudentData();
+    const { getStudentService } = useStudentDataService();
+    const { getCounselorService } = useCounselorServices();
+    const { getRecruiterService } = useRecruiterService();
 
 
     useEffect(() => {
 
         const populateStudentData = async () => {
-            const data = await fetchStudentData("s1");
+            const data = await getStudentService("s1", {});
             setStudentData(data);
         }
 
         const populateCounselorData = async () => {
-            const data = await fetchCounselorData();
+            const data = await getCounselorService("c1", {});
             setCounselorData(data);
         }
 
         const populateRecruiterData = async () => {
-            const data = await fetchRecruiterData();
+            const data = await getRecruiterService("2", {});
             setRecruiterData(data);
         }
 
@@ -80,7 +82,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
         }
         setPopulated(true);
 
-    }, [authUser, role]);
+    }, [authUser, role, getCounselorService, getRecruiterService, getStudentService]);
 
     const setUserData: (data: Profile) => void = (data) => {
         switch (role) {
