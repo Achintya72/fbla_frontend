@@ -15,8 +15,11 @@ export default function Bookmark({ job, className }: { job: Job, className: stri
     const ref = jobReferences.find(jobReference => jobReference.id === job.id);
     const added = ref != undefined;
 
+    console.log("Job References", jobReferences);
+
     if (role == "student") return (
         <div className={className + " cursor-pointer"} onClick={(event) => {
+            event.stopPropagation();
             if (added) {
                 if (ref.status == "bookmarked") {
                     removeJobReference(job.id);

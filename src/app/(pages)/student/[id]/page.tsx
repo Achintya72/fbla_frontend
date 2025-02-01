@@ -24,7 +24,7 @@ function Page() {
         };
 
         setStudentData();
-    }, [getStudentPageService, id]);
+    }, [id]);
 
     if (loading) {
         return <Loader />

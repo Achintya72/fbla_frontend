@@ -36,7 +36,7 @@ function LoginContextProvider({ children }: PropsWithChildren) {
 
     useEffect(() => {
         loginUserFromCache(populateUser, reset);
-    }, [loginUserFromCache])
+    }, [])
 
     /**
      * Resets role, username, and authUser on logout

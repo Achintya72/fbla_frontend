@@ -26,7 +26,7 @@ function Dashboard() {
             }
             populateData();
         }
-    }, [counselorData, getApplicationsForReviewService, getUnVerifiedRecruitersService, getUnverifiedPostingsService])
+    }, [counselorData])
 
     return (
        <main className="px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
