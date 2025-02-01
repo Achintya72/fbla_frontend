@@ -23,7 +23,6 @@ export default function SignUp() {
     const [error, changeError, loading, createUser] = useCreateUser();
     const context = useLoginContext();
 
-    console.log(context);
 
     const onSubmit = async (data: SignUpForm) => {
         await createUser(data.email, data.password, data.name, "student");
@@ -37,9 +36,7 @@ export default function SignUp() {
 
 
     return (
-        <main className="px-[60px] flex flex-row-reverse gap-[40px]" style={{
-            height: "calc(100vh - 200px)"
-        }}>
+        <main className="px-[20px] md:px-[60px] flex gap-[40px] flex-wrap-reverse md:h-[calc(100vh - 200px)]">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center flex-1 gap-[20px]">
                 <h2>Sign Up</h2>
                 <Input<SignUpForm>
@@ -97,8 +94,8 @@ export default function SignUp() {
                     redirect("/recruiter-signup");
                 }} variant="secondary">I&apos;m A Recruiter</Button>
             </form>
-            <div className="flex-1 bg-green-100 rounded-[40px]">
-
+            <div className="flex-1 bg-green-100 rounded-[40px] min-w-[250px] md:min-w-[350px] flex flex-row justify-center items-center p-[20px]">
+                <img src={'phoneCall.svg'} />
             </div>
             <Error error={error} resetError={changeError} />
         </main>

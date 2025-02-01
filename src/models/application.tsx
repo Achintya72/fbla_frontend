@@ -1,4 +1,4 @@
-import { CoverLetter } from "./student";
+import { CoverLetter, StudentPage } from "./student";
 import { JobStatus } from "./student";
 
 type Progress = "accepted" | "rejected" | "in-progress"
@@ -49,6 +49,7 @@ interface CounselorApplication {
     additionalInformation: string
     coverLetter?: CoverLetter,
     resume?: string,
+    page?: StudentPage,
     counselorComments: Comment[],
 }
 

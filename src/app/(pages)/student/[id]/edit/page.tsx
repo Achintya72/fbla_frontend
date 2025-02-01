@@ -27,7 +27,6 @@ export default function EditStudent() {
         return <Loader />
     }
 
-    console.log(formData.projects[0].startDate == undefined ? "" : formData.projects[0].startDate.toISOString().split("T")[0])
 
 
     const resetError = () => {
@@ -169,7 +168,7 @@ export default function EditStudent() {
     };
 
     return (
-        <div className="w-full px-[60px]">
+        <div className="w-full px-[20px] md:px-[60px]">
             <NextLink href='/dashboard/student' className="cursor-pointer sticky top-0 w-full py-[10px] flex justify-start items-center gap-[10px]">
                 <CaretLeft size={20} />
                 <h6>Student Dashboard <span className="text-red-500">(You will lose unsaved work)</span></h6>

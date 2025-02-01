@@ -17,7 +17,7 @@ export default function Home() {
             background: "linear-gradient(to bottom right, #D9EFCC, #97BFBF)"
           }}
         />
-        <div className="absolute bg-white-200 p-[40px] rounded-tl-[40px] rounded-br-[40px]">
+        <div className="absolute bg-white-200 p-[20px] md:p-[40px] rounded-tl-[40px] rounded-br-[40px]">
           <h3>WHERE</h3>
           <h1>Leaders</h1>
           <div
@@ -27,7 +27,7 @@ export default function Home() {
             className="absolute circle-cutout-1 top-[100%] w-[40px] h-[40px] bg-white-200 left-0"
           />
         </div>
-        <div className="absolute right-0 bottom-0 bg-white-200 p-[40px] rounded-tl-[40px] rounded-br-[40px]">
+        <div className="absolute right-0 bottom-0 bg-white-200 p-[20px] md:p-[40px] rounded-tl-[40px] rounded-br-[40px]">
           <h3 className="text-right">NURTURE</h3>
           <h1>Learners</h1>
           <div

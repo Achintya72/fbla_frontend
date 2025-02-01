@@ -113,12 +113,13 @@ export const useStudentRepo = () => {
         const jobsIndex = jobs.findIndex(j => j.id === application.job);
         if(studentIndex >= 0) {
             const id = createApplicationId();
-            const newApplications = [...applications, {
+            const newApplication = {
                 ...application,
                 id,
                 recruiterComments: [],
                 recruiterClassification: "in-progress",
-            } as Application]
+            } as Application;
+            const newApplications = [...applications, newApplication]
             setApplications([...newApplications]);
             const newJobApplications = [...jobs[jobsIndex].applications, id];
             setJobs(prev => {
@@ -131,7 +132,7 @@ export const useStudentRepo = () => {
                 return [...prev];
             });
 
-            return application;
+            return newApplication;
         }
         throw new Error("Student not found");
     }

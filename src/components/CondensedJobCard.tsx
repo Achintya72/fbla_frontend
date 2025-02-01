@@ -5,7 +5,7 @@ import Button from "./button";
 
 export default function CondensedJobCard({ job, showButtons = false, status = null, buttons = [{ text: "Apply", href: `/jobs/${job.id}/apply` }] }: { job: Job, showButtons?: boolean, status?: string | null, nextSteps?: string[], buttons?: { text: string, href?: string, action?: () => Promise<void> }[] }) {
     return (
-        <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[350px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
+        <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[250px] md:min-w-[350px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
             <div className="flex flex-row justify-between gap-[8px]">
                 <div className="flex flex-row gap-[5px]">
                     <div className="bg-white-200 rounded-full h-[51px] w-[51px] flex items-center justify-center">
@@ -17,7 +17,7 @@ export default function CondensedJobCard({ job, showButtons = false, status = nu
                         <div className="text-white-700 text-[14px]">{job.company.name}</div>
                     </div>
                 </div>
-                {status && <div className={"status " + status.replace(" ", "")}>{status.charAt(0).toUpperCase() + status.slice(1)}</div>}
+                {status && <div className={"status h-fit " + status.replace(" ", "")}>{status.charAt(0).toUpperCase() + status.slice(1)}</div>}
                 {!status && <Bookmark job={job} className="justify-self-center  text-white-700" />}
             </div>
             <div className="flex flex-row font-bold text-[14px] gap-[10px]">
@@ -36,7 +36,7 @@ export default function CondensedJobCard({ job, showButtons = false, status = nu
             </div>
             {showButtons && buttons.map((value, index) => <Button size="small" key={index} onClick={(event) => {
                 event.stopPropagation();
-                if(value.href != undefined) redirect(value.href);
+                if (value.href != undefined) redirect(value.href);
                 else if (value.action != undefined) value.action();
             }}>{value.text}</Button>)}
         </div>

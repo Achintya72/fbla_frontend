@@ -4,12 +4,10 @@ import withProtection from "@/components/protected"
 import { useLoginContext } from "@/services/login.service";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
+import Loader from "@/components/Loader"
 
 function Dashboard() {
     const context = useLoginContext();
-    console.log(context.role);
-    console.log(context.authUser);
-    console.log(context.name);
 
     useEffect(() => {
         if (context.authUser) {
@@ -18,9 +16,12 @@ function Dashboard() {
     }, [context.authUser, context.role])
 
     return (
-        <main className="px-[60px] flex flex-col gap-[40px]">
-            <h3>Loading...</h3>
-        </main>
+        <div className="px-[20px] md:px-[60px] flex flex-row h-full w-full justify-center items-center">
+            <div className="flex flex-col gap-[10px] items-center">
+                <Loader />
+                Loading your dashboard ...
+            </div>
+        </div>
     )
 }
 

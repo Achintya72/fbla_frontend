@@ -16,11 +16,10 @@ export default function Posting() {
 
     const job = jobs.find((job) => job.id === params.id);
 
-    console.log("Job:", job?.id);
 
     if (!populated) {
         return (
-            <div className="px-[60px]">
+            <div className="px-[20px] md:px-[60px]">
                 <h3>Loading...</h3>
             </div>
         );
@@ -29,11 +28,11 @@ export default function Posting() {
         const similarJobs = jobs.filter((j) => j.id != job.id && j.tags.some((tag) => job.tags.includes(tag)));
 
         return (
-            <div className="px-[60px] flex flex-row gap-[24px]">
+            <div className="px-[20px] md:px-[60px] flex flex-col md:flex-row gap-[24px] mb-[20px] ">
                 <div className="flex flex-col gap-[16px] flex-[2]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img className="w-full aspect-[8/1] rounded-[8px] object-cover" alt={"Cover Image "} src={job.coverImage} />
-                    <div className="flex flex-row justify-between">
+                    <div className="flex flex-row justify-between flex-wrap">
                         <h1 className="text-[40px] font-inter tracking-normal">{job.title}</h1>
                         <div className="flex flex-row gap-[10px]">
                             <Bookmark job={job} className="bg-white-400 rounded-[8px] p-[12px]" />
@@ -43,7 +42,7 @@ export default function Posting() {
 
                         </div>
                     </div>
-                    <div className="flex flex-row justify-between">
+                    <div className="flex flex-col gap-[16px] md:flex-row justify-between">
                         <div className="flex flex-col gap-[5px]">
                             <h5 className="font-semibold">
                                 ${job.salary.toLocaleString()}
@@ -62,15 +61,17 @@ export default function Posting() {
                             </div>
                         </div>
                         <div className="flex flex-row gap-[5px]">
-                            <div className="flex flex-col gap-[5px] text-right">
+                            <div className="flex flex-col gap-[5px] md:text-right">
                                 <h5>Google</h5>
                                 <div className="text-white-700 text-[14px]">
                                     {job.company.tags.join(" • ")}
                                 </div>
                             </div>
-                            <div className="bg-white-400 rounded-full h-[51px] w-[51px] flex items-center justify-center">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={job.company.logo} alt={job.company.name} className="w-[40px] h-[40px] rounded-full object-contain" />
+                            <div className="flex flex-row h-full items-center justify-center">
+                                <div className="bg-white-400 rounded-full h-[51px] w-[51px] flex items-center justify-center">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img src={job.company.logo} alt={job.company.name} className="w-[40px] h-[40px] rounded-full object-contain" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -81,6 +82,10 @@ export default function Posting() {
                     <div>
                         <div className="font-bold">Responsibilities</div>
                         <ul className="text-white-700">{job.responsibilities.map((value, index) => <li key={index}>• {value}</li>)}</ul>
+                    </div>
+                    <div>
+                        <div className="font-bold">Skills</div>
+                        <ul className="text-white-700">{job.skills.map((value, index) => <li key={index}>• {value}</li>)}</ul>
                     </div>
                 </div>
                 <div>
@@ -97,7 +102,7 @@ export default function Posting() {
             redirect('/jobs');
         }, 5000)
         return (
-            <div className="px-[60px]">
+            <div className="px-[20px] md:px-[60px]">
                 <h3>Job not found. Redirecting...</h3>
             </div>
         );

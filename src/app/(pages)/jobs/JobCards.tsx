@@ -40,10 +40,10 @@ function JobCard({ job }: { job: Job }) {
             <div>
                 {job.description}
             </div>
-            <div className="text-white-700 text-[14px]">
+            <div className="text-white-700 text-[14px] flex-1">
                 {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })} • {job.applications.length} Applicant{job.applications.length > 1 ? "s" : ""}
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between items-center">
                 <div className="font-semibold">
                     ${job.salary.toLocaleString()}
                     <span className="text-white-700">/mo</span>
@@ -64,7 +64,7 @@ export default function JobCards() {
     const filteredJobs = jobs.filter(job => job.title.includes(searchText) && (job.tags.includes(selectedTag) || selectedTag == "All") && job.salary >= compensationRange[0] && job.salary <= compensationRange[1] && (locations.length == 0 || locations.includes(job.location)) && (commitments.length == 0 || commitments.includes(job.commitment)) && (levels.length == 0 || levels.includes(job.level)) && job.published && new Date() < job.closeDate);
 
     return (
-        <div className="grid grid-cols-3 gap-[16px] flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px] flex-1 min-w-[250px] md:min-w-[350px]">
             {!populated && <div>Loading...</div>}
             {populated && (filteredJobs.length > 0 ? filteredJobs.map((job, index) => <JobCard key={index} job={job} />) : <div>No jobs found</div>)}
         </div>

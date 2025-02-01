@@ -33,7 +33,6 @@ export const useRecruiterRepo = () => {
         await delay(1000);
         const newJobs = [...jobs, job];
         setJobs([...newJobs]);
-        console.log(newJobs);
         return job;
 
     }

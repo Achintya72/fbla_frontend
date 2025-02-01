@@ -82,7 +82,7 @@ function UserDataContextProvider({ children }: PropsWithChildren) {
         }
         setPopulated(true);
 
-    }, [authUser, role, getCounselorService, getRecruiterService, getStudentService]);
+    }, [authUser, role]);
 
     const setUserData: (data: Profile) => void = (data) => {
         switch (role) {
