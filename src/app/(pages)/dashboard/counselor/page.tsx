@@ -82,7 +82,6 @@ function Dashboard() {
                                 </div>
                                 <Button onClick={() => {
                                     console.log("Clicked!!");
-                                    const response = verifyRecruiterService(recruiter.id, {});
                                     setUnverifiedRecruiters(prev => [...prev.filter(r => r.id !== recruiter.id)]);
                                 }} size="small">Approve</Button>
                             </div>
