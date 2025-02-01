@@ -21,7 +21,7 @@ function Dashboard() {
 
 
     const { getStudentPageService } = useStudentDataService();
-    const { getUnverifiedPostingsService, verifyRecruiterService, getUnVerifiedRecruitersService, getApplicationsForReviewService, approvePostingService, deletePostingService } = useCounselorServices();
+    const { getUnverifiedPostingsService, getUnVerifiedRecruitersService, getApplicationsForReviewService, approvePostingService, deletePostingService } = useCounselorServices();
     console.log(counselorData?.applicationReviews);
     useEffect(() => {
         if (counselorData) {
