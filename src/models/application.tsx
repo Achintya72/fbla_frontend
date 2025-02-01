@@ -15,6 +15,7 @@ interface Application {
     recruiterClassification: Progress,
     submitted: boolean
     status: JobStatus,
+    page?: StudentPage
 }
 
 interface StudentApplication {
@@ -36,6 +37,7 @@ interface RecruiterApplication {
     additionalInformation: string,
     coverLetter: CoverLetter,
     resume?: string,
+    page: StudentPage,
     recruiterComments: Comment[],
     recruiterClassification: Progress,
     submitted: boolean,

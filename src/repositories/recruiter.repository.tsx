@@ -89,7 +89,19 @@ export const useRecruiterRepo = () => {
         await delay(1000);
         const job = jobs.find(j => j.id === id);
         if (job) {
-            return applications.filter(a => a.job === id && a.submitted).map(a => a as RecruiterApplication);
+            return applications.filter(a => a.job === id && a.submitted).map(a => ({
+                additionalInformation: a.additionalInformation,
+                coverLetter: a.coverLetter,
+                id: a.id,
+                job: a.job,
+                page: a.page,
+                recruiterClassification: a.recruiterClassification,
+                recruiterComments: a.recruiterComments,
+                status: a.status,
+                student: a.student,
+                submitted: a.submitted,
+                resume: a.resume
+            } as RecruiterApplication));
         }
         throw new Error("Job not found");
     }
@@ -120,7 +132,7 @@ export const useRecruiterRepo = () => {
         const foundIndex = applications.findIndex(a => a.id === appId);
         if (foundIndex >= 0) {
             setApplications(prev => {
-                prev[foundIndex].status = status;
+                prev[foundIndex].recruiterClassification = status;
                 return [...prev];
             });
             return;

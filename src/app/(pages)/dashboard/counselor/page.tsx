@@ -9,14 +9,13 @@ import { CounselorApplication } from "@/models/application";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
 import CondensedJobCard from "@/components/CondensedJobCard";
 import { useStudentDataService } from "@/services/student.service";
-import { StudentPage } from "@/models/student";
 import { useJobContext } from "@/serviceProviders/jobsContext";
 import Button from "@/components/button";
 
 function Dashboard() {
     const { counselorData } = useUserDataContext();
     const { jobs } = useJobContext();
-    const [, setRecruiters] = useState<RecruiterData[]>([]);
+    // const [, setRecruiters] = useState<RecruiterData[]>([]);
     const [unverifiedJobs, setUnverifiedJobs] = useState<Job[]>([]);
     const [applicationsForReview, setApplicationsForReview] = useState<CounselorApplication[]>([]);
     const [unverifiedRecruiters, setUnverifiedRecruiters] = useState<RecruiterData[]>([]);
@@ -83,8 +82,7 @@ function Dashboard() {
                                     </div>
                                 </div>
                                 <Button onClick={() => {
-                                    console.log("Clicked!!");
-                                    const response = verifyRecruiterService(recruiter.id, {});
+                                    verifyRecruiterService(recruiter.id, {});
                                     setUnverifiedRecruiters(prev => [...prev.filter(r => r.id !== recruiter.id)]);
                                 }} size="small">Approve</Button>
                             </div>

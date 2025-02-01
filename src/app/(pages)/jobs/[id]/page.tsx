@@ -39,7 +39,11 @@ export default function Posting() {
                             {role == "student" && new Date() < job.closeDate && <Link href={`/jobs/${job.id}/apply`}>
                                 <Button>Apply (Closes {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })})</Button>
                             </Link>}
-
+                            {role == "recruiter" && (job.published || job.closeDate.valueOf() < Date.now()) &&
+                                <Link href={`/jobs/${job.id}/applicants`}>
+                                    <Button>View Applications ({job.applications.length})</Button>
+                                </Link>
+                            }
                         </div>
                     </div>
                     <div className="flex flex-row justify-between">
@@ -88,6 +92,7 @@ export default function Posting() {
                         {similarJobs.length > 0 ? similarJobs.map((job, index) => <CondensedJobCard key={index} job={job} />) : <div>No similar jobs found</div>}
                     </div>
                 </div>
+                
             </div>
         )
     }
