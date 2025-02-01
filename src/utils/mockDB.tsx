@@ -122,7 +122,7 @@ export const students: StudentData[] = [
 export const recruiters: RecruiterData[] = [
     {
         company: {
-            logo: "https://images.seeklogo.com/logo-png/47/1/meta-logo-png_seeklogo-477180.png?v=1957917042401470928",
+            logo: "https://www.facebook.com/images/fb_icon_325x325.png",
             name: "Meta",
             tags: ["Social Media", "LLM"]
         },
@@ -133,7 +133,7 @@ export const recruiters: RecruiterData[] = [
     },
     {
         company: {
-            logo: "https://images.seeklogo.com/logo-png/47/1/meta-logo-png_seeklogo-477180.png?v=1957917042401470928",
+            logo: "https://www.facebook.com/images/fb_icon_325x325.png",
             name: "Meta",
             tags: ["Social Media", "LLM"]
         },
@@ -162,7 +162,7 @@ export const jobs: Job[] = [
         responsibilities: ["Develop software solutions", "Work with the team to deliver projects", "Learn and grow"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
-        published: true,
+        published: false,
         skills: [],
         studentFound: undefined
     },
@@ -183,7 +183,7 @@ export const jobs: Job[] = [
         responsibilities: ["Analyze data", "Create reports", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
-        published: true,
+        published: false,
         skills: [],
         studentFound: undefined
     },

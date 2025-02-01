@@ -169,7 +169,17 @@ export default function useCounselorRepo() {
             counselor.applicationReviews.forEach(app => {
                 const foundApp = applications.find(a => a.id === app);
                 if (foundApp) {
-                    reviewApps.push(foundApp as CounselorApplication);
+                    reviewApps.push({
+                        additionalInformation: foundApp.additionalInformation,
+                        counselorComments: foundApp.counselorComments,
+                        id: foundApp.id,
+                        job: foundApp.job,
+                        page: undefined,
+                        student: foundApp.student,
+                        coverLetter: foundApp.coverLetter,
+                        resume: foundApp.resume
+
+                    } as CounselorApplication);
                 } else {
                     throw new Error(`Application ${app} not found`);
                 }
