@@ -49,7 +49,7 @@ function Dashboard() {
         <main className="px-[20px] md:px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
             <div className="grow-[3]">
                 <h4 className="mb-[8px]">Jobs for Review</h4>
-                <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px] mb-[32px]">
                     {unverifiedJobs.length > 0 && unverifiedJobs.map((value, index) => {
                         return <CondensedJobCard status={"pending"} key={index} job={value} showButtons buttons={[
                             {
@@ -71,7 +71,7 @@ function Dashboard() {
                     {unverifiedJobs.length == 0 && <div className="text-white-700">No jobs to review.</div>}
                 </div>
                 <h4 className="mb-[8px]">Recruiters to Approve</h4>
-                <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px] mb-[32px]">
                     {unverifiedRecruiters.length > 0 ?
                         unverifiedRecruiters.map(recruiter => (
                             <div key={recruiter.id} className="p-[16px] flex items-end justify-between rounded-[8px] bg-white-100 border border-white-500">
@@ -93,7 +93,7 @@ function Dashboard() {
                         <div className="text-white-700">No recruiters to review.</div>}
                 </div>
                 <h4 className="mb-[8px]">Application Review Requests</h4>
-                <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px] mb-[32px]">
                     {applicationsForReview.map((app, i) => (
                         <div key={i} className="flex gap-[10px] items-center  p-[16px] rounded-[8px] bg-white-100 border border-white-500">
                             <div className="flex flex-1 flex-col">
@@ -106,7 +106,7 @@ function Dashboard() {
                     ))}
                 </div>
             </div>
-            <div className="flex flex-col gap-[16px] min-w-[350px] grow">
+            <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px] grow">
                 <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px]">
                     <h5 className="text-white-700">Hello,</h5>
                     <h1 className="text-[30px] font-inter tracking-normal mt-[-10px]">{counselorData?.name}</h1>
@@ -119,7 +119,7 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-[16px] min-w-[350px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px]">
                     <h4 className="mb-[8px]">Endorsement Requests</h4>
                 </div>
             </div>

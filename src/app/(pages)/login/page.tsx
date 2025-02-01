@@ -33,9 +33,7 @@ export default function Login() {
 
 
     return (
-        <main className="px-[20px] md:px-[60px] flex gap-[40px]" style={{
-            height: "calc(100vh - 200px)"
-        }}>
+        <main className="px-[20px] md:px-[60px] flex gap-[40px] flex-wrap-reverse md:h-[calc(100vh - 200px)]">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center flex-1 gap-[20px]">
                 <h2>Login</h2>
                 <Input<LoginForm>
@@ -56,7 +54,7 @@ export default function Login() {
                     name="password"
                     options={{
                         required: "Field is required",
-                        minLength: { value: 5, message: "Must be atleast 5 characters" }
+                        minLength: { value: 5, message: "Must be at least 5 characters" }
                     }}
                     type="password"
 
@@ -68,8 +66,8 @@ export default function Login() {
                     redirect("/signup");
                 }} variant="secondary">I Don&apos;t Have An Account</Button>
             </form>
-            <div className="flex-1 bg-green-100 rounded-[40px]">
-
+            <div className="flex-1 bg-green-100 rounded-[40px] min-w-[250px] md:min-w-[350px] flex flex-row justify-center items-center p-[20px]">
+                <img src={"accessAccount.svg"} />
             </div>
             <Error error={error} resetError={resetError} />
         </main>

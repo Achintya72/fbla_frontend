@@ -19,7 +19,7 @@ function Page() {
     useEffect(() => {
         const setStudentData = async () => {
             if (id && typeof id == 'string') {
-                setPage(await getStudentPageService(id, {setError, setLoading}));
+                setPage(await getStudentPageService(id, { setError, setLoading }));
             }
         };
 
@@ -36,12 +36,12 @@ function Page() {
             <section className="w-full relative z-10 mt-[100px] flex flex-col gap-[20px] items-center">
                 <div className="bg-white-400 border-8 border-white-200 w-[200px] h-[200px] rounded-full" />
                 <h4>{page?.name}</h4>
-                <div className="w-full flex gap-[20px] items-start">
+                <div className="w-full flex flex-col-reverse md:flex-row gap-[20px] items-start">
                     <div className="flex-1">
                         <h6 className="mb-[6px]">About Me</h6>
                         <p>{page?.bio}</p>
                     </div>
-                    <div className="bg-white-100 max-w-[300px] flex flex-col gap-[20px] min-w-[250px] p-[16px] rounded-[8px] border border-white-500">
+                    <div className="bg-white-100 max-w-[300px] flex flex-col gap-[20px] min-w-[250px] md:min-w-[350px] p-[16px] rounded-[8px] border border-white-500">
                         {(page?.links ?? []).map((link, i) =>
                             <div key={i}>
                                 <h6 className="text-white-800 mb-[6px]">{link.name}</h6>

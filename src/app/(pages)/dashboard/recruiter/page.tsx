@@ -58,21 +58,21 @@ function Dashboard() {
         <main className="px-[20px] md:px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
             <div className="grow-[3]">
                 <h4 className="mb-[8px]">Live Postings</h4>
-                <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px] mb-[32px]">
                     {livePostings.length > 0 && livePostings.map((value, index) => {
                         return value ? <CondensedJobCard key={index} job={value} status={"pending"} /> : null;
                     })}
                     {livePostings.length == 0 && <div className="text-white-700">No live postings. <Link className="underline" href="/jobs">Create one?</Link></div>}
                 </div>
                 <h4 className="mb-[8px]">Previous Postings</h4>
-                <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px] mb-[32px]">
                     {completed.length > 0 && completed.map((value, index) => {
                         return value ? <CondensedJobCard key={index} job={value} status={value.studentFound ? "student Found" : "completed"} /> : null;
                     })}
                     {completed.length == 0 && <div className="text-white-700">No completed postings. <Link className="underline" href="/jobs">Create one?</Link></div>}
                 </div>
             </div>
-            <div className="flex flex-col gap-[16px] min-w-[350px] grow">
+            <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px] grow">
                 <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px]">
                     <h5 className="text-white-700">Hello,</h5>
                     <h1 className="text-[30px] font-inter tracking-normal mt-[-10px]">{name}</h1>
@@ -88,7 +88,7 @@ function Dashboard() {
                         <Link href='/jobs/create'><Button size={'small'}>Create Job</Button></Link>
                     </div>
                 </div>
-                <div className="flex flex-col gap-[16px] min-w-[350px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] md:min-w-[350px]">
                     <h4 className="mb-[8px]">Waiting for Approval</h4>
                     {inProgress.length > 0 && inProgress.map((value, index) => {
                         return value ? <CondensedJobCard key={index} job={value} showButtons buttons={[

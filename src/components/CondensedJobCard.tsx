@@ -5,7 +5,7 @@ import Button from "./button";
 
 export default function CondensedJobCard({ job, showButtons = false, status = null, buttons = [{ text: "Apply", href: `/jobs/${job.id}/apply` }] }: { job: Job, showButtons?: boolean, status?: string | null, nextSteps?: string[], buttons?: { text: string, href?: string, action?: () => Promise<void> }[] }) {
     return (
-        <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[250px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
+        <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px] min-w-[250px] md:min-w-[350px] border hover:border-black cursor-pointer" onClick={() => redirect(`/jobs/${job.id}`)}>
             <div className="flex flex-row justify-between gap-[8px]">
                 <div className="flex flex-row gap-[5px]">
                     <div className="bg-white-200 rounded-full h-[51px] w-[51px] flex items-center justify-center">

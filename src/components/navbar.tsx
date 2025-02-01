@@ -23,7 +23,6 @@ export default function Navbar() {
                     {authUser &&
                         <Button variant="text"><Link href={`/dashboard/${role}`}>Dashboard</Link></Button>
                     }
-                    <Button variant="text"><Link href="/about">About</Link></Button>
                 </div>
                 {authUser ?
                     <Button onClick={logOut} loading={loading}>Log Out</Button>
@@ -42,13 +41,12 @@ export default function Navbar() {
                     {showMenu ? <X size={24} /> : <List size={24} />}
                 </Button>
             </nav>
-            {showMenu && <div className="fixed w-full mt-[-15px] flex flex-col items-end md:hidden gap-[8px] mb-[20px] px-[20px] z-[100]">
+            {showMenu && <div className="absolute w-full mt-[-15px] flex flex-col items-end md:hidden gap-[8px] mb-[20px] px-[20px] z-[100]">
                 <div className="flex flex-col gap-[8px] items-end bg-white-100 p-[16px] rounded-[10px]">
                     <Button variant="text"><Link href="/jobs">Jobs</Link></Button>
                     {authUser &&
                         <Button variant="text"><Link href={`/dashboard/${role}`}>Dashboard</Link></Button>
                     }
-                    <Button variant="text"><Link href="/about">About</Link></Button>
                     {authUser ?
                         <Button variant="text" onClick={logOut} loading={loading}>Log Out</Button>
                         :

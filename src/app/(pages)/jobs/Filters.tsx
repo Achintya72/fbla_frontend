@@ -56,7 +56,7 @@ export default function Filters() {
     };
 
     return (
-        <div className="flex flex-col gap-[10px] flex-none w-full lg:max-w-[20%] min-w-[250px]">
+        <div className="flex flex-col gap-[10px] flex-none w-full lg:max-w-[20%] min-w-[250px] md:min-w-[350px]">
             <div className="flex flex-row justify-between">
                 <h5 className="font-inter text-[20px] font-bold">Filters</h5>
                 <Sliders size={24} className="self-center" />

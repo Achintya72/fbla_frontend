@@ -163,7 +163,7 @@ export const jobs: Job[] = [
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
         published: false,
-        skills: [],
+        skills: ["Backend Development", "App Development", "Code Knowledge"],
         studentFound: undefined
     },
     {
@@ -184,7 +184,7 @@ export const jobs: Job[] = [
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
         published: false,
-        skills: [],
+        skills: ["Backend Development", "App Development", "Code Knowledge"],
         studentFound: undefined
     },
     {
@@ -205,7 +205,7 @@ export const jobs: Job[] = [
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
         published: true,
-        skills: [],
+        skills: ["Backend Development", "App Development", "Code Knowledge"],
         studentFound: undefined
     },
     {
@@ -226,7 +226,7 @@ export const jobs: Job[] = [
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
         published: true,
-        skills: [],
+        skills: ["Backend Development", "App Development", "Code Knowledge"],
         studentFound: undefined
     },
     {
@@ -247,7 +247,7 @@ export const jobs: Job[] = [
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
         published: true,
-        skills: [],
+        skills: ["Backend Development", "App Development", "Code Knowledge"],
         studentFound: undefined
     }
 ];

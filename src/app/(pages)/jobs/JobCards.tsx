@@ -64,7 +64,7 @@ export default function JobCards() {
     const filteredJobs = jobs.filter(job => job.title.includes(searchText) && (job.tags.includes(selectedTag) || selectedTag == "All") && job.salary >= compensationRange[0] && job.salary <= compensationRange[1] && (locations.length == 0 || locations.includes(job.location)) && (commitments.length == 0 || commitments.includes(job.commitment)) && (levels.length == 0 || levels.includes(job.level)) && job.published && new Date() < job.closeDate);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px] flex-1 min-w-[250px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px] flex-1 min-w-[250px] md:min-w-[350px]">
             {!populated && <div>Loading...</div>}
             {populated && (filteredJobs.length > 0 ? filteredJobs.map((job, index) => <JobCard key={index} job={job} />) : <div>No jobs found</div>)}
         </div>

@@ -28,7 +28,7 @@ export default function Posting() {
         const similarJobs = jobs.filter((j) => j.id != job.id && j.tags.some((tag) => job.tags.includes(tag)));
 
         return (
-            <div className="px-[20px] md:px-[60px] flex flex-col md:flex-row gap-[24px] ">
+            <div className="px-[20px] md:px-[60px] flex flex-col md:flex-row gap-[24px] mb-[20px] ">
                 <div className="flex flex-col gap-[16px] flex-[2]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img className="w-full aspect-[8/1] rounded-[8px] object-cover" alt={"Cover Image "} src={job.coverImage} />
@@ -82,6 +82,10 @@ export default function Posting() {
                     <div>
                         <div className="font-bold">Responsibilities</div>
                         <ul className="text-white-700">{job.responsibilities.map((value, index) => <li key={index}>• {value}</li>)}</ul>
+                    </div>
+                    <div>
+                        <div className="font-bold">Skills</div>
+                        <ul className="text-white-700">{job.skills.map((value, index) => <li key={index}>• {value}</li>)}</ul>
                     </div>
                 </div>
                 <div>
