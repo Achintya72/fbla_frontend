@@ -33,7 +33,7 @@ export default function Login() {
 
 
     return (
-        <main className="px-[60px] flex gap-[40px]" style={{
+        <main className="px-[20px] md:px-[60px] flex gap-[40px]" style={{
             height: "calc(100vh - 200px)"
         }}>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center flex-1 gap-[20px]">

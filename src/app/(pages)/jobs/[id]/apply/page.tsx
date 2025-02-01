@@ -22,25 +22,25 @@ function Apply() {
     const [loading, setLoading] = useState(true);
     const [, setError] = useState<string>("");
     const [app, setApp] = useState<StudentApplication | undefined>(undefined);
-    const { 
-        getApplicationService, 
-        requestReviewApplicationService, 
-        makeStudentApplicationService, 
-        setStudentApplication, 
-        setStudentDataService, 
-        makeCoverLetterService 
+    const {
+        getApplicationService,
+        requestReviewApplicationService,
+        makeStudentApplicationService,
+        setStudentApplication,
+        setStudentDataService,
+        makeCoverLetterService
     } = useStudentDataService();
     const { id } = useParams();
     const [letterUpload, setLetterUpload] = useState<boolean>(false);
     const [resumeUpload, setResumeUpload] = useState<boolean>(false);
-    const {uploadFileToServerRepo} = useFileRepo();
+    const { uploadFileToServerRepo } = useFileRepo();
 
     const job = jobs.find((job) => job.id === id);
 
     useEffect(() => {
         const fetchApplication = async () => {
             if (studentData && typeof id === "string") {
-                const application = await getApplicationService(studentData?.id, id, {setError, setLoading});
+                const application = await getApplicationService(studentData?.id, id, { setError, setLoading });
                 if (application) {
                     setApp(application);
                 } else {
@@ -63,15 +63,14 @@ function Apply() {
     }, []);
 
     const uploadNewApplication = async (a: StudentApplication) => {
-        const newApp = await makeStudentApplicationService(a, {setError, setLoading});
-        console.log(newApp);
+        const newApp = await makeStudentApplicationService(a, { setError, setLoading });
         if (newApp) {
             setApp(newApp)
         }
     }
 
     const setApplication = async (a: StudentApplication) => {
-        const newApp = await setStudentApplication(a, {setError, setLoading});
+        const newApp = await setStudentApplication(a, { setError, setLoading });
         if (newApp) {
             setApp(newApp);
         }
@@ -101,12 +100,12 @@ function Apply() {
     const handleLetterSubmit = async (data: { file: File; fileName: string; isOk: boolean }, setError?: Dispatch<SetStateAction<string>>, setLoading?: Dispatch<SetStateAction<boolean>>) => {
         if (data.isOk && studentData) {
             const url = await uploadFileToServerRepo(data.file, setError, setLoading);
-            if(url) {
-                const coverLetter: CoverLetter = {name: data.fileName, url: url};
+            if (url) {
+                const coverLetter: CoverLetter = { name: data.fileName, url: url };
                 // Do the cover letter add thing
-                const success = makeCoverLetterService(studentData.id, coverLetter, {setError, setLoading});
+                const success = makeCoverLetterService(studentData.id, coverLetter, { setError, setLoading });
                 // Set the application to reflect the selected cover letter
-                
+
 
                 setApp(prev => {
                     prev!.coverLetter = coverLetter;
@@ -118,15 +117,15 @@ function Apply() {
         return false;
     }
 
-    const handleResumeSubmit = async (data: { file: File; fileName: string; isOk: boolean }, setError?: Dispatch<SetStateAction<string>>, 
+    const handleResumeSubmit = async (data: { file: File; fileName: string; isOk: boolean }, setError?: Dispatch<SetStateAction<string>>,
         setLoading?: Dispatch<SetStateAction<boolean>>) => {
-        if(data.isOk) {
+        if (data.isOk) {
             const url = await uploadFileToServerRepo(data.file, setError, setLoading);
-            if(url) {
-                const result = await setStudentDataService({ ...studentData, resume: url } as StudentData, {setError, setLoading});
-                if(result) {
+            if (url) {
+                const result = await setStudentDataService({ ...studentData, resume: url } as StudentData, { setError, setLoading });
+                if (result) {
                     setApp(prev => ({
-                       ...prev, resume: url 
+                        ...prev, resume: url
                     } as StudentApplication))
                     return true;
                 }
@@ -150,7 +149,7 @@ function Apply() {
     const wordCount = (app.additionalInformation.match(/\b\w+\b/g) || []).length;
 
     return (
-        <main className="w-full px-[60px]">
+        <main className="w-full px-[20px] md:px-[60px]">
 
             <Link href={'/jobs/' + job.id} className="cursor-pointer bg-white-200 sticky top-0 w-full py-[10px] flex justify-start items-center gap-[10px]">
                 <CaretLeft size={20} />
@@ -158,7 +157,7 @@ function Apply() {
             </Link>
             <section className="mt-[20px] p-[16px] bg-white-100 rounded-[8px] border border-white-500">
                 <h5 className="mb-[12px]">Attach Cover Letter</h5>
-                <div className="flex gap-[10px]">
+                <div className="flex gap-[10px] flex-wrap">
                     {studentData!.coverLetters.map((letter, i) => (
                         <div
                             onClick={() => {
@@ -199,7 +198,7 @@ function Apply() {
                 }
             </section>
             <section className="mt-[20px] flex flex-col gap-[10px] p-[16px] bg-white-100 rounded-[8px] border border-white-500">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between">
                     <h5 className="flex-1">Attach Resume</h5>
                     <div
                         onClick={() => {
@@ -242,11 +241,11 @@ function Apply() {
                     <small className="absolute z-10 right-[8px] bottom-[8px]">{wordCount}/300</small>
                 </div>
             </section>
-            <section className="mt-[20px] items-center flex gap-[10px] p-[16px] bg-white-100 rounded-[8px] border border-white-500">
+            <section className="mt-[20px] items-center flex gap-[10px] p-[16px] bg-white-100 rounded-[8px] border border-white-500 flex-wrap">
                 <h5 className="flex-1">Request Review</h5>
                 <div
                     onClick={() => {
-                        if(app.id !== "NEW" && studentData) {
+                        if (app.id !== "NEW" && studentData) {
                             requestReviewApplicationService(app.id, studentData.counselor, {});
                         }
                     }}

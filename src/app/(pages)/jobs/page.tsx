@@ -9,7 +9,7 @@ import JobCards from "./JobCards";
 import Filters from "./Filters";
 export default function Jobs() {
     return (
-        <div className="px-[60px]">
+        <div className="px-[20px] md:px-[60px]">
             {/* Search Bar */}
             <div
                 className={
@@ -29,7 +29,7 @@ export default function Jobs() {
                 {["All", "UI/UX Design", "Architecture", "Engineering", "Graphic Design", "Product Management", "Data Science", "Marketing", "Finance", "Human Resources"].map((tag, index) => <Tag key={index} tag={tag} />)}
             </div>
 
-            <div className="flex flex-row gap-[16px] mt-[16px]">
+            <div className="flex flex-col lg:flex-row gap-[16px] mt-[16px] flex-wrap">
                 {/* Filters */}
                 <Filters />
                 {/* JobCards */}

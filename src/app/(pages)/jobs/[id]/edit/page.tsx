@@ -115,7 +115,7 @@ function EditJob() {
     }
 
     return (
-        <main className="w-full px-[60px]">
+        <main className="w-full px-[20px] md:px-[60px]">
             <h4>Create Job</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Link href='/dashboard/recruiter' className="cursor-pointer sticky top-0 w-full py-[10px] flex justify-start items-center gap-[10px]">

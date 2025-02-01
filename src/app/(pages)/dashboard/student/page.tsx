@@ -27,21 +27,21 @@ function Dashboard() {
     console.log(jobReferences);
 
     return (
-        <main className="px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
+        <main className="px-[20px] md:px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
             <div className="grow-[3]">
                 <h4 className="mb-[8px]">In Progress</h4>
-                <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] mb-[32px]">
                     {inProgress.length > 0 && inProgress.map((value, index) => {
                         const job = jobs.find((job) => job.id === value.id);
                         return (job && job.closeDate.valueOf() > Date.now()) ? <CondensedJobCard status={value.status} key={index} job={job} showButtons buttons={[{
                             href: `/jobs/${job.id}/apply`,
                             text: "Edit"
-                        }]}/> : null;
+                        }]} /> : null;
                     })}
                     {inProgress.length == 0 && <div className="text-white-700">No applications in progress. <Link className="underline" href="/jobs">Add some?</Link></div>}
                 </div>
                 <h4 className="mb-[8px]">Completed</h4>
-                <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px] mb-[32px]">
                     {completed.length > 0 && completed.map((value, index) => {
                         const job = jobs.find((job) => job.id === value.id);
                         return job ? <CondensedJobCard key={index} job={job} status={value.status} /> : null;
@@ -49,7 +49,7 @@ function Dashboard() {
                     {completed.length == 0 && <div className="text-white-700">No completed applications. <Link className="underline" href="/jobs">Add some?</Link></div>}
                 </div>
             </div>
-            <div className="flex flex-col gap-[16px] min-w-[350px] grow">
+            <div className="flex flex-col gap-[16px] min-w-[250px] grow">
                 <div className="border-white-500 flex flex-col gap-[10px] rounded-[8px] bg-white-100 p-[16px]">
                     <h5 className="text-white-700">Hello,</h5>
                     <h1 className="text-[30px] font-inter tracking-normal mt-[-10px]">{name}</h1>
@@ -70,7 +70,7 @@ function Dashboard() {
                         </Link>
                     </div>
                 </div>
-                <div className="flex flex-col gap-[16px] min-w-[350px]">
+                <div className="flex flex-col gap-[16px] min-w-[250px]">
                     <h4 className="mb-[8px]">Bookmarks</h4>
                     {bookmarked.length > 0 && bookmarked.map((value, index) => {
                         const job = jobs.find((job) => job.id === value.id);

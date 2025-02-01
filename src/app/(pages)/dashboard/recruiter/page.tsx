@@ -55,7 +55,7 @@ function Dashboard() {
     const inProgress: Job[] = recruiterJobs.filter((value) => !value.published);
 
     return (
-        <main className="px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
+        <main className="px-[20px] md:px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
             <div className="grow-[3]">
                 <h4 className="mb-[8px]">Live Postings</h4>
                 <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">

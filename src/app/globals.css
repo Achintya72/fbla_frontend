@@ -9,7 +9,7 @@ body {
 
 h1 {
 	font-family: var(--font-inter);
-	font-size: 120px;
+	font-size: clamp(64px, 20%, 120px);
 	font-style: normal;
 	font-weight: 700;
 	line-height: 95.172%;
@@ -18,7 +18,7 @@ h1 {
 
 h2 {
 	font-family: var(--font-inter);
-	font-size: 70px;
+	font-size: clamp(35px, 12%, 70px);
 	font-style: normal;
 	font-weight: 700;
 	line-height: 95.172%;
@@ -27,7 +27,7 @@ h2 {
 
 h3 {
 	font-family: var(--font-inter);
-	font-size: 24px;
+	font-size: clamp(18px, 6%, 24px);
 	font-style: normal;
 	font-weight: 200;
 	line-height: 95.172%;
@@ -37,7 +37,7 @@ h3 {
 
 h4 {
 	font-family: var(--font-inter);
-	font-size: 20px;
+	font-size: clamp(16px, 5%, 20px);
 	font-style: normal;
 	font-weight: 700;
 	line-height: normal;
@@ -46,7 +46,7 @@ h4 {
 
 h5 {
 	font-family: var(--font-inter);
-	font-size: 20px;
+	font-size: clamp(16px, 5%, 20px);
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
@@ -54,7 +54,7 @@ h5 {
 
 h6 {
 	font-family: var(--font-inter);
-	font-size: 16px;
+	font-size: clamp(12px, 4%, 16px);
 	font-style: normal;
 	font-weight: 700;
 	line-height: normal;
@@ -62,7 +62,7 @@ h6 {
 
 button {
 	font-family: var(--font-inter);
-	font-size: 16px;
+	font-size: clamp(12px, 4%, 16px);
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
@@ -71,7 +71,7 @@ button {
 
 p {
 	font-family: var(--font-inter);
-	font-size: 16px;
+	font-size: clamp(12px, 4%, 16px);
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
@@ -79,7 +79,7 @@ p {
 
 small {
 	font-family: var(--font-inter);
-	font-size: 12px;
+	font-size: clamp(12px, 4%, 16px);
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
@@ -87,7 +87,7 @@ small {
 
 label {
 	font-family: var(--font-inter);
-	font-size: 14px;
+	font-size: clamp(12px, 4%, 164x);
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
