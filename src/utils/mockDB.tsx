@@ -13,14 +13,6 @@ export const counselors: CounselorData[] = [
         endorsementRequests: ["s1"],
         applicationReviews: []
     },
-    {
-        id: "c2",
-        name: "Kelsey Wescott",
-        email: "kwescott@lwsd.org",
-        students: ["s2"],
-        endorsementRequests: ["s2"],
-        applicationReviews: []
-    }
 ]
 
 export const students: StudentData[] = [

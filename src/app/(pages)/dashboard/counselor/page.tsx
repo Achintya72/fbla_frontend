@@ -16,7 +16,7 @@ function Dashboard() {
     const [, setApplicationsForReview] = useState<CounselorApplication[]>([]);
     
     const {getUnverifiedPostingsService, getUnVerifiedRecruitersService, getApplicationsForReviewService, approvePostingService, deletePostingService } = useCounselorServices();
-
+    console.log(counselorData?.applicationReviews);
     useEffect(() => {
         if(counselorData) {
             const populateData = async () => {

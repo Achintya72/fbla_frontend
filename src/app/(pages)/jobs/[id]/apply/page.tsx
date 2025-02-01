@@ -24,7 +24,7 @@ function Apply() {
     const [app, setApp] = useState<StudentApplication | undefined>(undefined);
     const { 
         getApplicationService, 
-        //requestReviewApplicationService, 
+        requestReviewApplicationService, 
         makeStudentApplicationService, 
         setStudentApplication, 
         setStudentDataService, 
@@ -64,6 +64,7 @@ function Apply() {
 
     const uploadNewApplication = async (a: StudentApplication) => {
         const newApp = await makeStudentApplicationService(a, {setError, setLoading});
+        console.log(newApp);
         if (newApp) {
             setApp(newApp)
         }
@@ -245,6 +246,9 @@ function Apply() {
                 <h5 className="flex-1">Request Review</h5>
                 <div
                     onClick={() => {
+                        if(app.id !== "NEW" && studentData) {
+                            requestReviewApplicationService(app.id, studentData.counselor, {});
+                        }
                     }}
                     className={classes(
                         "flex p-[8px] rounded-[4px] font-font-inter",
