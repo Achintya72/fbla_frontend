@@ -77,7 +77,7 @@ export const students: StudentData[] = [
             ],
         },
         verified: false,
-        resume: "https://www.google.com"
+        resume: undefined
     },
     {
         id: "s2",
@@ -123,7 +123,7 @@ export const students: StudentData[] = [
             ],
         },
         verified: false,
-        resume: "https://www.google.com"
+        resume: undefined
     }
 ]
 
@@ -381,11 +381,8 @@ export const applications: Application[] = [
         ],
         recruiterClassification: "accepted",
         submitted: false,
-        coverLetter: {
-            name: "Marketing",
-            url: "https://www.linkedin.com"
-        },
-        resume: "https://www.linkedin.com",
+        coverLetter: undefined,
+        resume: undefined,
         status: "in-progress"
     },
     {
@@ -407,7 +404,7 @@ export const applications: Application[] = [
             name: "Marketing",
             url: "https://www.linkedin.com"
         },
-        resume: "https://www.linkedin.com",
+        resume: undefined,
         status: "in-progress"
     }
 ];

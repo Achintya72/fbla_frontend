@@ -9,14 +9,14 @@ import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
 import { useContext } from "react";
 
-export const useRecruiterQueries = () => {
+export const useRecruiterRepo = () => {
     const { recruiters, applications, setApplications } = useMockData();
     const { jobs, setJobs } = useContext(JobsContext);
 
     /**
      * @returns RecruiterData or null
      */
-    const getRecruiterById: (id: string) => Promise<RecruiterData> = async (id) => {
+    const getRecruiterByIdRepo: (id: string) => Promise<RecruiterData> = async (id) => {
         await delay(1000);
         const found = recruiters.find(r => r.id === id);
         if (found) {
@@ -29,7 +29,7 @@ export const useRecruiterQueries = () => {
      * Creates a new job posting
      * @returns Created Job Posting or null
      */
-    const createJobPosting: (job: Job) => Promise<Job> = async (job) => {
+    const createJobPostingRepo: (job: Job) => Promise<Job> = async (job) => {
         await delay(1000);
         const newJobs = [...jobs, job];
         setJobs([...newJobs]);
@@ -42,7 +42,7 @@ export const useRecruiterQueries = () => {
      * Updates specific job posting
      * @returns Updating Job posting
      */
-    const updateJobPosting: (job: Job) => Promise<Job> = async (job) => {
+    const updateJobPostingRepo: (job: Job) => Promise<Job> = async (job) => {
         await delay(1000);
         const foundIndex = jobs.findIndex(j => j.id === job.id);
         if (foundIndex >= 0) {
@@ -58,7 +58,7 @@ export const useRecruiterQueries = () => {
     /**
      * Deletes a job posting
      */
-    const deleteJobPosting: (job: Job) => Promise<void> = async (job) => {
+    const deleteJobPostingRepo: (job: Job) => Promise<void> = async (job) => {
         await delay(1000);
         const foundIndex = jobs.findIndex(j => j.id === job.id);
         if (foundIndex >= 0) {
@@ -74,7 +74,7 @@ export const useRecruiterQueries = () => {
     /**
      * @returns List of Jobs created by Recruiter
      */
-    const getRecruiterJobs: (recruiterId: string) => Promise<Job[]> = async (id) => {
+    const getRecruiterJobsRepo: (recruiterId: string) => Promise<Job[]> = async (id) => {
         await delay(1000);
         const foundRecruiter = recruiters.find(r => r.id === id);
         if (foundRecruiter) {
@@ -86,7 +86,7 @@ export const useRecruiterQueries = () => {
     /**
      * @returns List of Submitted Applications for Job
      */
-    const getApplicationsForJob: (jobId: string) => Promise<RecruiterApplication[]> = async (id) => {
+    const getApplicationsForJobRepo: (jobId: string) => Promise<RecruiterApplication[]> = async (id) => {
         await delay(1000);
         const job = jobs.find(j => j.id === id);
         if (job) {
@@ -99,7 +99,7 @@ export const useRecruiterQueries = () => {
      * Adds comment to a specific application
      * @returns Updated list of recruiterComments
      */
-    const recruiterCommentOnApplication: (applicationId: string, comment: Comment) => Promise<Comment[]> = async (appId, comment) => {
+    const recruiterCommentOnApplicationRepo: (applicationId: string, comment: Comment) => Promise<Comment[]> = async (appId, comment) => {
         await delay(1000);
         const foundIndex = applications.findIndex(a => a.id === appId);
         if (foundIndex >= 0) {
@@ -116,7 +116,7 @@ export const useRecruiterQueries = () => {
     /**
      * Changes student's application status (rejected, accepted, not-decided)
      */
-    const changeApplicationStatus: (applicationId: string, status: Progress) => Promise<void> = async (appId, status) => {
+    const changeApplicationStatusRepo: (applicationId: string, status: Progress) => Promise<void> = async (appId, status) => {
         await delay(1000);
         const foundIndex = applications.findIndex(a => a.id === appId);
         if (foundIndex >= 0) {
@@ -132,7 +132,7 @@ export const useRecruiterQueries = () => {
     /**
      * Sets Applications' status to recruiter status for all submitted applications
      */
-    const publishJobResults: (jobId: string) => Promise<void> = async (id) => {
+    const publishJobResultsRepo: (jobId: string) => Promise<void> = async (id) => {
         await delay(1000);
         const jobIndex = jobs.findIndex(j => j.id === id);
         if (jobIndex >= 0) {
@@ -147,14 +147,14 @@ export const useRecruiterQueries = () => {
     }
 
     return {
-        getRecruiterById,
-        createJobPosting,
-        updateJobPosting,
-        deleteJobPosting,
-        getRecruiterJobs,
-        getApplicationsForJob,
-        recruiterCommentOnApplication,
-        changeApplicationStatus,
-        publishJobResults
+        getRecruiterByIdRepo,
+        createJobPostingRepo,
+        updateJobPostingRepo,
+        deleteJobPostingRepo,
+        getRecruiterJobsRepo,
+        getApplicationsForJobRepo,
+        recruiterCommentOnApplicationRepo,
+        changeApplicationStatusRepo,
+        publishJobResultsRepo
     };
 }

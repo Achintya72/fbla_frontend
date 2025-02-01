@@ -56,7 +56,7 @@ export const student: StudentData = {
             url: "https://www.google.com",
         }
     ],
-    resume: "https://www.facebook.com",
+    resume: "https://www.rd.usda.gov/sites/default/files/pdf-sample_0.pdf",
     jobReferences: jobReferences,
     page: {
         name: "John Doe",

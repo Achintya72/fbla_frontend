@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 import { JobContextData, Job, Location, Commitment, JobLevel } from "@/models/jobs";
-import { useJobQueries } from "@/repositories/jobs.repository";
+import { useJobRepo } from "@/repositories/jobs.repository";
 
 const JobsContext = createContext<JobContextData>({
     jobs: [],
@@ -31,16 +31,17 @@ function JobsContextProvider({ children }: PropsWithChildren) {
     const [locations, setLocations] = useState<Location[]>([]);
     const [commitments, setCommitments] = useState<Commitment[]>([]);
     const [levels, setLevels] = useState<JobLevel[]>([]);
-    const { getJobs } = useJobQueries();
+    const { getJobsRepo } = useJobRepo();
 
-    const populateJobs = async () => {
-        const jobs = await getJobs();
-        setJobs(jobs);
-        changePopulated(true);
-    }
+    
 
 
     useEffect(() => {
+        const populateJobs = async () => {
+            const jobs = await getJobsRepo();
+            setJobs(jobs);
+            changePopulated(true);
+        }
         populateJobs();
     }, [])
 
@@ -69,5 +70,9 @@ function JobsContextProvider({ children }: PropsWithChildren) {
     )
 }
 
+const useJobContext = () => {
+    return useContext(JobsContext);
+}
+
 export default JobsContext;
-export { JobsContextProvider };
+export { JobsContextProvider, useJobContext };

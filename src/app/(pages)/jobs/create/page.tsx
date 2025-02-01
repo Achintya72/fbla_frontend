@@ -7,7 +7,7 @@ import withProtection from "@/components/protected"
 import { JobLevel, Location, Commitment, Job } from "@/models/jobs";
 import JobsContext from "@/serviceProviders/jobsContext";
 import { useUserDataContext } from "@/serviceProviders/userDataContext";
-import { useRecruiterQueries } from "@/repositories/recruiter.repository";
+import { useRecruiterService } from "@/services/recruiter.service";
 import { CaretLeft } from "@phosphor-icons/react";
 import { redirect } from "next/navigation";
 import { useContext, useState } from "react";
@@ -42,7 +42,7 @@ function CreateJob() {
         mode: "all",
         reValidateMode: "onChange"
     });
-    const { createJobPosting } = useRecruiterQueries();
+    const { createJobService } = useRecruiterService();
 
     const resetError = () => {
         setError("");
@@ -77,9 +77,11 @@ function CreateJob() {
         }
 
         try {
-            const j = await createJobPosting(edits);
+            const j = await createJobService(edits, {});
             // redirect(`/jobs/${id}`);
-            redirect(`/jobs/${j.id}`);
+            if(j) {
+                redirect(`/jobs/${j.id}`);
+            }
         }
         finally {
             setLoading(false);

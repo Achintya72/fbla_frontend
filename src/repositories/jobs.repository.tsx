@@ -6,15 +6,15 @@ import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
 
 
-export const useJobQueries = () => {
+export const useJobRepo = () => {
     const { jobs } = useMockData();
     /**
      * @returns List of approved jobs
      */
-    const getJobs: () => Promise<Job[]> = async () => {
+    const getJobsRepo: () => Promise<Job[]> = async () => {
         await delay(100);
         return jobs;
     }
 
-    return { getJobs };
+    return { getJobsRepo };
 }

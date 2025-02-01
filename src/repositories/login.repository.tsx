@@ -8,7 +8,7 @@ import { Role } from "@/models/login";
  * JWT Token if sign in was successful
  * Null if the sign in was not successful
  */
-export const loginUser: (email: string, password: string) => Promise<string> = async (email, password) => {
+export const loginUserRepo: (email: string, password: string) => Promise<string> = async (email, password) => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sign_in`, {
             method: "POST",
@@ -32,7 +32,7 @@ export const loginUser: (email: string, password: string) => Promise<string> = a
  * Success: JWT Token
  * Failure: null
  */
-export const createUser: (email: string, password: string, name: string, role: Role) => Promise<string> = async (email, password, name, role) => {
+export const createUserRepo: (email: string, password: string, name: string, role: Role) => Promise<string> = async (email, password, name, role) => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sign_up`, {
             method: "POST",
@@ -59,7 +59,7 @@ export const createUser: (email: string, password: string, name: string, role: R
  * auth persistence
  * @returns whether or not the jwt is valid
  */
-export const validateJWT: (token: string) => Promise<boolean> = async (token) => {
+export const validateJWTRepo: (token: string) => Promise<boolean> = async (token) => {
     try {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jwt_check`, {
             method: "GET",

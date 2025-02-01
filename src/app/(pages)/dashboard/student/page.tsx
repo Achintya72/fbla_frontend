@@ -24,7 +24,7 @@ function Dashboard() {
     const completed = jobReferences.filter((value) => ["accepted", "rejected", "pending"].includes(value.status));
     const bookmarked = jobReferences.filter((value) => value.status == "bookmarked");
 
-
+    console.log(studentData.jobReferences);
     return (
         <main className="px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
             <div className="grow-[3]">

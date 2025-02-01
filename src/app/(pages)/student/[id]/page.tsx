@@ -3,7 +3,7 @@
 import Loader from "@/components/Loader";
 import withProtection from "@/components/protected";
 import { StudentPage } from "@/models/student";
-import { useFetchStudentData } from "@/services/student";
+import { useStudentDataService } from "@/services/student.service";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -14,17 +14,17 @@ function Page() {
     const [, setError] = useState<string>("");
     const [page, setPage] = useState<StudentPage | undefined>(undefined);
     const { id } = useParams();
-    const { fetchStudentPage } = useFetchStudentData();
+    const { getStudentPageService } = useStudentDataService();
 
     useEffect(() => {
         const setStudentData = async () => {
             if (id && typeof id == 'string') {
-                setPage(await fetchStudentPage(id, setError, setLoading));
+                setPage(await getStudentPageService(id, {setError, setLoading}));
             }
         };
 
         setStudentData();
-    }, []);
+    }, [getStudentPageService, id]);
 
     if (loading) {
         return <Loader />

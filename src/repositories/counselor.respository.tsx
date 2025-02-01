@@ -10,7 +10,7 @@ import { useMockData } from "@/serviceProviders/mockDataContext";
 import delay from "@/utils/delay";
 import { useContext } from "react";
 
-export default function useCounselorQueries() {
+export default function useCounselorRepo() {
     const { setStudents, counselors, applications, students, setCounselors, recruiters, setRecruiters, setApplications } = useMockData();
     const { jobs, setJobs } = useContext(JobsContext);
 
@@ -18,7 +18,7 @@ export default function useCounselorQueries() {
      * Fetch's counselor's data
      * @returns CounselorData or null
      */
-    const getCounselorById: (id: string) => Promise<CounselorData> = async (id) => {
+    const getCounselorRepo: (id: string) => Promise<CounselorData> = async (id) => {
         await delay(1000);
         const found = counselors.find(c => c.id === id);
         if (found) {
@@ -31,7 +31,8 @@ export default function useCounselorQueries() {
      * Verifies a student
      * and removes them from endorsementRequests
      */
-    const endorseStudent: (studentId: string) => Promise<void> = async (id) => {
+    // TODO: return remaining endorsements
+    const endorseStudentRepo: (studentId: string) => Promise<void> = async (id) => {
         await delay(1000);
         const student = students.find(s => s.id === id);
         const studentIndex = students.findIndex(s => s.id === id);
@@ -57,7 +58,8 @@ export default function useCounselorQueries() {
     /**
      * Removes endorsement request
      */
-    const denyEndorsement: (studentId: string) => Promise<void> = async (id) => {
+    // TODO: return remaining endorsements
+    const denyEndorsementRepo: (studentId: string) => Promise<void> = async (id) => {
         await delay(1000);
         const student = students.find(s => s.id === id);
         if (student) {
@@ -77,7 +79,7 @@ export default function useCounselorQueries() {
     /**
      * @returns List of Recruiters who are unverified
      */
-    const getUnVerifiedRecruiters: () => Promise<RecruiterData[]> = async () => {
+    const getUnVerifiedRecruitersRepo: () => Promise<RecruiterData[]> = async () => {
         await delay(1000);
         return recruiters.filter(r => !r.verified);
     }
@@ -86,7 +88,7 @@ export default function useCounselorQueries() {
      * Sets verified to true in Recruiter Doc
      * @returns Returns remaining list of unverified recruiters
      */
-    const verifyRecruiter: (id: string) => Promise<RecruiterData[]> = async (id) => {
+    const verifyRecruiterRepo: (id: string) => Promise<RecruiterData[]> = async (id) => {
         await delay(1000);
         const recruiterIndex = recruiters.findIndex(r => r.id === id);
         if (recruiterIndex >= 0) {
@@ -103,7 +105,7 @@ export default function useCounselorQueries() {
     /**
      * @returns List of un-approved Job Postings
      */
-    const getUnverifiedPostings: () => Promise<Job[]> = async () => {
+    const getUnverifiedPostingsRepo: () => Promise<Job[]> = async () => {
         await delay(1000);
         return jobs.filter(job => !job.published);
     }
@@ -112,7 +114,7 @@ export default function useCounselorQueries() {
      * Verifies Job
      * @returns Remaining list of un-approved Job Postings
      */
-    const approvePosting: (id: string) => Promise<Job[]> = async (id) => {
+    const approvePostingRepo: (id: string) => Promise<Job[]> = async (id) => {
         await delay(1000);
         const jobIndex = jobs.findIndex(j => j.id === id);
         if (jobIndex >= 0) {
@@ -128,7 +130,7 @@ export default function useCounselorQueries() {
     /**
      * Deletes a Job Posting
      */
-    const deletePosting: (id: string) => Promise<void> = async (id) => {
+    const deletePostingRepo: (id: string) => Promise<void> = async (id) => {
         await delay(1000);
         const jobsIndex = jobs.findIndex(j => j.id === id);
         if (jobsIndex >= 0) {
@@ -141,7 +143,8 @@ export default function useCounselorQueries() {
     /**
      * Add counselor's comments to student's application
      */
-    const counselorCommentOnApplication: (applicationId: string, comment: Comment) => Promise<void> = async (appId, comment) => {
+    // TODO: Return new total of counselor's comments
+    const counselorCommentOnApplicationRepo: (applicationId: string, comment: Comment) => Promise<void> = async (appId, comment) => {
         await delay(1000);
         const foundIndex = applications.findIndex(prev => prev.id == appId);
         if (foundIndex >= 0) {
@@ -158,7 +161,7 @@ export default function useCounselorQueries() {
     /**
      * @returns List of applications that requested counselor's review
      */
-    const getApplicationsForReview: (counselorId: string) => Promise<CounselorApplication[]> = async (id) => {
+    const getApplicationsForReviewRepo: (counselorId: string) => Promise<CounselorApplication[]> = async (id) => {
         await delay(1000);
         const counselor = counselors.find(c => c.id === id);
         if (counselor) {
@@ -180,7 +183,7 @@ export default function useCounselorQueries() {
      * Removes given application from counselor's application review list
      * @returns Remaining list of un-approved applications
      */
-    const completeApplicationReview: (applicationId: string) => Promise<CounselorApplication[]> = async (appId) => {
+    const completeApplicationReviewRepo: (applicationId: string) => Promise<CounselorApplication[]> = async (appId) => {
         await delay(1000);
         const application = applications.find(a => a.id === appId);
         if (application) {
@@ -208,16 +211,16 @@ export default function useCounselorQueries() {
     }
 
     return {
-        getCounselorById,
-        endorseStudent,
-        denyEndorsement,
-        getUnVerifiedRecruiters,
-        verifyRecruiter,
-        getUnverifiedPostings,
-        approvePosting,
-        deletePosting,
-        counselorCommentOnApplication,
-        getApplicationsForReview,
-        completeApplicationReview
+        getCounselorRepo,
+        endorseStudentRepo,
+        denyEndorsementRepo,
+        getUnVerifiedRecruitersRepo,
+        verifyRecruiterRepo,
+        getUnverifiedPostingsRepo,
+        approvePostingRepo,
+        deletePostingRepo,
+        counselorCommentOnApplicationRepo,
+        getApplicationsForReviewRepo,
+        completeApplicationReviewRepo
     }
 }
