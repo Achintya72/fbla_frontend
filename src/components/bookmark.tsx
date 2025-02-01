@@ -17,7 +17,6 @@ export default function Bookmark({ job, className }: { job: Job, className: stri
 
     if (role == "student") return (
         <div className={className + " cursor-pointer"} onClick={(event) => {
-            event.stopPropagation();
             if (added) {
                 if (ref.status == "bookmarked") {
                     removeJobReference(job.id);

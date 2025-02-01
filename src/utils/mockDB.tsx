@@ -36,9 +36,9 @@ export const students: StudentData[] = [
         ],
         email: "1055712@lwsd.org",
         jobReferences: [
-            { id: "j1", status: "bookmarked" },
-            { id: "j4", status: "in-progress" },
-            { id: "j5", status: "in-progress" },
+            // { id: "j1", status: "bookmarked" },
+            // { id: "j4", status: "in-progress" },
+            // { id: "j5", status: "in-progress" },
         ],
         lessons: [],
         page: {
@@ -165,7 +165,7 @@ export const jobs: Job[] = [
         level: "intern",
         hours: "20",
         tags: ["Engineering"],
-        closeDate: new Date(2025, 0, 1),
+        closeDate: new Date(2025, 4, 1),
         applications: [],
         responsibilities: ["Develop software solutions", "Work with the team to deliver projects", "Learn and grow"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
@@ -182,36 +182,15 @@ export const jobs: Job[] = [
         company: { name: "Meta", logo: "https://www.facebook.com/images/fb_icon_325x325.png", tags: ["Tech", "Social Media", "Large", "CA, US"] },
         commitment: "Part-time",
         location: "Remote",
-        salary: 1500,
+        salary: 2100,
         level: "intern",
         hours: "15",
-        tags: ["Data", "Engineering"],
-        closeDate: new Date(2025, 0, 5),
+        tags: ["Data Science", "Engineering"],
+        closeDate: new Date(2025, 4, 1),
         applications: [],
         responsibilities: ["Analyze data", "Create reports", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
-        published: false,
-        skills: [],
-        studentFound: undefined
-    },
-    {
-        id: "j3",
-        title: "Product Manager Intern",
-        description: "A 6-month internship for aspiring product managers with the Amazon Web Services team.",
-        longDescription: "A 6-month internship for aspiring product managers with the Amazon Web Services team. You will help manage product development and strategy.",
-        company: { name: "Amazon", logo: "https://www.amazon.com/favicon.ico", tags: ["Tech", "E-commerce", "Large", "WA, US"] },
-        commitment: "Full-time",
-        location: "Onsite",
-        salary: 2500,
-        level: "intern",
-        hours: "40",
-        tags: ["Product Management"],
-        closeDate: new Date(2025, 3, 1),
-        applications: [],
-        responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
-        coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "2",
         published: true,
         skills: [],
         studentFound: undefined
@@ -228,91 +207,7 @@ export const jobs: Job[] = [
         level: "intern",
         hours: "40",
         tags: ["Product Management"],
-        closeDate: new Date(2025, 3, 1),
-        applications: [],
-        responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
-        coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "2",
-        published: true,
-        skills: [],
-        studentFound: undefined
-    },
-    {
-        id: "j3",
-        title: "Product Manager Intern",
-        description: "A 6-month internship for aspiring product managers with the Amazon Web Services team.",
-        longDescription: "A 6-month internship for aspiring product managers with the Amazon Web Services team. You will help manage product development and strategy.",
-        company: { name: "Amazon", logo: "https://www.amazon.com/favicon.ico", tags: ["Tech", "E-commerce", "Large", "WA, US"] },
-        commitment: "Full-time",
-        location: "Onsite",
-        salary: 2500,
-        level: "intern",
-        hours: "40",
-        tags: ["Product Management"],
-        closeDate: new Date(2025, 3, 1),
-        applications: [],
-        responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
-        coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "2",
-        published: true,
-        skills: [],
-        studentFound: undefined
-    },
-    {
-        id: "j3",
-        title: "Product Manager Intern",
-        description: "A 6-month internship for aspiring product managers with the Amazon Web Services team.",
-        longDescription: "A 6-month internship for aspiring product managers with the Amazon Web Services team. You will help manage product development and strategy.",
-        company: { name: "Amazon", logo: "https://www.amazon.com/favicon.ico", tags: ["Tech", "E-commerce", "Large", "WA, US"] },
-        commitment: "Full-time",
-        location: "Onsite",
-        salary: 2500,
-        level: "intern",
-        hours: "40",
-        tags: ["Product Management"],
-        closeDate: new Date(2025, 3, 1),
-        applications: [],
-        responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
-        coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "2",
-        published: true,
-        skills: [],
-        studentFound: undefined
-    },
-    {
-        id: "j3",
-        title: "Product Manager Intern",
-        description: "A 6-month internship for aspiring product managers with the Amazon Web Services team.",
-        longDescription: "A 6-month internship for aspiring product managers with the Amazon Web Services team. You will help manage product development and strategy.",
-        company: { name: "Amazon", logo: "https://www.amazon.com/favicon.ico", tags: ["Tech", "E-commerce", "Large", "WA, US"] },
-        commitment: "Full-time",
-        location: "Onsite",
-        salary: 2500,
-        level: "intern",
-        hours: "40",
-        tags: ["Product Management"],
-        closeDate: new Date(2025, 3, 1),
-        applications: [],
-        responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
-        coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
-        recruiterId: "2",
-        published: true,
-        skills: [],
-        studentFound: undefined
-    },
-    {
-        id: "j3",
-        title: "Product Manager Intern",
-        description: "A 6-month internship for aspiring product managers with the Amazon Web Services team. AAAAAAAAAAAAAAA AAAAAAAAAAAAAA AAAAAAAAAAAAAAA AAAAAAAAAAAA AAAAAAAAAAAAAA",
-        longDescription: "A 6-month internship for aspiring product managers with the Amazon Web Services team. You will help manage product development and strategy.",
-        company: { name: "Amazon", logo: "https://www.amazon.com/favicon.ico", tags: ["Tech", "E-commerce", "Large", "WA, US"] },
-        commitment: "Full-time",
-        location: "Onsite",
-        salary: 2500,
-        level: "intern",
-        hours: "40",
-        tags: ["Product Management"],
-        closeDate: new Date(2025, 3, 1),
+        closeDate: new Date(2025, 4, 1),
         applications: [],
         responsibilities: ["Manage product development", "Coordinate with teams", "Define product strategy"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
@@ -333,8 +228,8 @@ export const jobs: Job[] = [
         level: "intern",
         hours: "20",
         tags: ["Marketing"],
-        closeDate: new Date(2025, 0, 1),
-        applications: ["a2"],
+        closeDate: new Date(2025, 4, 1),
+        applications: [],
         responsibilities: ["Assist in marketing campaigns", "Develop marketing strategies", "Collaborate with the team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
@@ -353,9 +248,9 @@ export const jobs: Job[] = [
         salary: 2200,
         level: "intern",
         hours: "30",
-        tags: ["Design"],
-        closeDate: new Date(2025, 0, 1),
-        applications: ["a1"],
+        tags: ["UI/UX Design"],
+        closeDate: new Date(2025, 4, 1),
+        applications: [],
         responsibilities: ["Design user experiences", "Conduct user research", "Collaborate with the design team"],
         coverImage: "https://t3.ftcdn.net/jpg/05/05/94/08/360_F_505940885_kmTN2GvEUmdY0uylOR5bAaEgTRVXUndm.jpg",
         recruiterId: "2",
@@ -366,45 +261,45 @@ export const jobs: Job[] = [
 ];
 
 export const applications: Application[] = [
-    {
-        id: "a1",
-        student: "s1",
-        job: "j5",
-        additionalInformation: "Hello I'm under da wader ",
-        counselorComments: [],
-        recruiterComments: [
-            {
-                resolved: false,
-                section: "additional-info",
-                text: "What is this rubbish?"
-            }
-        ],
-        recruiterClassification: "accepted",
-        submitted: false,
-        coverLetter: undefined,
-        resume: undefined,
-        status: "in-progress"
-    },
-    {
-        id: "a2",
-        student: "s1",
-        job: "j4",
-        additionalInformation: "Helicopter Helicopter dkdkdkdkdk",
-        counselorComments: [],
-        recruiterComments: [
-            {
-                resolved: false,
-                section: "additional-info",
-                text: "What is this rubbish?"
-            }
-        ],
-        recruiterClassification: "accepted",
-        submitted: false,
-        coverLetter: {
-            name: "Marketing",
-            url: "https://www.linkedin.com"
-        },
-        resume: undefined,
-        status: "in-progress"
-    }
+    // {
+    //     id: "a1",
+    //     student: "s1",
+    //     job: "j5",
+    //     additionalInformation: "Hello I'm under da wader ",
+    //     counselorComments: [],
+    //     recruiterComments: [
+    //         {
+    //             resolved: false,
+    //             section: "additional-info",
+    //             text: "What is this rubbish?"
+    //         }
+    //     ],
+    //     recruiterClassification: "accepted",
+    //     submitted: false,
+    //     coverLetter: undefined,
+    //     resume: undefined,
+    //     status: "in-progress"
+    // },
+    // {
+    //     id: "a2",
+    //     student: "s1",
+    //     job: "j4",
+    //     additionalInformation: "Helicopter Helicopter dkdkdkdkdk",
+    //     counselorComments: [],
+    //     recruiterComments: [
+    //         {
+    //             resolved: false,
+    //             section: "additional-info",
+    //             text: "What is this rubbish?"
+    //         }
+    //     ],
+    //     recruiterClassification: "accepted",
+    //     submitted: false,
+    //     coverLetter: {
+    //         name: "Marketing",
+    //         url: "https://www.linkedin.com"
+    //     },
+    //     resume: undefined,
+    //     status: "in-progress"
+    // }
 ];

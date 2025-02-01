@@ -27,7 +27,6 @@ function LoginContextProvider({ children }: PropsWithChildren) {
      * @param user - user to populate the context with
      */
     const populateUser = (token: string) => {
-        console.log(token);
         const decoded: UserJWT = jwtDecode(token);
         changeAuthUser(true);
         changeRole(decoded.rol as Role);

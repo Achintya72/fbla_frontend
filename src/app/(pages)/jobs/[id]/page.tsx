@@ -16,7 +16,6 @@ export default function Posting() {
 
     const job = jobs.find((job) => job.id === params.id);
 
-    console.log("Job:", job?.id);
 
     if (!populated) {
         return (

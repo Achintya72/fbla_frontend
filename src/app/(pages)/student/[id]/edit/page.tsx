@@ -27,7 +27,6 @@ export default function EditStudent() {
         return <Loader />
     }
 
-    console.log(formData.projects[0].startDate == undefined ? "" : formData.projects[0].startDate.toISOString().split("T")[0])
 
 
     const resetError = () => {

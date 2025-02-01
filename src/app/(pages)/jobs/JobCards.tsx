@@ -40,10 +40,10 @@ function JobCard({ job }: { job: Job }) {
             <div>
                 {job.description}
             </div>
-            <div className="text-white-700 text-[14px]">
+            <div className="text-white-700 text-[14px] flex-1">
                 {job.closeDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: new Date(job.closeDate).getFullYear() === new Date().getFullYear() ? undefined : 'numeric' })} • {job.applications.length} Applicant{job.applications.length > 1 ? "s" : ""}
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between items-center">
                 <div className="font-semibold">
                     ${job.salary.toLocaleString()}
                     <span className="text-white-700">/mo</span>

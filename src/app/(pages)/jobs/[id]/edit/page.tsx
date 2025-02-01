@@ -40,7 +40,6 @@ function EditJob() {
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState(false);
 
-    console.log(jobs);
     const job = jobs.find((job) => job.id === params.id);
     const { control, register, handleSubmit, reset, formState: { errors }, } = useForm<JobForm>({
         mode: "all",

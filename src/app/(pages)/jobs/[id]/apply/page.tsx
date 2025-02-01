@@ -89,7 +89,6 @@ function Apply() {
     const handleApplicationSubmit = () => {
         if (app) {
             const a = { ...app, submitted: true, status: "pending" } as StudentApplication;
-            console.log(a);
             if (app.id === "NEW") {
                 uploadNewApplication(a);
             } else {

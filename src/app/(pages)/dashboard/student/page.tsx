@@ -24,7 +24,6 @@ function Dashboard() {
     const completed = jobReferences.filter((value) => ["accepted", "rejected", "pending"].includes(value.status));
     const bookmarked = jobReferences.filter((value) => value.status == "bookmarked");
 
-    console.log(studentData.jobReferences);
     return (
         <main className="px-[60px] flex flex-row gap-[20px] flex-wrap-reverse">
             <div className="grow-[3]">
@@ -32,7 +31,7 @@ function Dashboard() {
                 <div className="flex flex-col gap-[16px] min-w-[350px] mb-[32px]">
                     {inProgress.length > 0 && inProgress.map((value, index) => {
                         const job = jobs.find((job) => job.id === value.id);
-                        return job ? <CondensedJobCard status={value.status} key={index} job={job} showButtons buttons={[{
+                        return (job && job.closeDate.getMilliseconds() > new Date().getMilliseconds()) ? <CondensedJobCard status={value.status} key={index} job={job} showButtons buttons={[{
                             href: `/jobs/${job.id}/apply`,
                             text: "Edit"
                         }]}/> : null;

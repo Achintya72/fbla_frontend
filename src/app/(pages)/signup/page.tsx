@@ -23,7 +23,6 @@ export default function SignUp() {
     const [error, changeError, loading, createUser] = useCreateUser();
     const context = useLoginContext();
 
-    console.log(context);
 
     const onSubmit = async (data: SignUpForm) => {
         await createUser(data.email, data.password, data.name, "student");
